@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+    <h1>PollAI</h1>
+    <h2 th:if="${Invalid}">Invalid Login</h2>
+    <form action="/login" method="post">
+        <label>Email: </label>
+        <input type = "email" name = "email" pattern="/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm" required autofocus><br>
+        <label>Password  </label>
+        <input type = password name= "password" required><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <form action ="/getAll" method="get">
+        <input type="submit" value="Get all Users">
+    </form>
+
+    <form action ="/registerpage" method="get">
+        <input type="submit" value="register">
+    </form>
+</body>
+</html>

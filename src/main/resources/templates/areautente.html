@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Utente</title>
+</head>
+<body>
+<p>Name: <span th:text="${session.user.nome}"></span></p>
+<p>Email: <span th:text="${session.user.email}"></span></p>
+</body>
+</html>

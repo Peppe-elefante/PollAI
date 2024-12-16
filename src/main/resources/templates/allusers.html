@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<body>
+<h1>User List</h1>
+<div class="user-display">
+    <ul>
+        <li th:each="user : ${users}">
+            <span th:text="${user.nome}">Game Name</span>
+            -<span th:text="${user.cognome}">Game Name</span>
+            <span th:text="${user.email}">Category</span> -
+            <span th:text="${user.password}">Price</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
