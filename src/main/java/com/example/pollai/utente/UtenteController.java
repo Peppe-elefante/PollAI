@@ -26,6 +26,10 @@ public class UtenteController {
 
     @GetMapping("/")
     public String home(){
+        return "homepage";
+    }
+    @GetMapping("/loginpage")
+    public String loginpage(){
         return "index";
     }
 

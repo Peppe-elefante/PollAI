@@ -9,10 +9,10 @@
 <div class="user-display">
     <ul>
         <li th:each="user : ${users}">
-            <span th:text="${user.nome}">Game Name</span>
-            -<span th:text="${user.cognome}">Game Name</span>
-            <span th:text="${user.email}">Category</span> -
-            <span th:text="${user.password}">Price</span>
+            <span th:text="${user.nome}">Nome</span>
+            -<span th:text="${user.cognome}">Cognome</span>
+            <span th:text="${user.email}">Email</span> -
+            <span th:text="${user.password}">Password</span>
         </li>
     </ul>
 </div>
