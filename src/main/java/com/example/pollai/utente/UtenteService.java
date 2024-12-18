@@ -12,51 +12,67 @@ import org.slf4j.LoggerFactory;
 @Service
 public class UtenteService {
 
+    // Inietta il repository per l'interazione con il database
     @Autowired
     private UtenteRepository utenteRepository;
 
+    // Crea un logger per il controllo dei log
     private static final Logger log = LoggerFactory.getLogger(UtenteController.class);
 
-    // Create or update an Utente (save)
+    // Crea o aggiorna un Utente (salva)
     public Utente saveUtente(Utente utente, String password) {
+        // Hash della password prima di salvarla
         String hashedPassword = hashPassword(password);
+        // Imposta la password criptata sull'utente
         utente.setPassword(hashedPassword);
+        // Salva l'utente nel repository e restituisce l'utente salvato
         return utenteRepository.save(utente);
     }
 
-    // Get all users
+    // Ottiene tutti gli utenti
     public List<Utente> getAllUtenti() {
+        // Restituisce una lista di tutti gli utenti
         return utenteRepository.findAll();
     }
 
-    // Get an Utente by ID
+    // Ottiene un Utente per ID
     public Optional<Utente> getUtenteById(Long id) {
+        // Restituisce un utente opzionale trovato tramite ID
         return utenteRepository.findById(id);
     }
 
-    // Delete an Utente by ID
+    // Elimina un Utente per ID
     public void deleteUtente(Long id) {
+        // Elimina l'utente con il dato ID
         utenteRepository.deleteById(id);
     }
 
-    // Custom query example: Get Utente by email
+    // Esempio di query personalizzata: Ottieni un Utente tramite email
     public Optional<Utente> getUtenteByEmail(String email, String password) {
+        // Cerca un utente tramite email
         Optional<Utente> userCheck = utenteRepository.findByEmail(email);
         if(userCheck.isPresent()){
-            log.info("the email is found");
+            log.info("L'email è stata trovata");
             Utente user = userCheck.get();
+            // Verifica se la password corrisponde
             if(!verifyPassword(password, user.getPassword())){
+                // Se la password non è corretta, restituisce un risultato vuoto
                 return Optional.empty();
             }
         }
+        // Restituisce l'utente trovato tramite email
         return userCheck;
     }
 
+    // Metodo per fare l'hash della password
     public static String hashPassword(String plainPassword) {
+        // Restituisce la password criptata usando BCrypt
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt(12));
     }
 
+    // Metodo per verificare se la password inserita corrisponde alla password criptata
     public static boolean verifyPassword(String plainPassword, String hashedPassword) {
+        // Confronta la password in chiaro con quella criptata
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }

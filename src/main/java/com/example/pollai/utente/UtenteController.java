@@ -24,15 +24,19 @@ public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
+    //Apre l'homepage quando si accede all'ip o domain
     @GetMapping("/")
     public String home(){
         return "homepage";
     }
+
+    //Apre la pagine dove fare il login
     @GetMapping("/loginpage")
     public String loginpage(){
         return "index";
     }
 
+   //Dopo che l'utente ha inserito tutti fa l'autenticazione
     @PostMapping("/login")
     public String login(String email, String password, HttpSession session, HttpServletRequest request, Model model){
         Optional<Utente> user = utenteService.getUtenteByEmail(email, password);
@@ -48,6 +52,7 @@ public class UtenteController {
         }
     }
 
+    //Restituisce tutti gli utenti
     @GetMapping("/getAll")
     public String getUsers(Model model){
         List<Utente> users = utenteService.getAllUtenti();
@@ -55,12 +60,14 @@ public class UtenteController {
         return "allusers";
     }
 
+    //Apre la pagine dove un utente si può registrare
     @GetMapping("/registerpage")
     public String registerPage(Model model){
         model.addAttribute("user", new Utente());
         return "registeruser";
     }
 
+    //Prende i dati dell'utente e lo fa registrare
     @PostMapping("/register")
     public String register(@ModelAttribute("user") Utente user, @RequestParam String password, HttpSession session, Model model){
         log.info("here " + user.getNome());
