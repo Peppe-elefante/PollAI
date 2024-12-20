@@ -1,5 +1,6 @@
 package com.example.pollai.pollaio;
 
+import com.example.pollai.utente.Utente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +15,9 @@ public class Pollaio implements Serializable {
     private int quantity;
     @OneToMany(mappedBy = "pollaio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Gallina> galline;
+
+    @OneToOne(mappedBy = "pollaio")
+    private Utente utente;
 
     public Pollaio() {
     }

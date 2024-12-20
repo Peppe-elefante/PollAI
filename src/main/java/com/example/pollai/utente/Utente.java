@@ -1,5 +1,6 @@
 package com.example.pollai.utente;
 
+import com.example.pollai.pollaio.Pollaio;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -32,6 +33,14 @@ public class Utente implements Serializable {
 
     @Column(nullable = false, unique = true, length = 45)
     private String email;
+
+    @OneToOne
+    @JoinTable(
+            name = "utente_pollaio", // Name of the join table
+            joinColumns = @JoinColumn(name = "utente_id"), // Foreign key for User
+            inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Address
+    )
+    private Pollaio pollaio;
 
     public void setId(Long id) {
         this.id = id;
@@ -95,6 +104,12 @@ public class Utente implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public Pollaio getPollaio(){
+        return pollaio;
+    }
+    public void setPollaio(Pollaio pollaio){
+        this.pollaio = pollaio;
     }
 
     @Override
