@@ -14,7 +14,7 @@ public class UtenteService {
 
     // Inietta il repository per l'interazione con il database
     @Autowired
-    private UtenteRepository utenteRepository;
+    private UtenteDAO utenteDAO;
 
     // Crea un logger per il controllo dei log
     private static final Logger log = LoggerFactory.getLogger(UtenteController.class);
@@ -26,31 +26,31 @@ public class UtenteService {
         // Imposta la password criptata sull'utente
         utente.setPassword(hashedPassword);
         // Salva l'utente nel repository e restituisce l'utente salvato
-        return utenteRepository.save(utente);
+        return utenteDAO.save(utente);
     }
 
     // Ottiene tutti gli utenti
     public List<Utente> getAllUtenti() {
         // Restituisce una lista di tutti gli utenti
-        return utenteRepository.findAll();
+        return utenteDAO.findAll();
     }
 
     // Ottiene un Utente per ID
     public Optional<Utente> getUtenteById(Long id) {
         // Restituisce un utente opzionale trovato tramite ID
-        return utenteRepository.findById(id);
+        return utenteDAO.findById(id);
     }
 
     // Elimina un Utente per ID
     public void deleteUtente(Long id) {
         // Elimina l'utente con il dato ID
-        utenteRepository.deleteById(id);
+        utenteDAO.deleteById(id);
     }
 
     // Esempio di query personalizzata: Ottieni un Utente tramite email
     public Optional<Utente> getUtenteByEmail(String email, String password) {
         // Cerca un utente tramite email
-        Optional<Utente> userCheck = utenteRepository.findByEmail(email);
+        Optional<Utente> userCheck = utenteDAO.findByEmail(email);
         if(userCheck.isPresent()){
             log.info("L'email è stata trovata");
             Utente user = userCheck.get();

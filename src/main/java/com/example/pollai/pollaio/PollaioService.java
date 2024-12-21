@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class PollaioService {
     @Autowired
-    private PollaioRepository pollaioRepository;
+    private PollaioDAO pollaioDAO;
     @Autowired
-    private GallinaRepository gallinaRepository;
+    private GallinaDAO gallinaDAO;
 
     public Pollaio savePollaio(Utente utente){
         Pollaio pollaio = new Pollaio();
         pollaio.setUtente(utente);
         pollaio.setQuantity(0);
-        return pollaioRepository.save(pollaio);
+        utente.setPollaio(pollaio);
+        return pollaioDAO.save(pollaio);
     }
 }
