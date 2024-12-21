@@ -22,9 +22,10 @@ public class Pollaio implements Serializable {
     public Pollaio() {
     }
 
-    public Pollaio(int quantity, List<Gallina> galline) {
+    public Pollaio(int quantity, List<Gallina> galline, Utente utente) {
         this.quantity = galline.size();
         this.galline = galline;
+        this.utente = utente;
     }
 
     public Long getId() {
@@ -59,6 +60,14 @@ public class Pollaio implements Serializable {
     public void removeGallina(Gallina gallina) {
         galline.remove(gallina);
         gallina.setPollaio(null);
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
 
