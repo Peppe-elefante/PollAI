@@ -4,6 +4,8 @@ import com.example.pollai.utente.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PollaioService {
     @Autowired
@@ -18,4 +20,26 @@ public class PollaioService {
         utente.setPollaio(pollaio);
         return pollaioDAO.save(pollaio);
     }
+
+    public Optional findPollaioID(long id){
+        return pollaioDAO.findById(id);
+    }
+
+    public boolean addGallina(Pollaio p, Gallina g) {
+        if (p.getQuantity() < 15) {
+            p.addGallina(g);
+            return true;
+        } else
+            return false;
+    }
+
+    public boolean removeGallina(Pollaio p, Gallina g) {
+        if (p.getQuantity() > 0) {
+            p.removeGallina(g);
+            return true;
+        } else
+            return false;
+
+    }
+
 }
