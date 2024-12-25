@@ -28,6 +28,7 @@ public class PollaioService {
     public boolean addGallina(Pollaio p, Gallina g) {
         if (p.getQuantity() < 15) {
             p.addGallina(g);
+            gallinaDAO.save(g);
             return true;
         } else
             return false;
@@ -36,6 +37,7 @@ public class PollaioService {
     public boolean removeGallina(Pollaio p, Gallina g) {
         if (p.getQuantity() > 0) {
             p.removeGallina(g);
+            gallinaDAO.delete(g);
             return true;
         } else
             return false;
