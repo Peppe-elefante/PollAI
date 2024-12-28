@@ -1,5 +1,6 @@
 package com.example.pollai.utente;
 
+import com.example.pollai.magazzino.Magazzino;
 import com.example.pollai.pollaio.Pollaio;
 import jakarta.persistence.*;
 
@@ -41,6 +42,14 @@ public class Utente implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Address
     )
     private Pollaio pollaio;
+
+    @OneToOne
+    @JoinTable(
+            name = "utente_magazzino", // Name of the join table
+            joinColumns = @JoinColumn(name = "magazzino_id"), // Foreign key for User
+            inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Address
+    )
+    private Magazzino magazzino;
 
     public void setId(Long id) {
         this.id = id;
@@ -110,6 +119,13 @@ public class Utente implements Serializable {
     }
     public void setPollaio(Pollaio pollaio){
         this.pollaio = pollaio;
+    }
+
+    public Magazzino getMagazzino(){
+        return magazzino;
+    }
+    public void setMagazzino(Magazzino m){
+        this.magazzino = m;
     }
 
     @Override
