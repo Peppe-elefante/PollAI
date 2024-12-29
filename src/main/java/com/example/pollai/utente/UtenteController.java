@@ -24,12 +24,6 @@ public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
-    //Apre l'homepage quando si accede all'ip o domain
-    @GetMapping("/")
-    public String home(){
-        return "homepage";
-    }
-
     //Apre la pagine dove fare il login
     @GetMapping("/loginpage")
     public String loginpage(){
