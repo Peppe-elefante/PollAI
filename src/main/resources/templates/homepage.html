@@ -7,31 +7,7 @@
 </head>
 <body>
 <header>
-    <div class="top-bar">
-        <a href="?">
-            <h4>Privacy</h4>
-        </a>
-        <div class="language">
-            <a href="?">
-                <h4>English</h4>
-            </a>
-            <a href="?">
-                <h4>Italiano</h4>
-            </a>
-        </div>
-    </div>
-    <nav class="navbar">
-        <a href="/" class="logo">
-            <img src="/Images/Logo%20Bianco.png" alt="Logo" />
-        </a>
-        <div class="nav-links">
-            <a href="our-story.html">Our Story</a>
-            <a href="our-solutions.html">Our Solutions</a>
-        </div>
-        <div class="nav-button">
-            <a href="/choose-plan" class="button">Choose Your Plan</a>
-        </div>
-    </nav>
+    <div th:replace="fragments/navbar :: navbar"></div>
 </header>
 <main>
 
