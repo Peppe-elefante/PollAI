@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -23,12 +22,6 @@ public class UtenteController {
 
     @Autowired
     private UtenteService utenteService;
-
-    //Apre la pagine dove fare il login
-    @GetMapping("/loginpage")
-    public String loginpage(){
-        return "index";
-    }
 
    //Dopo che l'utente ha inserito tutti fa l'autenticazione
     @PostMapping("/login")
@@ -46,21 +39,6 @@ public class UtenteController {
         }
     }
 
-    //Restituisce tutti gli utenti
-    @GetMapping("/getAll")
-    public String getUsers(Model model){
-        List<Utente> users = utenteService.getAllUtenti();
-        model.addAttribute("users", users);
-        return "allusers";
-    }
-
-    //Apre la pagine dove un utente si può registrare
-    @GetMapping("/registerpage")
-    public String registerPage(Model model){
-        model.addAttribute("user", new Utente());
-        return "registeruser";
-    }
-
     //Prende i dati dell'utente e lo fa registrare
     @PostMapping("/register")
     public String register(@ModelAttribute("user") Utente user, @RequestParam String password, HttpSession session, Model model){
@@ -70,4 +48,11 @@ public class UtenteController {
         return "areautente";
     }
 
+    //Restituisce tutti gli utenti
+    @GetMapping("/getAll")
+    public String getUsers(Model model){
+        List<Utente> users = utenteService.getAllUtenti();
+        model.addAttribute("users", users);
+        return "allusers";
+    }
 }

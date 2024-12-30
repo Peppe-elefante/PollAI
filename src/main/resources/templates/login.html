@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <link rel="stylesheet" href="/CSS/nav-bar.css">
 </head>
 <body>
+<header>
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
     <h1>PollAI</h1>
     <h2 th:if="${Invalid}">Invalid Login</h2>
     <form action="/login" method="post">
@@ -14,13 +18,8 @@
         <input type = password name= "password" required><br>
         <input type="submit" value="Login">
     </form>
-
-    <form action ="/getAll" method="get">
-        <input type="submit" value="Get all Users">
-    </form>
-
-    <form action ="/registerpage" method="get">
-        <input type="submit" value="register">
-    </form>
+   <a href="/register-page">
+       <button>Sign Up</button>
+   </a>
 </body>
 </html>

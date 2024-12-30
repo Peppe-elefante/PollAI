@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <title>Chose your plan</title>
     <link rel="stylesheet" href="/CSS/nav-bar.css">
+    <link rel="stylesheet" href="/CSS/choose-plan.css">
 </head>
 <body>
 <header>
     <div th:replace="fragments/navbar :: navbar"></div>
 </header>
 <main>
-
+    <h1>PollAI Plan Options</h1>
+    <div class="plan-container">
+        <div class="plan-box">
+            <div class="plan-title">Private Grower</div>
+            <div class="plan-description">Piano pensato per gli allevatori privati (da tradurre)</div>
+            <a href="/register-page">
+                <button class="subscribe-button">Subscribe</button>
+            </a>
+        </div>
+        <div class="plan-box">
+            <div class="plan-title">Business</div>
+            <div class="plan-description">Ideal for professionals who need more features.</div>
+            <a href="/">
+                <button class="subscribe-button">Talk to us</button>
+            </a>
+        </div>
+        <div class="plan-box">
+            <div class="plan-title">Enterprise</div>
+            <div class="plan-description">Everything you need for your business and more.</div>
+            <a href="/">
+                <button class="subscribe-button">Talk to us</button>
+            </a>
+        </div>
+    </div>
 </main>
 </body>
 </html>

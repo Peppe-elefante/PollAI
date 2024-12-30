@@ -1,6 +1,8 @@
 package com.example.pollai;
 
+import com.example.pollai.utente.Utente;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //Classe che gestisce l'accesso a tutte le pagine generali
@@ -17,5 +19,18 @@ public class MainController {
     @GetMapping("/choose-plan")
     public String choosePlan() {
         return "choose-plan";
+    }
+
+    //Mapping verso la pagina per il login
+    @GetMapping("/login-page")
+    public String loginpage(){
+        return "login";
+    }
+
+    //Mapping verso la pagina di registrazione per l'Utente
+    @GetMapping("/register-page")
+    public String registerPage(Model model){
+        model.addAttribute("user", new Utente());
+        return "registeruser";
     }
 }
