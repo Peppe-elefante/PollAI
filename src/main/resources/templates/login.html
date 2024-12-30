@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Homepage</title>
     <link rel="stylesheet" href="/CSS/nav-bar.css">
+    <link rel="stylesheet" href="/CSS/log-in.css">
 </head>
 <body>
 <header>
@@ -11,15 +12,38 @@
 </header>
     <h1>PollAI</h1>
     <h2 th:if="${Invalid}">Invalid Login</h2>
+
+
+<div class="login-form">
     <form action="/login" method="post">
-        <label>Email: </label>
-        <input type = "email" name = "email" pattern="/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm" required autofocus><br>
-        <label>Password  </label>
-        <input type = password name= "password" required><br>
-        <input type="submit" value="Login">
+        <p class="form-title">Sign in to your account</p>
+        <div class="input-container">
+            <input type = "email" name = "email" pattern="/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm" required autofocus>
+            <span>
+                <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                </svg>
+              </span>
+        </div>
+        <div class="input-container">
+            <input type = password name= "password" required>
+
+            <span>
+                <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                </svg>
+              </span>
+        </div>
+        <button class="submit" type="submit">
+            Log in
+        </button>
+
+        <p class="signup-link">
+            No account?
+            <a href="/register-page">Sign up</a>
+        </p>
     </form>
-   <a href="/register-page">
-       <button>Sign Up</button>
-   </a>
+</div>
 </body>
 </html>
