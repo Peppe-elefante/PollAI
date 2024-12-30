@@ -39,15 +39,15 @@ public class Utente implements Serializable {
     @JoinTable(
             name = "utente_pollaio", // Name of the join table
             joinColumns = @JoinColumn(name = "utente_id"), // Foreign key for User
-            inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Address
+            inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Pollaio
     )
     private Pollaio pollaio;
 
     @OneToOne
     @JoinTable(
             name = "utente_magazzino", // Name of the join table
-            joinColumns = @JoinColumn(name = "magazzino_id"), // Foreign key for User
-            inverseJoinColumns = @JoinColumn(name = "pollaio_id") // Foreign key for Address
+            joinColumns = @JoinColumn(name = "utente_id"), // Foreign key for User
+            inverseJoinColumns = @JoinColumn(name = "magazzino_id") // Foreign key for Magazzino
     )
     private Magazzino magazzino;
 
