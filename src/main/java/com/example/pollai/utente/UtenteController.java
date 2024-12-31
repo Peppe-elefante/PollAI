@@ -41,7 +41,7 @@ public class UtenteController {
 
     //Prende i dati dell'utente e lo fa registrare
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") Utente user, @RequestParam String password, HttpSession session, Model model){
+    public String register(@ModelAttribute("user") Utente user, @RequestParam String password, HttpSession session){
         log.info("here " + user.getNome());
         Utente savedUser = utenteService.saveUtente(user, password);
         session.setAttribute("user", savedUser);

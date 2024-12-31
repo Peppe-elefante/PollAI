@@ -14,10 +14,10 @@ public class Magazzino implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Farmaco> farmaci;
 
-    @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Cibo> cibo;
 
     @OneToOne(mappedBy = "magazzino", cascade = CascadeType.ALL)

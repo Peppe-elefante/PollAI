@@ -17,6 +17,17 @@
         </li>
     </ul>
 </div>
+<p>Inserisci farmaci</p>
+<form th:action="@{/inserisci-farmaco}" th:object="${newfarmaco}" method="post">
+    <div>
+        <label >tipo:</label>
+        <input type="text" id="tipo_f" th:field="*{tipo}" required />
+    </div>
+    <div>
+        <label for="quantita_f"> quantita:</label>
+        <input type="number" id="quantita_f" th:field="*{quantita}" required />
+    </div>
+</form>
 
 <h2>Lista del cibo: </h2>
 <div class="cibo-display">
@@ -27,5 +38,17 @@
         </li>
     </ul>
 </div>
+
+<p>Inserisci cibo</p>
+<form th:action="@{/inserisci-cibo}" th:object="${newcibo}" method="post">
+    <div>
+        <label >tipo:</label>
+        <input type="text" id="tipo_c" th:field="*{tipo}" required />
+    </div>
+    <div>
+        <label for="quantita_c"> quantita:</label>
+        <input type="number" id="quantita_c" th:field="*{quantita}" required />
+    </div>
+</form>
 </body>
 </html>

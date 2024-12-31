@@ -3,6 +3,7 @@ package com.example.pollai.magazzino;
 import com.example.pollai.utente.Utente;
 import com.example.pollai.utente.UtenteController;
 import com.example.pollai.utente.UtenteService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
@@ -36,6 +39,23 @@ public class MagazzinoController {
             magazzinoService.createMagazzino(utente);
             log.info("Creato Magazzino");
         }
+        model.addAttribute("newcibo", new Cibo());
+        model.addAttribute("newfarmaco", new Farmaco());
         return "magazzino";
+    }
+
+    @PostMapping("/inserisci-farmaco")
+    public String inserisciFarmaco(HttpSession session, @ModelAttribute("newfarmaco") Farmaco farmaco, HttpServletRequest request){
+        Utente sessionUser = (Utente) session.getAttribute("user");
+        String referer = request.getHeader("Referer");
+        if (sessionUser == null) {
+            log.warn("Nessun utente trovato in sessione.");
+            return "redirect:/login"; // Reindirizza alla pagina di login
+        }
+        // Recupera l'utente gestito dal database
+        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
+        farmaco.setMagazzino(utente.getMagazzino());
+        magazzinoService.addFarmaco(utente.getMagazzino(), farmaco);
+        return "redirect:" + (referer != null ? referer : "/");
     }
 }
