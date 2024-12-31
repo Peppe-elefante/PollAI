@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazzino</title>
+</head>
+<body>
+<h1> Magazzino </h1>
+<p> Questo è il magazzino di <span th:text="${session.user.nome}"></span></p>
+
+<h2>Lista dei farmaci: </h2>
+<div class="farmaci-display">
+    <ul>
+        <li th:each="farmaco : ${session.user.magazzino.farmaci}">
+            <span th:text="${farmaco.tipo}">Tipo</span>
+            <span th:text="${farmaco.quantita}">Quantita</span>
+        </li>
+    </ul>
+</div>
+
+<h2>Lista del cibo: </h2>
+<div class="cibo-display">
+    <ul>
+        <li th:each="cibi : ${session.user.magazzino.cibo}">
+            <span th:text="${cibi.tipo}">Tipo</span>
+            <span th:text="${cibi.quantita}">Quantita</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

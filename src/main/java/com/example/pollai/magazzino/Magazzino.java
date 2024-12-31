@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "magazzino")
 public class Magazzino implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -19,7 +20,7 @@ public class Magazzino implements Serializable {
     @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cibo> cibo;
 
-    @OneToOne(mappedBy = "magazzino")
+    @OneToOne(mappedBy = "magazzino", cascade = CascadeType.ALL)
     private Utente utente;
 
     public Magazzino() {
@@ -48,12 +49,32 @@ public class Magazzino implements Serializable {
         this.farmaci = farmaci;
     }
 
+    public void addFarmaco(Farmaco farmaco) {
+        farmaci.add(farmaco);
+        farmaco.setMagazzino(this);
+    }
+
+    public void removeFarmaco(Farmaco farmaco) {
+        farmaci.remove(farmaco);
+        farmaco.setMagazzino(null);
+    }
+
     public List<Cibo> getCibo() {
         return cibo;
     }
 
     public void setCibo(List<Cibo> cibo) {
         this.cibo = cibo;
+    }
+
+    public void addCibo(Cibo cibo1) {
+        cibo.add(cibo1);
+        cibo1.setMagazzino(this);
+    }
+
+    public void removeCibo(Cibo cibo1) {
+        cibo.remove(cibo1);
+        cibo1.setMagazzino(null);
     }
 
     public Utente getUtente() {

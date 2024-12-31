@@ -13,14 +13,36 @@ public class MagazzinoService {
     private FarmacoDAO farmacoDAO;
     @Autowired
     private CiboDAO ciboDAO;
-    @Autowired
-    private UtenteDAO utenteDAO;
+
 
     public Magazzino createMagazzino(Utente utente){
         Magazzino m = new Magazzino();
         m.setUtente(utente);
         utente.setMagazzino(m);
-        utenteDAO.save(utente);
         return magazzinoDAO.save(m);
+    }
+
+    public void addFarmaco(Magazzino m, Farmaco f){
+        m.addFarmaco(f);
+        farmacoDAO.save(f);
+        magazzinoDAO.save(m);
+    }
+
+    public void removeFarmaco(Magazzino m, Farmaco f){
+        m.removeFarmaco(f);
+        farmacoDAO.delete(f);
+        magazzinoDAO.save(m);
+    }
+
+    public void addCibo(Magazzino m, Cibo c){
+        m.addCibo(c);
+        ciboDAO.save(c);
+        magazzinoDAO.save(m);
+    }
+
+    public void removeCibo(Magazzino m, Cibo c){
+        m.removeCibo(c);
+        ciboDAO.delete(c);
+        magazzinoDAO.save(m);
     }
 }

@@ -13,15 +13,13 @@ public class PollaioService {
     private PollaioDAO pollaioDAO;
     @Autowired
     private GallinaDAO gallinaDAO;
-    @Autowired
-    private UtenteDAO utenteDAO;
+
 
     public Pollaio createPollaio(Utente utente){
         Pollaio pollaio = new Pollaio();
         pollaio.setUtente(utente);
         pollaio.setQuantity(0);
         utente.setPollaio(pollaio);
-        utenteDAO.save(utente);
         return pollaioDAO.save(pollaio);
     }
 
@@ -33,6 +31,7 @@ public class PollaioService {
         if (p.getQuantity() < 15) {
             p.addGallina(g);
             gallinaDAO.save(g);
+            p.setQuantity(p.getQuantity()+1);
             pollaioDAO.save(p);
             return true;
         } else
@@ -43,6 +42,7 @@ public class PollaioService {
         if (p.getQuantity() > 0) {
             p.removeGallina(g);
             gallinaDAO.delete(g);
+            p.setQuantity(p.getQuantity()-1);
             pollaioDAO.save(p);
             return true;
         } else

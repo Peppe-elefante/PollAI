@@ -16,7 +16,7 @@ public class Pollaio implements Serializable {
     @OneToMany(mappedBy = "pollaio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Gallina> galline;
 
-    @OneToOne(mappedBy = "pollaio")
+    @OneToOne(mappedBy = "pollaio", cascade = CascadeType.ALL)
     private Utente utente;
 
     public Pollaio() {
