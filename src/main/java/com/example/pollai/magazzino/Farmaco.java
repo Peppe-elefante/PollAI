@@ -9,12 +9,13 @@ import java.io.Serializable;
 @Table(name = "farmaco")
 public class Farmaco implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
     private int quantita;
 
     @ManyToOne
-    @JoinColumn(name = "magazzino_id", nullable = false)
+    @JoinColumn(name = "magazzino_id")
     private Magazzino magazzino;
 
     // Default Constructor
@@ -22,10 +23,10 @@ public class Farmaco implements Serializable {
     }
 
     // Constructor with All Fields
-    public Farmaco(Long id, String tipo, int quantita) {
-        this.id = id;
+    public Farmaco( String tipo, int quantita, Magazzino magazzino) {
         this.tipo = tipo;
         this.quantita = quantita;
+        this.magazzino = magazzino;
     }
 
     // Getters and Setters

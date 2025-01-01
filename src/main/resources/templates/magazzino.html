@@ -18,14 +18,17 @@
     </ul>
 </div>
 <p>Inserisci farmaci</p>
-<form th:action="@{/inserisci-farmaco}" th:object="${newfarmaco}" method="post">
+<form th:action="@{/inserisci-farmaco}"  method="post">
     <div>
         <label >tipo:</label>
-        <input type="text" id="tipo_f" th:field="*{tipo}" required />
+        <input type="text" id="tipo_f" name="tipo_f" required />
     </div>
     <div>
         <label for="quantita_f"> quantita:</label>
-        <input type="number" id="quantita_f" th:field="*{quantita}" required />
+        <input type="number" id="quantita_f" name ="quantita_f" required />
+    </div>
+    <div>
+        <button type="submit">aggiungi</button>
     </div>
 </form>
 
@@ -40,14 +43,17 @@
 </div>
 
 <p>Inserisci cibo</p>
-<form th:action="@{/inserisci-cibo}" th:object="${newcibo}" method="post">
+<form th:action="@{/inserisci-cibo}"  method="post">
     <div>
         <label >tipo:</label>
-        <input type="text" id="tipo_c" th:field="*{tipo}" required />
+        <input type="text" id="tipo_c" name="tipo_c" required />
     </div>
     <div>
         <label for="quantita_c"> quantita:</label>
-        <input type="number" id="quantita_c" th:field="*{quantita}" required />
+        <input type="number" id="quantita_c" name="quantita_c" required />
+    </div>
+    <div>
+        <button type="submit">aggiungi</button>
     </div>
 </form>
 </body>

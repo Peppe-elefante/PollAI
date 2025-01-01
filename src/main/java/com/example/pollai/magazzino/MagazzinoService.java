@@ -22,27 +22,32 @@ public class MagazzinoService {
         return magazzinoDAO.save(m);
     }
 
-    public void addFarmaco(Magazzino m, Farmaco f){
+    public Magazzino addFarmaco(Magazzino m, Farmaco f){
+
+        // Salva il farmaco per generare l'ID
         m.addFarmaco(f);
-        farmacoDAO.save(f);
-        magazzinoDAO.save(m);
+
+        // Salva il magazzino aggiornato
+        return magazzinoDAO.save(m);
     }
 
-    public void removeFarmaco(Magazzino m, Farmaco f){
+    public Magazzino removeFarmaco(Magazzino m, Farmaco f){
         m.removeFarmaco(f);
         farmacoDAO.delete(f);
-        magazzinoDAO.save(m);
+        return magazzinoDAO.save(m);
     }
 
-    public void addCibo(Magazzino m, Cibo c){
+    public Magazzino addCibo(Magazzino m, Cibo c){
+        // Aggiungi il cibo al magazzino
         m.addCibo(c);
-        ciboDAO.save(c);
-        magazzinoDAO.save(m);
+
+        // Salva il magazzino aggiornato
+        return magazzinoDAO.save(m);
     }
 
-    public void removeCibo(Magazzino m, Cibo c){
+    public Magazzino removeCibo(Magazzino m, Cibo c){
         m.removeCibo(c);
         ciboDAO.delete(c);
-        magazzinoDAO.save(m);
+        return magazzinoDAO.save(m);
     }
 }

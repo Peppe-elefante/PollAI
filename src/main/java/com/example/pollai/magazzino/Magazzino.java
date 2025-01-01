@@ -5,6 +5,7 @@ import com.example.pollai.utente.Utente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,10 +16,10 @@ public class Magazzino implements Serializable {
     private Long id;
 
     @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Farmaco> farmaci;
+    private List<Farmaco> farmaci = new ArrayList<>();
 
     @OneToMany(mappedBy = "magazzino", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Cibo> cibo;
+    private List<Cibo> cibo = new ArrayList<>();
 
     @OneToOne(mappedBy = "magazzino", cascade = CascadeType.ALL)
     private Utente utente;
