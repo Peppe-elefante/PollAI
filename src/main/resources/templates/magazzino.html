@@ -8,12 +8,20 @@
 <h1> Magazzino </h1>
 <p> Questo è il magazzino di <span th:text="${session.user.nome}"></span></p>
 
+<span th:text="${session.user.magazzino.notifica.avvertimento}"></span>
+
 <h2>Lista dei farmaci: </h2>
 <div class="farmaci-display">
     <ul>
         <li th:each="farmaco : ${session.user.magazzino.farmaci}">
             <span th:text="${farmaco.tipo}">Tipo</span>
             <span th:text="${farmaco.quantita}">Quantita</span>
+            <form th:action="@{/rimuovi-farmaco}"  method="post">
+                <div>
+                    <input type="hidden" th:name="farmacoId" th:value="${farmaco.id}" />
+                    <button type="submit">Rimuovi</button>
+                </div>
+            </form>
         </li>
     </ul>
 </div>
@@ -38,6 +46,12 @@
         <li th:each="cibi : ${session.user.magazzino.cibo}">
             <span th:text="${cibi.tipo}">Tipo</span>
             <span th:text="${cibi.quantita}">Quantita</span>
+            <form th:action="@{/rimuovi-cibo}" method="post">
+                <div>
+                    <input type="hidden" th:name="ciboId" th:value="${cibi.id}" />
+                    <button type="submit">Rimuovi</button>
+                </div>
+            </form>
         </li>
     </ul>
 </div>

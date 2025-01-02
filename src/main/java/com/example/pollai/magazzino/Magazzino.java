@@ -24,6 +24,9 @@ public class Magazzino implements Serializable {
     @OneToOne(mappedBy = "magazzino", cascade = CascadeType.ALL)
     private Utente utente;
 
+    @Transient
+    private Notifica notifica;
+
     public Magazzino() {
     }
 
@@ -84,6 +87,26 @@ public class Magazzino implements Serializable {
 
     public void setUtente(Utente utente) {
         this.utente = utente;
+    }
+
+    public void setNotifica(){
+        Notifica notifica = new Notifica();
+        int quantity = 0;
+        for(Cibo c : cibo){
+            quantity += c.getQuantita();
+        }
+        if(quantity < 200){
+            notifica.setAvvertimento("Le scorte alimentari sono insufficienti");
+        } else if(quantity > 200 && quantity < 400){
+            notifica.setAvvertimento("Le scorte alimentari saranno presto insufficienti");
+        } else{
+            notifica.setAvvertimento("Le scorte alimentari sono sufficienti");
+        }
+        this.notifica = notifica;
+    }
+
+    public Notifica getNotifica(){
+        return notifica;
     }
 
 }
