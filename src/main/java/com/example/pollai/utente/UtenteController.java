@@ -31,6 +31,13 @@ public class UtenteController {
         if (user.isPresent()) {
             log.info("User is present");
             session.setAttribute("user", user.get());
+
+            Utente utente = user.get();
+            if (utente.getPollaio() == null) {
+                // Se l'utente non ha un pollaio, reindirizzalo alla pagina di configurazione
+                return "configura-pollaio";
+            }
+
             return "/areautente";
         } else{
             log.info("User isn't present");
@@ -45,8 +52,11 @@ public class UtenteController {
         log.info("here " + user.getNome());
         Utente savedUser = utenteService.saveUtente(user, password);
         session.setAttribute("user", savedUser);
-        return "areautente";
+        return "configura-pollaio";
     }
+
+    @GetMapping("/area-utente")
+    public String areaUtenet(){ return "areautente"; }
 
     //Restituisce tutti gli utenti
     @GetMapping("/getAll")
