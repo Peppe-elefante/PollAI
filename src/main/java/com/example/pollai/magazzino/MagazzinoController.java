@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -84,6 +85,57 @@ public class MagazzinoController {
         // Aggiorna l'utente con il magazzino aggiornato
         utente.setMagazzino(magazzinoAggiornato);
         session.setAttribute("user", utente);
+        // Reindirizza alla pagina precedente o alla home
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    @PostMapping("/rimuovi-farmaco")
+    public String rimuoviFarmaco(HttpSession session, @RequestParam("farmacoId") Long farmacoId, HttpServletRequest request){
+        // Recupera l'utente dalla sessione
+        Utente sessionUser = (Utente) session.getAttribute("user");
+        if (sessionUser == null) {
+            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
+            return "redirect:/login";
+        }
+        // Recupera l'utente dal database
+        Utente utente = utenteService.getUtenteById(sessionUser.getId())
+                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+
+        // Ottieni il riferimento della pagina precedente
+        String referer = request.getHeader("Referer");
+
+        log.info("Farmaco with id" + farmacoId);
+        Magazzino magazzino = magazzinoService.removeFarmaco(utente.getMagazzino(), farmacoId);
+        // Aggiorna l'utente con il magazzino aggiornato
+        utente.setMagazzino(magazzino);
+        session.setAttribute("user", utente);
+
+        // Reindirizza alla pagina precedente o alla home
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    @PostMapping("/rimuovi-cibo")
+    public String rimuoviCibo(HttpSession session, @RequestParam("ciboId") Long ciboId, HttpServletRequest request){
+        // Recupera l'utente dalla sessione
+        Utente sessionUser = (Utente) session.getAttribute("user");
+        if (sessionUser == null) {
+            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
+            return "redirect:/login";
+        }
+        // Recupera l'utente dal database
+        Utente utente = utenteService.getUtenteById(sessionUser.getId())
+                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+
+        // Ottieni il riferimento della pagina precedente
+        String referer = request.getHeader("Referer");
+
+        log.info("Cibo with id" + ciboId);
+
+        Magazzino magazzino = magazzinoService.removeCibo(utente.getMagazzino(), ciboId);
+        // Aggiorna l'utente con il magazzino aggiornato
+        utente.setMagazzino(magazzino);
+        session.setAttribute("user", utente);
+
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
     }

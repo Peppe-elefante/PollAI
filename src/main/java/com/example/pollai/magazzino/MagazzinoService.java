@@ -31,10 +31,21 @@ public class MagazzinoService {
         return magazzinoDAO.save(m);
     }
 
-    public Magazzino removeFarmaco(Magazzino m, Farmaco f){
-        m.removeFarmaco(f);
-        farmacoDAO.delete(f);
-        return magazzinoDAO.save(m);
+    public Magazzino removeFarmaco(Magazzino m, Long farmacoId){
+        Farmaco f = farmacoDAO.findById(farmacoId).get();
+        try {
+            // Rimuove il farmaco dal magazzino
+            m.removeFarmaco(f);
+
+            // Elimina il farmaco dal database
+            farmacoDAO.delete(f);
+
+            // Salva il magazzino aggiornato e lo restituisce
+            return magazzinoDAO.save(m);
+        } catch (Exception e) {
+            // Gestisce eventuali errori di rimozione o salvataggio
+            throw new RuntimeException("Errore durante la rimozione del farmaco", e);
+        }
     }
 
     public Magazzino addCibo(Magazzino m, Cibo c){
@@ -45,9 +56,20 @@ public class MagazzinoService {
         return magazzinoDAO.save(m);
     }
 
-    public Magazzino removeCibo(Magazzino m, Cibo c){
-        m.removeCibo(c);
-        ciboDAO.delete(c);
-        return magazzinoDAO.save(m);
+    public Magazzino removeCibo(Magazzino m, Long ciboId) {
+        Cibo c = ciboDAO.findById(ciboId).get();
+        try {
+            // Rimuove il farmaco dal magazzino
+            m.removeCibo(c);
+
+            // Elimina il farmaco dal database
+            ciboDAO.delete(c);
+
+            // Salva il magazzino aggiornato e lo restituisce
+            return magazzinoDAO.save(m);
+        } catch (Exception e) {
+            // Gestisce eventuali errori di rimozione o salvataggio
+            throw new RuntimeException("Errore durante la rimozione del farmaco", e);
+        }
     }
 }
