@@ -39,7 +39,14 @@ public class MagazzinoController {
         if(utente.getMagazzino() == null){
             magazzinoService.createMagazzino(utente);
             log.info("Creato Magazzino");
+        } else{
+            //Se non è il primo accesso l'utente avrà una notifica sulle sue scorte
+            Magazzino magazzino = utente.getMagazzino();
+            magazzino.setNotifica();
+            utente.setMagazzino(magazzino);
+            session.setAttribute("user", utente);
         }
+
         return "magazzino";
     }
 
