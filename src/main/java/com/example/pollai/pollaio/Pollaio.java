@@ -1,5 +1,6 @@
 package com.example.pollai.pollaio;
 
+import com.example.pollai.produzione.DatiProduzione;
 import com.example.pollai.utente.Utente;
 import jakarta.persistence.*;
 
@@ -18,6 +19,9 @@ public class Pollaio implements Serializable {
 
     @OneToOne(mappedBy = "pollaio", cascade = CascadeType.ALL)
     private Utente utente;
+
+    @OneToOne(mappedBy = "pollaio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private DatiProduzione produzione;
 
     public Pollaio() {
     }
@@ -68,6 +72,14 @@ public class Pollaio implements Serializable {
 
     public void setUtente(Utente utente) {
         this.utente = utente;
+    }
+
+    public DatiProduzione getProduzione() {
+        return produzione;
+    }
+
+    public void setProduzione(DatiProduzione produzione) {
+        this.produzione = produzione;
     }
 
 

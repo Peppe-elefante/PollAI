@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Produzione Uova</title>
+</head>
+<body>
+
+<tbody>
+    <tr th:each="entry : ${session.user.pollaio.produzione.uovaPerGiorno}">
+        <td th:text="${entry.key}">Data</td>
+        <td th:text="${entry.value}">uova</td>
+    </tr>
+</tbody>
+
+<p>Inserisci uova</p>
+<form th:action="@{/inserisci-uova}"  method="post">
+    <div>
+        <label for="date">Data:</label>
+        <input type="date" id="date" name="date" required />
+    </div>
+    <div>
+        <label for="quantita"> quantita:</label>
+        <input type="number" id="quantita" name ="quantita" required />
+    </div>
+    <div>
+        <button type="submit">aggiungi</button>
+    </div>
+</form>
+
+</body>
+</html>
