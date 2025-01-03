@@ -27,15 +27,13 @@ public class PollaioService {
         return pollaioDAO.findById(id);
     }
 
-    public boolean addGallina(Pollaio p, Gallina g) {
+    public Pollaio addGallina(Pollaio p, Gallina g) {
         if (p.getQuantity() < 15) {
             p.addGallina(g);
             gallinaDAO.save(g);
             p.setQuantity(p.getQuantity()+1);
-            pollaioDAO.save(p);
-            return true;
-        } else
-            return false;
+        }
+        return pollaioDAO.save(p);
     }
 
     public boolean removeGallina(Pollaio p, Gallina g) {

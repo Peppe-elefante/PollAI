@@ -29,6 +29,7 @@ public class MagazzinoController {
     @GetMapping("/accesso-magazzino")
     public String Magazzino(HttpSession session, Model model){
         Utente sessionUser = (Utente) session.getAttribute("user");
+        Magazzino magazzino;
         if (sessionUser == null) {
             log.warn("Nessun utente trovato in sessione.");
             return "redirect:/login"; // Reindirizza alla pagina di login
@@ -37,15 +38,16 @@ public class MagazzinoController {
         Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
         //Crea il magazzino se non esiste
         if(utente.getMagazzino() == null){
-            magazzinoService.createMagazzino(utente);
+            magazzino = magazzinoService.createMagazzino(utente);
             log.info("Creato Magazzino");
         } else{
             //Se non è il primo accesso l'utente avrà una notifica sulle sue scorte
-            Magazzino magazzino = utente.getMagazzino();
+            magazzino = utente.getMagazzino();
             magazzino.setNotifica();
-            utente.setMagazzino(magazzino);
-            session.setAttribute("user", utente);
         }
+        //aggiorna il magazzino
+        utente.setMagazzino(magazzino);
+        session.setAttribute("user", utente);
 
         return "magazzino";
     }
