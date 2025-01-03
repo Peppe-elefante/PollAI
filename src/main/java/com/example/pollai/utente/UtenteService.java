@@ -48,7 +48,7 @@ public class UtenteService {
     }
 
     // Esempio di query personalizzata: Ottieni un Utente tramite email
-    public Optional<Utente> getUtenteByEmail(String email, String password) {
+    public Optional<Utente> autenticazione(String email, String password) {
         // Cerca un utente tramite email
         Optional<Utente> userCheck = utenteDAO.findByEmail(email);
         if(userCheck.isPresent()){

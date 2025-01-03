@@ -26,7 +26,7 @@ public class UtenteController {
    //Dopo che l'utente ha inserito tutti fa l'autenticazione
     @PostMapping("/login")
     public String login(String email, String password, HttpSession session, HttpServletRequest request, Model model){
-        Optional<Utente> user = utenteService.getUtenteByEmail(email, password);
+        Optional<Utente> user = utenteService.autenticazione(email, password);
         String referer = request.getHeader("Referer");
         if (user.isPresent()) {
             log.info("User is present");
