@@ -83,7 +83,9 @@ public class ProduzioneController {
 
         Pollaio pollaio = utente.getPollaio();
         DatiProduzione produzione = pollaio.getProduzione();
+        
         switch (category) {
+
             case "3 months":
                 data = data.minusMonths(3);
                 break;
