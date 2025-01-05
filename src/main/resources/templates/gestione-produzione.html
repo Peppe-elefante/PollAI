@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<tbody>
-    <tr th:each="entry : ${session.user.pollaio.produzione.uovaPerGiorno}">
-        <td th:text="${entry.key}">Data</td>
-        <td th:text="${entry.value}">uova</td>
-    </tr>
-</tbody>
+<div>
+    <ul th:each="enuly : ${session.user.pollaio.produzione.uovaPerGiorno}">
+        <li th:text="${enuly.key}">Data</li>
+        <li th:text="${enuly.value}">uova</li>
+    </ul>
+</div>
 
 <p>Inserisci uova</p>
 <form th:action="@{/inserisci-uova}"  method="post">
@@ -28,7 +28,7 @@
     </div>
 </form>
 
-<p>Quante uova sono state prodotte in passato</p>
+<p>How many eggs have been produced in the past?</p>
 <form th:action="@{/archivio-produzione}">
     <p>
         Periodo:
@@ -42,6 +42,21 @@
 </form>
 
 <p><span th:text="${archivio}"></span></p>
+
+<p>How many eggs will be produced in the future?</p>
+<form th:action="@{/predizione-produzione}">
+    <p>
+        Periodo:
+        <select name="category" size="1" class="category-select">
+            <option value="3 months"> 3 months </option>
+            <option value="1 month"> 1 month </option>
+            <option value="1 year"> 1 year </option>
+        </select>
+        <input type="submit" value="Search">
+    </p>
+</form>
+
+<p><span th:text="${predizione}"></span></p>
 
 </body>
 </html>

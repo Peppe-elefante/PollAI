@@ -32,7 +32,7 @@ public class ProduzioneController {
         Pollaio pollaio;
         DatiProduzione produzione;
         if (sessionUser == null) {
-            return "redirect:/login"; // Reindirizza alla pagina di login
+            return "login"; // Reindirizza alla pagina di login
         }
         // Recupera l'utente gestito dal database
         Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
@@ -102,6 +102,32 @@ public class ProduzioneController {
         archivio += eggs;
 
         redirectAttributes.addFlashAttribute("archivio", archivio);
+
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    @GetMapping("/predizione-produzione")
+    public String predizioneProduzione(@RequestParam String category, HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes){
+        int eggs;
+        String referer = request.getHeader("Referer");
+
+
+        switch (category) {
+
+            case "3 months":
+                eggs = 30;
+                break;
+            case "1 month":
+                eggs = 10;
+                break;
+
+            default:
+                eggs = 100;
+        }
+
+        String predizione = "The eggs that will be produces in the next " + category + " are " + eggs;
+
+        redirectAttributes.addFlashAttribute("predizione", predizione);
 
         return "redirect:" + (referer != null ? referer : "/");
     }
