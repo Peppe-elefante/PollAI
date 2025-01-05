@@ -1,25 +1,40 @@
-.login-form{
+body {
+    background: linear-gradient(135deg, #deffff 40%, #ffffff 100%);
+    font-family: 'Merriweather', serif;
+    margin: 0;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 3.2em;
+    color: #004d61;
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: #e74c3c;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-form {
     position: fixed;
     top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #dddddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 300px;
-    height: 325px;
+    height: 400px;
     text-align: center;
-    font-family: 'Merriweather', serif;
-}
-
-.form {
-    background-color: #fff;
-    display: block;
-    padding: 1rem;
-    max-width: 350px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     font-family: 'Merriweather', serif;
 }
 
@@ -28,12 +43,8 @@
     line-height: 1.75rem;
     font-weight: 600;
     text-align: center;
-    color: #000;
+    color: #004d61; /* Lo stesso blu per il testo */
     font-family: 'Merriweather', serif;
-}
-
-.input-container {
-    position: relative;
 }
 
 .input-container input, .form button {
@@ -77,18 +88,33 @@
     padding-bottom: 0.75rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    background-color: #28a745;
-    color: #ffffff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
+    background: linear-gradient(135deg, #00796b, #004d40);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 30px;
     text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.3s;
     font-family: 'Merriweather', serif;
 }
 
+.submit:hover {
+    background-color: #009688;
+    transform: translateY(-5px) scale(1.05);
+}
+
 .signup-link {
-    color: #6B7280;
+    color: #004d61;
     font-size: 0.875rem;
+    margin-top: 15px;
+}
+
+.signup-link a {
+    text-decoration: none;
+    color: #004d61;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
 }

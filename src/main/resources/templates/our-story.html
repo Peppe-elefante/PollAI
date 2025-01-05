@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Nostra Storia</title>
+    <link rel="stylesheet" href="/css/nav-bar.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/our-story.css">
+</head>
+<body>
+
+<header>
+    <!-- Includi la navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<main>
+    <section>
+        <h1>La Nostra Storia</h1>
+        <p>
+            Siamo nati con l'obiettivo di semplificare la gestione dei processi decisionali attraverso soluzioni innovative e basate sui dati.
+            La nostra missione è fornire strumenti che migliorino la produttività, promuovano la collaborazione e rendano ogni decisione più consapevole e strategica.
+        </p>
+        <p>
+            Grazie al nostro team stiamo trasformando il modo in cui le organizzazioni raccolgono, analizzano e utilizzano le informazioni.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <div th:replace="fragments/footer :: footer"></div> <!-- Inclusione del footer -->
+</footer>
+
+</body>
+</html>

@@ -1,13 +1,13 @@
-.hero {
+main section {
     padding: 100px 20px;
-    background: linear-gradient(135deg, #deffff 40%, #ffffff 100%);
+    background: linear-gradient(135deg, #ffffff 40%, #ffffff 100%);
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
 }
 
-.hero h1 {
+main section h1 {
     font-size: 3.2em;
     color: #004d61;
     margin-bottom: 30px;
@@ -17,7 +17,7 @@
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-.hero p {
+main section p {
     font-size: 1.3em;
     line-height: 1.8;
     color: #00434f;
@@ -30,21 +30,22 @@
     animation: slideUp 1s ease-in-out forwards 0.5s;
 }
 
-h4 {
-    text-align: center;
-    font-size: 1.2em;
-    color: #004d61;
-    margin-top: 30px;
-}
-
-h4 a {
-    color: #034aff;
-    font-weight: bold;
+main section .cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #00796b, #004d40);
+    color: white;
+    font-size: 1.3em;
+    font-family: 'Merriweather', serif;
+    border-radius: 30px;
     text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-h4 a:hover {
-    text-decoration: underline;
+main section .cta-button:hover {
+    background-color: #009688;
+    transform: translateY(-5px) scale(1.05);
 }
 
 /* Animazioni CSS */
@@ -60,28 +61,25 @@ h4 a:hover {
 
 /* Responsive design per dispositivi mobili */
 @media (max-width: 768px) {
-    .hero {
+    main section {
         padding: 60px 15px;
     }
 
-    .hero h1 {
+    main section h1 {
         font-size: 2.5em;
     }
 
-    .hero p {
-        font-size: 1.1em;
-    }
-
-    h4 {
+    main section p {
         font-size: 1.1em;
     }
 }
 
-a {
-    color: #004d61;
+main section a {
+    color: #004d40;
     text-decoration: none;
+    font-weight: bold;
 }
 
-a:hover {
+main section a:hover {
     text-decoration: underline;
 }

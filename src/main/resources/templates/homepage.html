@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
-    <link rel="stylesheet" href="/CSS/nav-bar.css">
+    <link rel="stylesheet" href="/css/nav-bar.css">
     <link rel="stylesheet" href="/css/homepage.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div th:replace="fragments/navbar :: navbar"></div> <!-- Inclusione della nav bar -->
 </header>
 
 <main>
@@ -21,44 +21,11 @@
             <p>Un'app facile da usare per la gestione degli allevamenti avicoli, progettata per ottimizzare le prestazioni, i costi e la pianificazione.</p>
         </div>
     </div>
-
     <h4>You have already an account? <a href="/login-page">Click here!</a></h4>
 </main>
 
-<footer class="footer">
-    <div class="footer-content">
-        <!-- Colonna di sinistra: Copyright, Privacy, Policy, Termini, Supporto -->
-        <div class="left-section">
-            <p>&copy; 2025 PollAI. Tutti i diritti riservati.</p>
-            <p>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Termini e Condizioni</a>
-            </p>
-
-            <!-- Supporto -->
-            <div class="support">
-                <p><strong>Supporto:</strong></p>
-                <p>Email di supporto: <a href="mailto:supporto@pollai.com">supporto@pollai.com</a></p>
-            </div>
-        </div>
-
-        <!-- Colonna di destra: Contatti, Social -->
-        <div class="right-section">
-            <!-- Contatti -->
-            <div class="contact-info">
-                <p><strong>Contatti:</strong></p>
-                <p>Email: <a href="mailto:teamcontatto@pollai.com">teamcontatto@pollai.com</a></p>
-                <p>Telefono: +39 123 456 0090</p>
-                <p>Indirizzo: Via Giovanni Paolo II, 132, 84084 Fisciano SA, Campania, Italia</p>
-            </div>
-
-            <!-- Social Media con l'icona di Instagram -->
-            <div class="social-links">
-                <p><strong>Seguici su:</strong></p>
-                <a href="#" class="instagram"><i class="fab fa-instagram"></i> Instagram</a>
-            </div>
-        </div>
-    </div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div> <!-- Inclusione del footer -->
 </footer>
 
 </body>
