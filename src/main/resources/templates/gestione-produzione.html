@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Produzione Uova</title>
+</head>
+<body>
+
+
+<div class="uova-display">
+    <ul th:each="uova : ${session.user.pollaio.produzione.uovaPerGiorno}">
+        <li th:text="${uova.key}">Data</li>
+        <li th:text="${uova.value}">uova</li>
+    </ul>
+</div>
+
+<div class ="inserimento-uova">
+    <h2>Inserisci uova</h2>
+    <form th:action="@{/inserisci-uova}" method="post">
+        <fieldset>
+            <div>
+                <label for="date">Data:</label>
+                <input type="date" id="date" name="date" required />
+            </div>
+            <div>
+                <label for="quantita">Quantità:</label>
+                <input type="number" id="quantita" name="quantita" required />
+            </div>
+            <div>
+                <button type="submit">Aggiungi</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class = "archivio-uovo">
+    <h2>How many eggs have been produced in the past?</h2>
+    <form th:action="@{/archivio-produzione}">
+        <p>
+            Periodo:
+            <select name="category" size="1" class="category-select">
+                <option value="3 months">3 months</option>
+                <option value="1 month">1 month</option>
+                <option value="1 year">1 year</option>
+            </select>
+            <input type="submit" value="Search">
+        </p>
+    </form>
+    <p><span th:text="${archivio}"></span></p>
+</div>
+
+<div class = "predizione-uova">
+    <h2>How many eggs will be produced in the future?</h2>
+    <form th:action="@{/predizione-produzione}">
+        <p>
+            Periodo:
+            <select name="category" size="1" class="category-select">
+                <option value="3 months">3 months</option>
+                <option value="1 month">1 month</option>
+                <option value="1 year">1 year</option>
+            </select>
+            <input type="submit" value="Search">
+        </p>
+    </form>
+    <p><span th:text="${predizione}"></span></p>
+</div>
+
+</body>
+</body>
+</html>

@@ -28,7 +28,7 @@ public class PollaioController {
     private UtenteService utenteService;
 
     @GetMapping("/accesso-pollaio")
-    public String Pollaio(HttpSession session, Model model){
+    public String Pollaio(HttpSession session){
         Utente sessionUser = (Utente) session.getAttribute("user");
         Pollaio pollaio;
         if (sessionUser == null) {
