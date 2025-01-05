@@ -1,0 +1,56 @@
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: white;
+}
+
+.hero .logo {
+    flex: 1;
+}
+
+.hero .text {
+    flex: 2;
+    text-align: left;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-family: 'Merriweather', serif;
+    color: rgb(1, 154, 222);
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 35px;
+    font-weight: 300;
+    font-family: 'Merriweather', serif;
+    color: #019ade; /* Colore per la descrizione */
+}
+
+.footer {
+    background-color: #203752;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section, .right-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-section a, .right-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.left-section a:hover, .right-section a:hover {
+    text-decoration: underline;
+}

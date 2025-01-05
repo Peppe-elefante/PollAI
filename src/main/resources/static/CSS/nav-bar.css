@@ -1,6 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Merriweather', serif;
 }
 
 .top-bar {
@@ -32,12 +35,16 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f8f9fa;
+    background-color: #003366;
     border-bottom: 1px solid #ddd;
 }
 
-.logo img {
-    height: 50px;
+.navbar a {
+    color: white;
+}
+
+.navbar .logo img {
+    height: 55px;
     cursor: pointer;
 }
 
@@ -48,26 +55,37 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 1rem;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .nav-links a:hover {
-    color: #007BFF;
+    color: #019ADE;
 }
 
 .nav-button .button {
     text-decoration: none;
-    background-color: #28a745;
+    background-color: #0e7a0d;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .nav-button .button:hover {
-    background-color: #218838;
+    background-color: #085d08;
+    border-color: #085d08;
+    transform: scale(1.05);
+}
+
+.nav-button .button:active {
+    background-color: #084f06;
+    border-color: #084f06;
+    border-width: 8px; /* Bordo più spesso quando cliccato */
+    transform: scale(1); /* Ritorna alla dimensione originale */
 }

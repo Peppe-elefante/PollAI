@@ -1,6 +1,6 @@
 main {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Merriweather', serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,7 @@ h1 {
     margin-bottom: 20px;
     text-align: center;
     color: #333;
+    font-family: 'Merriweather', serif;
 }
 
 .plan-container {
@@ -31,6 +32,7 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Merriweather', serif;
 }
 
 .plan-box:hover {
@@ -42,12 +44,14 @@ h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #333;
+    font-family: 'Merriweather', serif;
 }
 
 .plan-description {
     font-size: 1em;
     margin-bottom: 20px;
     color: #666;
+    font-family: 'Merriweather', serif;
 }
 
 .subscribe-button {
@@ -59,6 +63,7 @@ h1 {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    font-family: 'Merriweather', serif;
 }
 
 .subscribe-button:hover {

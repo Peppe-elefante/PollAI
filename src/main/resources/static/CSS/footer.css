@@ -1,0 +1,105 @@
+.footer {
+    background-color: #203752;
+    color: #ffffff;
+    padding: 40px 0;
+    text-align: left;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Merriweather', serif;
+    font-size: 0.8em;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Colonna di sinistra: Copyright, Privacy, Policy, Termini, Supporto */
+.footer-content .left-section {
+    flex: 1 1 50%; /* occupa la metà sinistra */
+}
+
+.footer-content .left-section a {
+    color: #019ADE;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.footer-content .left-section a:hover,
+.footer-content .left-section a:focus,
+.footer-content .left-section a:active {
+    color: #3E4EA8;
+    text-decoration: underline;
+}
+
+/* Colonna di destra: Contatti */
+.footer-content .right-section {
+    flex: 1 1 50%; /* occupa la metà destra */
+    text-align: left; /* Allinea il testo a sinistra */
+}
+
+/* Contatti */
+.footer-content .right-section .contact-info {
+    margin-bottom: 15px;
+}
+
+/* Sezione social */
+.footer-content .social-links {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.footer-content .social-links a {
+    font-size: 1.3em;
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.footer-content .social-links a i {
+    margin-right: 10px;
+}
+
+.footer-content .social-links a:hover {
+    transform: scale(1.1);
+}
+
+.footer-content .social-links a.instagram i {
+    border: none;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+.footer-content a {
+    color: #019ADE;
+    text-decoration: none;
+}
+
+.footer-content a:hover,
+.footer-content a:focus,
+.footer-content a:active {
+    color: #3E4EA8;
+    text-decoration: underline;
+}
+
+/* Per evitare lo spazio bianco sotto il footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
