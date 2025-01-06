@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Entity
 @Table(name = "produzione")
@@ -42,7 +43,7 @@ public class DatiProduzione {
     }
 
     public Map<LocalDate, Integer> getUovaPerGiorno() {
-        return uovaPerGiorno;
+        return new TreeMap<>(uovaPerGiorno);
     }
 
     public void setUovaPerGiorno(Map<LocalDate, Integer> uovaPerGiorno) {

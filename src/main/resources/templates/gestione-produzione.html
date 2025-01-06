@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gestione Produzione Uova</title>
+    <title>Production of eggs</title>
+    <link rel="stylesheet" href="/css/produzione.css">
 </head>
 <body>
 
 
 <div class="uova-display">
+    <h2>Eggs produced in the past</h2>
     <ul th:each="uova : ${session.user.pollaio.produzione.uovaPerGiorno}">
-        <li th:text="${uova.key}">Data</li>
-        <li th:text="${uova.value}">uova</li>
+        <li>
+            Date: <span th:text="${uova.key}">Sample Date</span>
+            Eggs: <span th:text="${uova.value}">Sample Count</span>
+        </li>
     </ul>
 </div>
 
 <div class ="inserimento-uova">
-    <h2>Inserisci uova</h2>
+    <h2>Insert eggs</h2>
     <form th:action="@{/inserisci-uova}" method="post">
         <fieldset>
             <div>
