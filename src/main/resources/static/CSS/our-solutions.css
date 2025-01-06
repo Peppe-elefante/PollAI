@@ -1,85 +1,82 @@
-main section {
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #ffffff 40%, #ffffff 100%);
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeIn 1.5s ease-in-out;
+.solutions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px;
 }
 
-main section h1 {
-    font-size: 3.2em;
-    color: #004d61;
-    margin-bottom: 30px;
-    font-family: 'Merriweather', serif;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+.card {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+    box-shadow: 0 0 0 5px #ffffff80;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-main section p {
-    font-size: 1.3em;
-    line-height: 1.8;
-    color: #00434f;
-    font-family: 'Merriweather', serif;
-    margin-bottom: 25px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0;
-    animation: slideUp 1s ease-in-out forwards 0.5s;
+.card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-main section .cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(135deg, #00796b, #004d40);
+.card__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semitrasparente */
+    border-radius: 10px;
     color: white;
-    font-size: 1.3em;
-    font-family: 'Merriweather', serif;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
-main section .cta-button:hover {
-    background-color: #009688;
-    transform: translateY(-5px) scale(1.05);
+/* Quando passi sopra con il mouse, il testo diventa visibile */
+.card:hover .card__text {
+    opacity: 1;
 }
 
-/* Animazioni CSS */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.card__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
 }
 
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.card__description {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #ddd;
+    line-height: 1.4;
+}
+
+/* Effetto hover per ingrandire la card */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive design per dispositivi mobili */
 @media (max-width: 768px) {
-    main section {
-        padding: 60px 15px;
+    .solutions-container {
+        flex-direction: column;
+        align-items: center;
     }
 
-    main section h1 {
-        font-size: 2.5em;
+    .card {
+        width: 100%;
+        max-width: 350px;
+        margin: 10px 0;
     }
-
-    main section p {
-        font-size: 1.1em;
-    }
-}
-
-main section a {
-    color: #004d40;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-main section a:hover {
-    text-decoration: underline;
 }

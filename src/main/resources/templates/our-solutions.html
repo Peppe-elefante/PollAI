@@ -12,22 +12,69 @@
 <body>
 
 <header>
-    <!-- Includi la navbar -->
+    <!-- Inclusione la navbar -->
     <div th:replace="fragments/navbar :: navbar"></div>
 </header>
 
 <main>
     <section>
         <h1>Le Nostre Soluzioni</h1>
+       <p>
+           Offriamo soluzioni tecnologiche all'avanguardia progettate per aiutare le organizzazioni a migliorare l'efficienza operativa, ottimizzare i processi decisionali e raggiungere i propri obiettivi strategici.
+       </p>
         <p>
-            Offriamo soluzioni tecnologiche all'avanguardia progettate per aiutare le organizzazioni a migliorare l'efficienza operativa, ottimizzare i processi decisionali e raggiungere i propri obiettivi strategici.
+            Grazie a funzionalità personalizzabili e a strumenti di analisi, si può migliorare l’efficienza operativa, ridurre sprechi e garantire il benessere degli animali.
         </p>
         <p>
-            Le nostre soluzioni includono strumenti di analisi avanzata, dashboard personalizzabili e integrazioni con i principali software aziendali, garantendo un'esperienza completa e senza interruzioni.
+            Con noi la gestione diventa più semplice, precisa e affidabile.
         </p>
-        <p>
-            In ogni progetto, ci impegniamo a fornire il massimo valore aggiunto attraverso innovazione, qualità e un supporto continuo ai nostri clienti.
-        </p>
+
+        <!-- Container delle card affiancate -->
+        <div class="solutions-container">
+            <!-- Salute delle Galline -->
+            <div class="card">
+                <div class="card__content">
+                    <img src="/Images/salute-galline.jpg" alt="Salute delle Galline" class="card__image">
+                    <div class="card__text">
+                    <h3 class="card__title">Salute delle Galline</h3>
+                    <p class="card__description">Esamina e migliora la salute delle galline.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrizione -->
+            <div class="card">
+                <div class="card__content">
+                    <img src="/Images/nutrizione.jpg" alt="Nutrizione" class="card__image">
+                    <div class="card__text">
+                    <h3 class="card__title">Nutrizione</h3>
+                    <p class="card__description">Ottimizza la nutrizione per migliorare le performance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produzione di Uova -->
+            <div class="card">
+                <div class="card__content">
+                    <img src="/Images/produzione-uova.jpg" alt="Produzione di Uova" class="card__image">
+                    <div class="card__text">
+                    <h3 class="card__title">Produzione di Uova</h3>
+                    <p class="card__description">Massimizza la produzione di uova.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendita delle Uova -->
+            <div class="card">
+                <div class="card__content">
+                    <img src="/Images/vendita-uova.jpg" alt="Vendita delle Uova" class="card__image">
+                    <div class="card__text">
+                    <h3 class="card__title">Vendita delle Uova</h3>
+                    <p class="card__description">Predici la vendita delle uova con analisi avanzate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 
