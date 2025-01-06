@@ -19,8 +19,21 @@
             <span th:text="${farmaco.quantita}">Quantita</span>
             <form th:action="@{/rimuovi-farmaco}"  method="post">
                 <div>
-                    <input type="hidden" th:name="farmacoId" th:value="${farmaco.id}" />
+                    <input type="hidden" th:name="id" th:value="${farmaco.id}" />
+                    <input type="hidden" name="tipo" value="farmaco">
                     <button type="submit">Rimuovi</button>
+                </div>
+            </form>
+            <form th:action="@{/modifica-farmaco}"  method="post">
+                <div>
+                    <input type="number" name="cambio" />
+                    <select name="azione" size="1">
+                        <option value="aggiungi">add</option>
+                        <option value="rimuovi">remove</option>
+                        <input type="hidden" name="tipo" value="farmaco">
+                        <input type="hidden" th:name="id" th:value="${farmaco.id}" />
+                    </select>
+                    <button type="submit">Modifica</button>
                 </div>
             </form>
         </li>
@@ -49,8 +62,21 @@
             <span th:text="${cibi.quantita}">Quantita</span>
             <form th:action="@{/rimuovi-cibo}" method="post">
                 <div>
-                    <input type="hidden" th:name="ciboId" th:value="${cibi.id}" />
+                    <input type="hidden" th:name="id" th:value="${cibi.id}" />
+                    <input type="hidden" name="tipo" value="cibo">
                     <button type="submit">Rimuovi</button>
+                </div>
+            </form>
+            <form th:action="@{/modifica-cibo}"  method="post">
+                <div>
+                    <input type="number" name="cambio" />
+                    <select name="azione" size="1">
+                        <option value="aggiungi">add</option>
+                        <option value="rimuovi">remove</option>
+                    </select>
+                    <input type="hidden" name="tipo" value="cibo">
+                    <input type="hidden" th:name="id" th:value="${cibi.id}" />
+                    <button type="submit">Modifica</button>
                 </div>
             </form>
         </li>
