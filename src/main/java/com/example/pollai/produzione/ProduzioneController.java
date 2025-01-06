@@ -28,20 +28,18 @@ public class ProduzioneController {
 
     @GetMapping("/accesso-produzione")
     public String produzione(HttpSession session){
-        Utente sessionUser = (Utente) session.getAttribute("user");
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
         Pollaio pollaio;
         DatiProduzione produzione;
-        if (sessionUser == null) {
-            return "login"; // Reindirizza alla pagina di login
-        }
-        // Recupera l'utente gestito dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
+
         //Crea il pollaio se non esiste
         if((pollaio = utente.getPollaio()) == null){
             pollaio = pollaioService.createPollaio(utente);
         }
-
-
+        //Crea i dati sulla produzione se non esistono
         if((produzione = pollaio.getProduzione()) == null){
             produzione = produzioneService.createProduzione(pollaio);
         }
@@ -58,9 +56,9 @@ public class ProduzioneController {
         LocalDate data = LocalDate.parse(date);
         String referer = request.getHeader("Referer");
 
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
 
         Pollaio pollaio = utente.getPollaio();
 
@@ -77,9 +75,9 @@ public class ProduzioneController {
         LocalDate data = LocalDate.now();
         String referer = request.getHeader("Referer");
 
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
 
         Pollaio pollaio = utente.getPollaio();
         DatiProduzione produzione = pollaio.getProduzione();
@@ -107,7 +105,9 @@ public class ProduzioneController {
     }
 
     @GetMapping("/predizione-produzione")
-    public String predizioneProduzione(@RequestParam String category, HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String predizioneProduzione(@RequestParam String category,
+                                       HttpSession session, HttpServletRequest request,
+                                       RedirectAttributes redirectAttributes){
         int eggs;
         String referer = request.getHeader("Referer");
 
@@ -130,6 +130,17 @@ public class ProduzioneController {
         redirectAttributes.addFlashAttribute("predizione", predizione);
 
         return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    private Utente getUtente(HttpSession session){
+        //prende l'Utente dalla sessione e verifica se esiste nel database
+        Utente sessionUser = (Utente) session.getAttribute("user");
+        if (sessionUser == null) {
+            return null;
+        }
+        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
+
+        return utente;
     }
 
 }

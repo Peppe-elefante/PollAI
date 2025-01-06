@@ -45,5 +45,10 @@
         </form>
 </div>
 
+<div th:if="${session.user.pollaio.quantity > 15}">
+    <h2>Reached the maximum number of poultry for your plan.</h2>
+    <h3>To add more poultry you must upgrade your plan!</h3>
+</div>
+
 </body>
 </html>

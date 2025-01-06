@@ -26,17 +26,14 @@ public class MagazzinoController {
     private UtenteService utenteService;
 
     private static final Logger log = LoggerFactory.getLogger(UtenteController.class);
+
+
     @GetMapping("/accesso-magazzino")
     public String Magazzino(HttpSession session, Model model){
-        Utente sessionUser = (Utente) session.getAttribute("user");
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
         Magazzino magazzino;
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione.");
-            return "redirect:/login"; // Reindirizza alla pagina di login
-        }
-        // Recupera l'utente gestito dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
-        //Crea il magazzino se non esiste
         if(utente.getMagazzino() == null){
             magazzino = magazzinoService.createMagazzino(utente);
             log.info("Creato Magazzino");
@@ -54,17 +51,10 @@ public class MagazzinoController {
 
     @PostMapping("/inserisci-farmaco")
     public String inserisciFarmaco(HttpSession session,String tipo_f, int quantita_f, HttpServletRequest request){
-        // Recupera l'utente dalla sessione
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
-            return "redirect:/login";
-        }
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
-        // Recupera l'utente dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
         // Crea e aggiungi il farmaco al magazzino
         Farmaco farmaco = new Farmaco(tipo_f, quantita_f, utente.getMagazzino());
         Magazzino magazzinoAggiornato = magazzinoService.addFarmaco(utente.getMagazzino(), farmaco);
@@ -77,17 +67,10 @@ public class MagazzinoController {
 
     @PostMapping("/inserisci-cibo")
     public String inserisciCibo(HttpSession session,String tipo_c, int quantita_c, HttpServletRequest request){
-        // Recupera l'utente dalla sessione
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
-            return "redirect:/login";
-        }
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
-        // Recupera l'utente dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
         // Crea e aggiungi il cibo al magazzino
         Cibo cibo = new Cibo(tipo_c, quantita_c, utente.getMagazzino());
         Magazzino magazzinoAggiornato = magazzinoService.addCibo(utente.getMagazzino(), cibo);
@@ -98,23 +81,61 @@ public class MagazzinoController {
         return "redirect:" + (referer != null ? referer : "/");
     }
 
-    @PostMapping("/rimuovi-farmaco")
-    public String rimuoviFarmaco(HttpSession session, @RequestParam("farmacoId") Long farmacoId, HttpServletRequest request){
+    @PostMapping({"/rimuovi-farmaco", "/rimuovi-cibo"})
+    public String rimuoviElemento(HttpSession session,
+                                  @RequestParam("id") Long itemId,
+                                  @RequestParam("tipo") String itemType,
+                                  HttpServletRequest request) {
+
         // Recupera l'utente dalla sessione
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
-            return "redirect:/login";
-        }
-        // Recupera l'utente dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
 
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
 
-        log.info("Farmaco with id" + farmacoId);
-        Magazzino magazzino = magazzinoService.removeFarmaco(utente.getMagazzino(), farmacoId);
+        // Log per tipo di elemento
+        log.info(itemType + " with id " + itemId);
+
+        // Esegui l'operazione di rimozione in base al tipo (farmaco o cibo)
+        Magazzino magazzino = null;
+        if ("farmaco".equals(itemType)) {
+            magazzino = magazzinoService.removeFarmaco(utente.getMagazzino(), itemId);
+        } else if ("cibo".equals(itemType)) {
+            magazzino = magazzinoService.removeCibo(utente.getMagazzino(), itemId);
+        }
+
+        // Aggiorna l'utente con il magazzino aggiornato
+        utente.setMagazzino(magazzino);
+        session.setAttribute("user", utente);
+
+        // Reindirizza alla pagina precedente o alla home
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+    @PostMapping({"/modifica-farmaco", "/modifica-cibo"})
+    public String modificaFarmaco(@RequestParam("cambio") int cambio,
+                                  @RequestParam("azione") String azione,
+                                  @RequestParam("id") Long itemId,
+                                  @RequestParam("tipo") String itemType,
+                                  HttpSession session, HttpServletRequest request){
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
+        // Ottieni il riferimento della pagina precedente
+        String referer = request.getHeader("Referer");
+
+        //aggiungere o rimuovere cambio in base all'input
+        cambio = Math.abs(cambio) * (azione.equals("aggiungi") ? 1 : -1);
+
+        // Esegui l'operazione di modifica in base al tipo (farmaco o cibo)
+        Magazzino magazzino = null;
+        if ("farmaco".equals(itemType)) {
+            magazzino = magazzinoService.modificaFarmaco(utente.getMagazzino(), itemId, cambio);
+        } else if ("cibo".equals(itemType)) {
+            magazzino = magazzinoService.modificaCibo(utente.getMagazzino(), itemId, cambio);
+        }
+
         // Aggiorna l'utente con il magazzino aggiornato
         utente.setMagazzino(magazzino);
         session.setAttribute("user", utente);
@@ -123,30 +144,16 @@ public class MagazzinoController {
         return "redirect:" + (referer != null ? referer : "/");
     }
 
-    @PostMapping("/rimuovi-cibo")
-    public String rimuoviCibo(HttpSession session, @RequestParam("ciboId") Long ciboId, HttpServletRequest request){
-        // Recupera l'utente dalla sessione
+    private Utente getUtente(HttpSession session){
+        //prende l'Utente dalla sessione e verifica se esiste nel database
         Utente sessionUser = (Utente) session.getAttribute("user");
         if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
-            return "redirect:/login";
+            log.warn("Nessun utente trovato in sessione.");
+            return null;
         }
-        // Recupera l'utente dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
 
-        // Ottieni il riferimento della pagina precedente
-        String referer = request.getHeader("Referer");
-
-        log.info("Cibo with id" + ciboId);
-
-        Magazzino magazzino = magazzinoService.removeCibo(utente.getMagazzino(), ciboId);
-        // Aggiorna l'utente con il magazzino aggiornato
-        utente.setMagazzino(magazzino);
-        session.setAttribute("user", utente);
-
-        // Reindirizza alla pagina precedente o alla home
-        return "redirect:" + (referer != null ? referer : "/");
+        return utente;
     }
 
 }

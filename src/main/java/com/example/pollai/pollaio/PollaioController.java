@@ -29,14 +29,11 @@ public class PollaioController {
 
     @GetMapping("/accesso-pollaio")
     public String Pollaio(HttpSession session){
-        Utente sessionUser = (Utente) session.getAttribute("user");
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
         Pollaio pollaio;
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione.");
-            return "redirect:/login"; // Reindirizza alla pagina di login
-        }
-        // Recupera l'utente gestito dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
+
         //Crea il pollaio se non esiste
         if((pollaio = utente.getPollaio()) == null){
             pollaio = pollaioService.createPollaio(utente);
@@ -52,16 +49,11 @@ public class PollaioController {
     @PostMapping("/inserisci-gallina")
     public String inserisciGallina(HttpSession session,String razza, int eta, int peso, HttpServletRequest request){
         // Recupera l'utente dalla sessione
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        if (sessionUser == null) {
-            log.warn("Nessun utente trovato in sessione. Reindirizzamento alla pagina di login.");
-            return "redirect:/login";
-        }
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
-        // Recupera l'utente dal database
-        Utente utente = utenteService.getUtenteById(sessionUser.getId())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato nel database"));
+
         // Crea e aggiungi il gallina al magazzino
         Gallina gallina = new Gallina(razza, eta, peso, utente.getPollaio());
         Pollaio pollaioAggiornato = pollaioService.addGallina(utente.getPollaio(), gallina);
@@ -70,5 +62,16 @@ public class PollaioController {
         session.setAttribute("user", utente);
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
+    }
+
+    private Utente getUtente(HttpSession session){
+        //prende l'Utente dalla sessione e verifica se esiste nel database
+        Utente sessionUser = (Utente) session.getAttribute("user");
+        if (sessionUser == null) {
+            return null;
+        }
+        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
+
+        return utente;
     }
 }

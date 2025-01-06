@@ -72,4 +72,60 @@ public class MagazzinoService {
             throw new RuntimeException("Errore durante la rimozione del farmaco", e);
         }
     }
+
+    public Magazzino modificaFarmaco(Magazzino m, Long itemId, int cambio) {
+        // Recupera l'oggetto Farmaco dal database utilizzando l'ID dell'item
+        Farmaco f = farmacoDAO.findById(itemId).get();
+
+        try {
+            // Calcola la nuova quantità di farmaco dopo l'operazione di aggiunta o rimozione
+            int quantita = f.getQuantita() + cambio;
+
+            // Verifica se la quantità risulta negativa o zero
+            if (quantita <= 0) {
+                // Se la quantità è 0 o negativa, non è possibile modificare il farmaco (lo lascia invariato)
+                return m;
+            } else {
+                // Altrimenti, aggiorna la quantità del farmaco con il nuovo valore calcolato
+                f.setQuantita(quantita);
+                // Salva l'oggetto Farmaco aggiornato nel database
+                farmacoDAO.save(f);
+            }
+
+            // Salva il Magazzino aggiornato nel database e lo restituisce
+            return magazzinoDAO.save(m);
+        } catch (Exception e) {
+            // Gestisce eventuali errori che potrebbero verificarsi durante la modifica del farmaco
+            // (ad esempio problemi con il salvataggio o la rimozione)
+            throw new RuntimeException("Errore durante la modifica del farmaco", e);
+        }
+    }
+
+    public Magazzino modificaCibo(Magazzino m, Long itemId, int cambio) {
+        // Recupera l'oggetto Cibo dal database utilizzando l'ID dell'item
+        Cibo c = ciboDAO.findById(itemId).get();
+
+        try {
+            // Calcola la nuova quantità di cibo dopo l'operazione di aggiunta o rimozione
+            int quantita = c.getQuantita() + cambio;
+
+            // Verifica se la quantità risulta negativa o zero
+            if (quantita <= 0) {
+                // Se la quantità è 0 o negativa, non è possibile modificare il cibo (lo lascia invariato)
+                return m;
+            } else {
+                // Altrimenti, aggiorna la quantità del cibo con il nuovo valore calcolato
+                c.setQuantita(quantita);
+                // Salva l'oggetto Cibo aggiornato nel database
+                ciboDAO.save(c);
+            }
+
+            // Salva il Magazzino aggiornato nel database e lo restituisce
+            return magazzinoDAO.save(m);
+        } catch (Exception e) {
+            // Gestisce eventuali errori che potrebbero verificarsi durante la modifica del cibo
+            // (ad esempio problemi con il salvataggio o la rimozione)
+            throw new RuntimeException("Errore durante la modifica del cibo", e);
+        }
+    }
 }
