@@ -2,56 +2,74 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sing Up!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up!</title>
     <link rel="stylesheet" href="/css/nav-bar.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/registeruser.css">
 </head>
 <body>
+
 <header>
     <div th:replace="fragments/navbar :: navbar"></div>
 </header>
 
 <main>
-    <h1>Register a New Account</h1>
+    <div class="form">
+        <h1 class="title">Register a New Account</h1>
+        <p class="subtitle">Fill out the form below to create your account</p>
 
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <div>
-            <label for="nome">First Name:</label>
-            <input type="text" id="nome" th:field="*{nome}" required />
-        </div>
-        <div>
-            <label for="cognome">Last Name:</label>
-            <input type="text" id="cognome" th:field="*{cognome}" required />
-        </div>
-        <div>
-            <label for="phoneNumber">Phone Number:</label>
-            <input type="text" id="phoneNumber" th:field="*{phone_number}" required />
-        </div>
-        <div>
-            <label for="rasvsl">RASVSL:</label>
-            <input type="checkbox" id="rasvsl" th:field="*{rasvsl}" />
-        </div>
-        <div>
-            <label for="pIVA">P.IVA (Tax ID):</label>
-            <input type="text" id="pIVA" th:field="*{pIVA}" required />
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" th:field="*{email}" required />
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-        </div>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <!-- First Name -->
+            <div class="input-container">
+                <input type="text" id="nome" class="input" th:field="*{nome}" placeholder=" " required />
+                <label for="nome" class="iLabel">First Name</label>
+            </div>
+
+            <!-- Last Name -->
+            <div class="input-container">
+                <input type="text" id="cognome" class="input" th:field="*{cognome}" placeholder=" " required />
+                <label for="cognome" class="iLabel">Last Name</label>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="input-container">
+                <input type="text" id="phoneNumber" class="input" th:field="*{phone_number}" placeholder=" " required />
+                <label for="phoneNumber" class="iLabel">Phone Number</label>
+            </div>
+
+            <!-- RASVSL Checkbox -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="rasvsl" th:field="*{rasvsl}" />
+                <label for="rasvsl">RASVSL</label>
+            </div>
+
+            <!-- P.IVA (Tax ID) -->
+            <div class="input-container">
+                <input type="text" id="pIVA" class="input" th:field="*{pIVA}" placeholder=" " required />
+                <label for="pIVA" class="iLabel">P.IVA (Tax ID)</label>
+            </div>
+
+            <!-- Email -->
+            <div class="input-container">
+                <input type="email" id="email" class="input" th:field="*{email}" placeholder=" " required />
+                <label for="email" class="iLabel">Email</label>
+            </div>
+
+            <!-- Password -->
+            <div class="input-container">
+                <input type="password" id="password" class="input" name="password" placeholder=" " required />
+                <label for="password" class="iLabel">Password</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit">Register</button>
+        </form>
+    </div>
 </main>
 
 <footer>
-    <div th:replace="fragments/footer :: footer"></div> <!-- Inclusione del footer -->
+    <div th:replace="fragments/footer :: footer"></div>
 </footer>
 
 </body>
