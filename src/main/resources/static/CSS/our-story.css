@@ -59,7 +59,7 @@ main section .cta-button:hover {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive design per dispositivi mobili */
+/* Responsive */
 @media (max-width: 768px) {
     main section {
         padding: 60px 15px;

@@ -40,6 +40,7 @@ body {
 
 .navbar a {
     color: white;
+    text-decoration: none;
 }
 
 .navbar .logo img {
@@ -58,7 +59,6 @@ body {
     color: white;
     font-size: 1rem;
     font-weight: bold;
-    margin-right: 20px;
 }
 
 .nav-links a:hover {
@@ -86,6 +86,61 @@ body {
 .nav-button .button:active {
     background-color: #084f06;
     border-color: #084f06;
-    border-width: 8px; /* Bordo più spesso quando cliccato */
-    transform: scale(1); /* Ritorna alla dimensione originale */
+    border-width: 8px;
+    transform: scale(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 8px 15px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+
+    .nav-button .button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .navbar .logo img {
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 6px 10px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+
+    .nav-button .button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .navbar .logo img {
+        height: 40px;
+    }
+
+    .top-bar h4 {
+        font-size: 0.8rem;
+    }
+
+    .top-bar a {
+        font-size: 0.75rem;
+    }
 }

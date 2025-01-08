@@ -74,17 +74,52 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Adattamento responsive per schermi più piccoli */
+/* Responsive */
 @media (max-width: 768px) {
+    main {
+        padding: 30px 10%;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    section {
+        margin-bottom: 25px;
+    }
+
+    section h2 {
+        font-size: 1.3em;
+    }
+
+    section p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
     main {
         padding: 20px;
     }
 
     h1 {
         font-size: 2em;
+        margin-top: 20px;
     }
 
     section {
         margin-bottom: 20px;
+    }
+
+    section h2 {
+        font-size: 1.2em;
+    }
+
+    section p {
+        font-size: 1em;
+    }
+
+    footer {
+        padding: 15px;
     }
 }

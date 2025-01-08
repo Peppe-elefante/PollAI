@@ -59,11 +59,12 @@ h2 {
     padding-right: 3rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    width: 200px;
+    width: 70%;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     font-family: 'Merriweather', serif;
 }
+
 
 .input-container span {
     display: grid;
@@ -138,4 +139,73 @@ h2 {
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-form {
+        width: 60%;
+    }
+
+    .input-container input {
+        width: 70%;
+    }
+
+    h1 {
+        font-size: 2.8em;
+        margin-top: 40px;
+    }
+
+    h2 {
+        font-size: 1.1em;
+    }
+
+    .form-title {
+        font-size: 1.1rem;
+    }
+
+    .button-login {
+        padding: 8px 20px;
+        font-size: 16px;
+    }
+
+    .signup-link {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background: linear-gradient(135deg, rgb(223, 255, 224) 40%, rgb(223, 255, 224) 100%);
+    }
+
+    .login-form {
+        width: 70%;
+    }
+
+    .input-container input {
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+
+    .form-title {
+        font-size: 1rem;
+    }
+
+    .button-login {
+        width: 40%;
+        padding: 12px 0;
+        font-size: 18px;
+    }
+
+    .signup-link {
+        font-size: 0.9rem;
+    }
 }

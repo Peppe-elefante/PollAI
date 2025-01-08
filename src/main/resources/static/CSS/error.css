@@ -13,6 +13,7 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    padding: 20px;
 }
 
 h1 {
@@ -52,16 +53,40 @@ a:hover {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 100%;
     max-width: 600px;
 }
 
-/* Responsività */
+/* Responsive */
 @media (max-width: 768px) {
     h1 {
+        font-size: 2.2em;
+    }
+    p {
+        font-size: 1.1em;
+    }
+    a {
+        font-size: 1.1em;
+    }
+    .error-container {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
         font-size: 2em;
+        margin-bottom: 15px;
     }
     p {
         font-size: 1em;
+    }
+    a {
+        font-size: 1em;
+    }
+    .error-container {
+        width: 100%;
+        padding: 20px;
     }
 }

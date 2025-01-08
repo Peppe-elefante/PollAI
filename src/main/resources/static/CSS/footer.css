@@ -103,3 +103,49 @@ body {
 main {
     flex: 1;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+    }
+
+    /* Sinistra: Copyright, Privacy, etc. */
+    .footer-content .left-section {
+        flex: 1 1 50%; /* occupa tutta la larghezza */
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    /* Destra: Contatti e Social */
+    .footer-content .right-section {
+        flex: 1 1 50%; /* occupa tutta la larghezza */
+        text-align: left;
+    }
+
+    .footer-content .social-links {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .footer-content .social-links a {
+        font-size: 1.2em;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        flex-direction: row; /* Mantieni le due colonne affiancate */
+    }
+
+    .footer-content .left-section p,
+    .footer-content .right-section p,
+    .footer-content .social-links a {
+        font-size: 0.8em; /* Riduci la dimensione del testo */
+    }
+
+    .footer-content .social-links a {
+        font-size: 1em; /* Un po' più grande per gli utenti tablet */
+    }
+}
