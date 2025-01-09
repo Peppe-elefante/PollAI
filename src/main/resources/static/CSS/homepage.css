@@ -1,10 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .hero {
-    padding: 100px 20px;
+    padding: 60px 20px;
     background: linear-gradient(135deg, #deffff 40%, #ffffff 100%);
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero h1 {
@@ -34,20 +47,34 @@ h4 {
     text-align: center;
     font-size: 1.2em;
     color: #004d61;
-    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    padding: 8px 20px;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    height: auto;
+    max-height: 60px;
 }
 
-h4 a {
-    color: #034aff;
-    font-weight: bold;
-    text-decoration: none;
+footer {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
 }
 
-h4 a:hover {
-    text-decoration: underline;
+.content-wrapper {
+    flex-grow: 1;
 }
 
-/* Animazioni CSS */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -61,37 +88,45 @@ h4 a:hover {
 /* Responsive */
 @media (max-width: 768px) {
     .hero {
-        padding: 80px 15px;
+        padding: 60px 15px;
+        min-height: 52vh;
     }
 
     .hero h1 {
-        font-size: 2.8em;
+        font-size: 2.6em;
     }
 
     .hero p {
-        font-size: 1.2em;
+        font-size: 1.15em;
     }
 
     h4 {
-        font-size: 1.1em;
+        font-size: 1em;
+        padding-left: 20px;
+        padding-right: 20px;
+        max-height: 50px;
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        padding: 60px 15px;
+        padding: 50px 15px;
+        min-height: 55vh;
     }
 
     .hero h1 {
-        font-size: 2.2em;
+        font-size: 2em;
     }
 
     .hero p {
-        font-size: 1.1em;
+        font-size: 1em;
     }
 
     h4 {
-        font-size: 1em;
+        font-size: 0.9em;
+        padding-left: 10px;
+        padding-right: 10px;
+        max-height: 40px;
     }
 }
 
