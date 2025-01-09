@@ -34,10 +34,9 @@ public class PollaioController {
         if(utente == null) return "login";
         Pollaio pollaio;
 
-        //Crea il pollaio se non esiste
+        //Se non esiste il pollaio, reindirizza l'utente alla pagina di configurazione del pollaio
         if((pollaio = utente.getPollaio()) == null){
-            pollaio = pollaioService.createPollaio(utente);
-            log.info("Creato pollaio");
+            return "configura-pollaio";
         }
         //aggiorna il pollaio
         utente.setPollaio(pollaio);

@@ -1,5 +1,7 @@
 package com.example.pollai.salute;
 
+import ch.qos.logback.core.model.Model;
+import com.example.pollai.pollaio.Gallina;
 import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.pollaio.PollaioService;
 import com.example.pollai.utente.Utente;
@@ -9,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 public class SaluteController {
 
     @Autowired
-    private PollaioService pollaioService;
-    @Autowired
     private UtenteService utenteService;
+    @Autowired
+    private PollaioService pollaioService;
 
     @GetMapping("/accesso-salute")
     public String salute(HttpSession session){
@@ -24,15 +28,20 @@ public class SaluteController {
         if(utente == null)
             return "login";
 
-        Pollaio pollaio;
+        Pollaio pollaio = utente.getPollaio();
 
-        //Controllo del Pollaio, se non è presente ne crea uno
-        if((pollaio = utente.getPollaio()) == null){
-            pollaio = pollaioService.createPollaio(utente);
+        //Controllo del Pollaio, reindirizza l'utente a configurarlo
+        if(pollaio == null){
+            return "configura-pollaio";
         }
+
+        List<Gallina> galline = pollaio.getGalline();
+
+        session.setAttribute("galline", galline);
 
         return "gestione-salute";
     }
+
 
     private Utente getUtente(HttpSession session){
         //Recupera l'Utente dalla sessione e verifica se esiste nel database

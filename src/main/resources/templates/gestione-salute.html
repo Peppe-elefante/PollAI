@@ -5,6 +5,21 @@
     <title>Salute</title>
 </head>
 <body>
-    <h1>AREA GESTIONE SALUTE</h1>
+<h1>AREA GESTIONE SALUTE</h1>
+
+<h2>Galline nel Pollaio</h2>
+
+<!-- Verifica se ci sono galline -->
+<div th:if="${not #lists.isEmpty(galline)}">
+    <ul>
+        <!-- Itera su tutte le galline -->
+        <li th:each="gallina : ${galline}">
+            <p th:text="${gallina.nome}"></p>
+        </li>
+    </ul>
+</div>
+<div th:if="${#lists.isEmpty(galline)}">
+    <p>Non ci sono galline nel pollaio.</p>
+</div>
 </body>
 </html>
