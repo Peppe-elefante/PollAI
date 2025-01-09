@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configura il tuo pollaio!</title>
     <link rel="stylesheet" href="/CSS/nav-bar.css">
+    <script>
+        setTimeout(function() {
+            window.location.href = "/accesso-pollaio";
+        }, 5000);  // 5000 millisecondi = 5 secondi
+    </script>
 </head>
 <body>
 <header>
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div th:replace="fragments/userbar :: userbar"></div>
 </header>
 <p>Per accedere alle funzionalita di PollAI è prima necessario inserire i dati del proprio pollame</p><br>
 <a href="/accesso-pollaio">accedi al pollaio</a><br>

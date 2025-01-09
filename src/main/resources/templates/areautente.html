@@ -6,19 +6,9 @@
     <title>Area Utente</title>
 </head>
 <body>
-<p>Name: <span th:text="${session.user.nome}"></span></p>
-<p>Email: <span th:text="${session.user.email}"></span></p>
-<a href="/accesso-magazzino">
-    <h4>accedi al magazzino</h4>
-</a>
-<a href="/accesso-pollaio">
-    <h4>accedi al pollaio</h4>
-</a>
-<a href="/accesso-produzione">
-    <h4>accedi alla produzione</h4>
-</a>
-<a href="/accesso-salute">
-    <h4>accedi alla salute</h4>
-</a>
+<header>
+    <div th:replace="fragments/userbar :: userbar"></div>
+</header>
+
 </body>
 </html>

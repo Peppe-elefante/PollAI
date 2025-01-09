@@ -6,6 +6,10 @@
     <title>Pollaio</title>
 </head>
 <body>
+<header>
+    <div th:replace="fragments/userbar :: userbar"></div>
+</header>
+
 <h1> Pollaio </h1>
 <p> Questo è il pollaio di <span th:text="${session.user.nome}"></span></p>
 

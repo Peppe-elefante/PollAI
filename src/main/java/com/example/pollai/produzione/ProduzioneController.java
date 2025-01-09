@@ -32,13 +32,14 @@ public class ProduzioneController {
         Utente utente = getUtente(session);
         if(utente == null) return "login";
 
-        Pollaio pollaio;
+        Pollaio pollaio = utente.getPollaio();
         DatiProduzione produzione;
 
-        //Crea il pollaio se non esiste
-        if((pollaio = utente.getPollaio()) == null){
-            pollaio = pollaioService.createPollaio(utente);
+        //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
+        if (pollaio == null || pollaio.getQuantity() == 0) {
+            return "configura-pollaio";
         }
+
         //Crea i dati sulla produzione se non esistono
         if((produzione = pollaio.getProduzione()) == null){
             produzione = produzioneService.createProduzione(pollaio);

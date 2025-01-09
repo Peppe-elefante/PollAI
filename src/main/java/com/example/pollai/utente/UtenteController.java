@@ -1,5 +1,6 @@
 package com.example.pollai.utente;
 
+import com.example.pollai.pollaio.Pollaio;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.LoggerFactory;
@@ -33,8 +34,9 @@ public class UtenteController {
             session.setAttribute("user", user.get());
 
             Utente utente = user.get();
-            if (utente.getPollaio() == null) {
-                // Se l'utente non ha un pollaio, reindirizzalo alla pagina di configurazione
+            Pollaio pollaio = utente.getPollaio();
+            //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
+            if (pollaio == null || pollaio.getQuantity() == 0) {
                 return "configura-pollaio";
             }
 
