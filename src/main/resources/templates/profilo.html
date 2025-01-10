@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilo</title>
+  <link rel="stylesheet" href="/CSS/userbar.css">
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .userbar-container {
+      width: 20%;
+      background-color: #203752;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content-container {
+      width: 80%;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #203752;
+    }
+  </style>
+</head>
+<body>
+
+<div class="userbar-container">
+
+  <div th:replace="fragments/userbar :: userbar"></div>
+</div>
+
+<div class="content-container">
+  <h1>Profilo Utente</h1>
+  <p>Qui puoi visualizzare le informazioni del tuo profilo.</p>
+</div>
+</body>
+</html>

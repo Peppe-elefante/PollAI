@@ -57,8 +57,16 @@ public class UtenteController {
         return "configura-pollaio";
     }
 
+    //Gestione area utente
     @GetMapping("/area-utente")
-    public String areaUtenet(){ return "areautente"; }
+    public String areaUtente(HttpSession session, Model model) {
+        Utente user = (Utente) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", user);
+        return "areautente";
+    }
 
     //Restituisce tutti gli utenti
     @GetMapping("/getAll")

@@ -1,18 +1,19 @@
 <div th:fragment="userbar">
     <div class="user-bar">
-        <p>Name: <span th:text="${session.user.nome}"></span></p>
-        <p>Email: <span th:text="${session.user.email}"></span></p>
-        <a href="/accesso-magazzino">
-            <h4>accedi al magazzino</h4>
-        </a>
-        <a href="/accesso-pollaio">
-            <h4>accedi al pollaio</h4>
-        </a>
-        <a href="/accesso-produzione">
-            <h4>accedi alla produzione</h4>
-        </a>
-        <a href="/accesso-salute">
-            <h4>accedi alla salute</h4>
-        </a>
+        <!-- Iniziali del profilo -->
+        <div class="profile-initials">
+            <span th:text="${session.user.nome.substring(0,1) + session.user.cognome.substring(0,1)}"></span>
+        </div>
+
+        <!-- Link principali -->
+        <a href="/area-utente">Mio Profilo</a>
+        <a href="/accesso-produzione">Accedi alla Produzione</a>
+        <a href="/accesso-salute">Accedi alla Salute</a>
+
+        <!-- Link in basso -->
+        <div class="user-links-bottom">
+            <a href="/accesso-magazzino">Accedi al Magazzino</a>
+            <a href="/accesso-pollaio">Accedi al Pollaio</a>
+        </div>
     </div>
 </div>

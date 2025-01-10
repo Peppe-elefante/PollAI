@@ -8,6 +8,9 @@ body {
 header {
     background-color: #203752;
     padding: 15px 20px;
+    margin: 0;
+    border-bottom: none;
+    box-shadow: none;
 }
 
 header a {
@@ -26,9 +29,11 @@ h1 {
 main {
     padding: 40px 15%;
     background-color: #ffffff;
-    margin: 40px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Rimuovi margini e spazi extra */
+    border-radius: 1px;
+    box-shadow: 0 4px 10px rgb(32, 55, 82);
+    min-height: 95vh; /* Imposto un'altezza minima per eliminare lo spazio tra blocco centrale e footer */
+    color: #203752; /* Imposto il colore del testo del blocco centrale */
 }
 
 section h2 {
@@ -63,6 +68,7 @@ footer {
     padding: 20px;
     color: white;
     text-align: center;
+    margin-top: 0; /* Rimuovo il margine sopra il footer */
 }
 
 footer a {

@@ -5,19 +5,8 @@ body {
     height: 100vh;
 }
 
-h1 {
-    font-size: 3.2em;
-    color: #004d61;
-    margin-top: 50px;
-    text-align: center;
-    font-family: 'Merriweather', serif;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-}
-
 h2 {
-    color: #e74c3c;
+    color: #d1d9e6;
     font-size: 1.2em;
     text-align: center;
     margin-top: 20px;
@@ -25,151 +14,107 @@ h2 {
 
 .login-form {
     position: fixed;
-    top: 65%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f9f9f9;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #354580;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     padding: 30px;
-    width: 300px;
-    height: 400px;
+    width: 360px;
+    height: auto;
     text-align: center;
+    color: #ffffff;
     font-family: 'Merriweather', serif;
 }
 
 .form-title {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
     text-align: center;
-    color: #004d61;
-    font-family: 'Merriweather', serif;
+    color: #ffffff;
 }
 
-.input-container input, .form button {
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.input {
+    background-color: #3e4ea8;
+    border: 1px solid #3e4ea8;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 12px 16px;
+    width: 90%;
     outline: none;
-    border: 1px solid #e5e7eb;
-    margin: 8px 0;
+    transition: border 0.3s ease;
+    position: relative;
 }
 
-.input-container input {
-    background-color: #fff;
-    padding: 1rem;
-    padding-right: 3rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    width: 70%;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    font-family: 'Merriweather', serif;
+.input::placeholder {
+    color: #a4b2cc;
+    font-size: 14px;
+    transform: translateY(0);
+    transition: all 0.3s ease;
 }
 
-
-.input-container span {
-    display: grid;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    place-content: center;
+.input:focus::placeholder,
+.input:not(:placeholder-shown)::placeholder {
+    transform: translateY(-28px);
+    font-size: 12px;
+    color: #3e4ea8;
 }
 
-.input-container span svg {
-    color: #9CA3AF;
-    width: 1rem;
-    height: 1rem;
-}
-
-/* Stile del bottone di login */
+/* Stile del tasto di login */
 .button-login {
     cursor: pointer;
     position: relative;
-    padding: 10px 24px;
+    padding: 14px 24px;
     font-size: 18px;
-    color: rgb(8, 128, 8);
-    border: 2px solid rgb(8, 128, 8);
-    border-radius: 34px;
-    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #088008;
+    border-radius: 12px;
+    background-color: #088008;
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-    overflow: hidden;
-}
-
-.button-login::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    margin: auto;
-    width: 50px;
-    height: 50px;
-    border-radius: inherit;
-    scale: 0;
-    z-index: -1;
-    background-color: rgb(8, 128, 8);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.button-login:hover::before {
-    scale: 3;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 .button-login:hover {
-    color: #ffffff;
-    scale: 1;
-    box-shadow: 0 0px 20px rgba(193, 163, 98, 0.4);
+    background-color: #067306;
 }
 
 .button-login:active {
-    scale: 1;
+    background-color: #009c20;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .login-form {
-        width: 60%;
-    }
-
-    .input-container input {
         width: 70%;
-    }
-
-    h1 {
-        font-size: 2.8em;
-        margin-top: 40px;
-    }
-
-    h2 {
-        font-size: 1.1em;
+        padding: 20px;
     }
 
     .form-title {
-        font-size: 1.1rem;
+        font-size: 28px;
     }
 
-    .button-login {
-        padding: 8px 20px;
+    .submit {
         font-size: 16px;
-    }
-
-    .signup-link {
-        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        background: linear-gradient(135deg, rgb(223, 255, 224) 40%, rgb(223, 255, 224) 100%);
-    }
-
     .login-form {
-        width: 70%;
+        width: 80%;
     }
 
     .input-container input {
-        width: 80%;
+        width: 90%;
     }
 
     h1 {
@@ -181,16 +126,11 @@ h2 {
     }
 
     .form-title {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .button-login {
-        width: 40%;
         padding: 12px 0;
         font-size: 18px;
-    }
-
-    .signup-link {
-        font-size: 0.9rem;
     }
 }

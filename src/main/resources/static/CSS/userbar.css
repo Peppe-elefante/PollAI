@@ -1,0 +1,66 @@
+.user-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+}
+
+.profile-initials {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #019ADE;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.user-bar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.user-bar a:hover {
+    text-decoration: underline;
+}
+
+.user-links-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    text-align: left;
+}
+
+.user-links-bottom a {
+    margin: 5px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .userbar-container {
+        width: 100%;
+        display: block;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+    .profile-initials {
+        width: 70px;
+        height: 70px;
+        font-size: 24px;
+    }
+}
