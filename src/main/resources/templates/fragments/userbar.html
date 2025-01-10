@@ -2,11 +2,13 @@
     <div class="user-bar">
         <!-- Iniziali del profilo -->
         <div class="profile-initials">
-            <span th:text="${session.user.nome.substring(0,1) + session.user.cognome.substring(0,1)}"></span>
+            <a href="/profilo">
+                <span th:text="${session.user.nome.substring(0,1) + session.user.cognome.substring(0,1)}"></span>
+            </a>
         </div>
 
         <!-- Link principali -->
-        <a href="/area-utente">Mio Profilo</a>
+        <a href="/area-utente">Dashboard</a>
         <a href="/accesso-produzione">Accedi alla Produzione</a>
         <a href="/accesso-salute">Accedi alla Salute</a>
 

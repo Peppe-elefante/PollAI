@@ -75,4 +75,18 @@ public class UtenteController {
         model.addAttribute("users", users);
         return "allusers";
     }
+
+    @GetMapping("/profilo")
+    public String profilo(HttpSession session){
+        return "profilo";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "login";
+    }
 }
