@@ -45,7 +45,6 @@ public class PollaioService {
             return true;
         } else
             return false;
-
     }
 
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Salute</title>
     <link rel="stylesheet" href="/CSS/userbar.css">
+    <script src="/JS/gestione-salute.js"></script>
 </head>
 <body>
 <header>
@@ -13,17 +14,37 @@
 
 <h2>Galline nel Pollaio</h2>
 
-<!-- Verifica se ci sono galline -->
-<div th:if="${not #lists.isEmpty(galline)}">
-    <ul>
-        <!-- Itera su tutte le galline -->
-        <li th:each="gallina : ${galline}">
-            <p th:text="${gallina.nome}"></p>
-        </li>
-    </ul>
+<li th:each="gallina : ${session.user.pollaio.galline}">
+    <span th:text="${gallina.id}">ID</span>
+    <button type="button"
+            onclick="mostraDettagli(this)"
+            th:data-id="${gallina.id}"
+            th:data-razza="${gallina.razza}"
+            th:data-eta="${gallina.eta}"
+            th:data-peso="${gallina.peso}">
+        Mostra dettagli
+    </button>
+</li>
+
+<div id="dettagliGallina" style="display: none; margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
+    <h2>Dettagli della Gallina</h2>
+    <p><strong>ID:</strong> <span id="dettagli-id"></span></p>
+    <p><strong>Razza:</strong> <span id="dettagli-razza"></span></p>
+    <p><strong>Età:</strong> <span id="dettagli-eta"></span></p>
+    <p><strong>Peso:</strong> <span id="dettagli-peso"></span></p>
+
+    <button type="button" onclick="richiediConsiglio()">Richiedi Consiglio</button>
+    <button type="button" onclick="mostraContattoVeterinario()">Contatto Veterinario</button>
+
+    <p id="messaggioSalute" style="color: green; margin-top: 10px;"></p>
+
+    <div id="dettagliVeterinario" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid #aaa;">
+        <h3>Dettagli del Veterinario</h3>
+        <p><strong>Nome:</strong> Mario Rossi</p>
+        <p><strong>Cognome:</strong> Rossi</p>
+        <p><strong>Telefono:</strong> 123-456-7890</p>
+    </div>
 </div>
-<div th:if="${#lists.isEmpty(galline)}">
-    <p>Non ci sono galline nel pollaio.</p>
-</div>
+
 </body>
 </html>
