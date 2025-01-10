@@ -55,12 +55,14 @@ public class MagazzinoController {
         if(utente == null) return "login";
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
-        // Crea e aggiungi il farmaco al magazzino
-        Farmaco farmaco = new Farmaco(tipo_f, quantita_f, utente.getMagazzino());
-        Magazzino magazzinoAggiornato = magazzinoService.addFarmaco(utente.getMagazzino(), farmaco);
-        // Aggiorna l'utente con il magazzino aggiornato
-        utente.setMagazzino(magazzinoAggiornato);
-        session.setAttribute("user", utente);
+        if(quantita_f > 0) {
+            // Crea e aggiungi il farmaco al magazzino
+            Farmaco farmaco = new Farmaco(tipo_f, quantita_f, utente.getMagazzino());
+            Magazzino magazzinoAggiornato = magazzinoService.addFarmaco(utente.getMagazzino(), farmaco);
+            // Aggiorna l'utente con il magazzino aggiornato
+            utente.setMagazzino(magazzinoAggiornato);
+            session.setAttribute("user", utente);
+        }
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
     }
@@ -72,11 +74,13 @@ public class MagazzinoController {
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
         // Crea e aggiungi il cibo al magazzino
-        Cibo cibo = new Cibo(tipo_c, quantita_c, utente.getMagazzino());
-        Magazzino magazzinoAggiornato = magazzinoService.addCibo(utente.getMagazzino(), cibo);
-        // Aggiorna l'utente con il magazzino aggiornato
-        utente.setMagazzino(magazzinoAggiornato);
-        session.setAttribute("user", utente);
+        if(quantita_c > 0) {
+            Cibo cibo = new Cibo(tipo_c, quantita_c, utente.getMagazzino());
+            Magazzino magazzinoAggiornato = magazzinoService.addCibo(utente.getMagazzino(), cibo);
+            // Aggiorna l'utente con il magazzino aggiornato
+            utente.setMagazzino(magazzinoAggiornato);
+            session.setAttribute("user", utente);
+        }
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
     }
