@@ -1,7 +1,6 @@
 package com.example.pollai.pollaio;
 
-
-
+import com.example.pollai.PollAiApplication;
 import com.example.pollai.magazzino.Magazzino;
 import com.example.pollai.magazzino.MagazzinoService;
 import com.example.pollai.utente.Utente;
@@ -16,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class PollaioController {
@@ -49,21 +51,46 @@ public class PollaioController {
 
     @PostMapping("/inserisci-gallina")
     public String inserisciGallina(HttpSession session,String razza, int eta, int peso, HttpServletRequest request){
-        // Recupera l'utente dalla sessione
         Utente utente = getUtente(session);
         if(utente == null) return "login";
+
         // Ottieni il riferimento della pagina precedente
         String referer = request.getHeader("Referer");
 
-        // Crea e aggiungi il gallina al magazzino
         Gallina gallina = new Gallina(razza, eta, peso, utente.getPollaio());
         Pollaio pollaioAggiornato = pollaioService.addGallina(utente.getPollaio(), gallina);
-        // Aggiorna l'utente con il magazzino aggiornato
+
         utente.setPollaio(pollaioAggiornato);
         session.setAttribute("user", utente);
+
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
     }
+
+    @PostMapping("/rimuovi-gallina")
+    public String rimuoviGallina(@RequestParam("gallinaId") Long id, HttpSession session, HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+
+        Utente utente = getUtente(session);
+        if (utente == null) return "login";
+
+        Pollaio pollaio = utente.getPollaio();
+        if (pollaio == null) return "pollaio";
+
+        Gallina gallinaDaRimuovere = pollaio.getGalline().stream()
+                .filter(gallina -> gallina.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (gallinaDaRimuovere != null) {
+            Pollaio pollaioAggiornato = pollaioService.removeGallina(pollaio, gallinaDaRimuovere);
+            utente.setPollaio(pollaioAggiornato);
+            session.setAttribute("user", utente);
+        }
+
+        return "redirect:" + (referer != null ? referer : "/");
+    }
+
 
     private Utente getUtente(HttpSession session){
         //prende l'Utente dalla sessione e verifica se esiste nel database

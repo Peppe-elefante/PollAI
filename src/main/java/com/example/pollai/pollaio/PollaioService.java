@@ -1,7 +1,6 @@
 package com.example.pollai.pollaio;
 
 import com.example.pollai.utente.Utente;
-import com.example.pollai.utente.UtenteDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,15 +35,14 @@ public class PollaioService {
         return pollaioDAO.save(p);
     }
 
-    public boolean removeGallina(Pollaio p, Gallina g) {
+    public Pollaio removeGallina(Pollaio p, Gallina g) {
         if (p.getQuantity() > 0) {
             p.removeGallina(g);
             gallinaDAO.delete(g);
             p.setQuantity(p.getQuantity()-1);
-            pollaioDAO.save(p);
-            return true;
-        } else
-            return false;
+            return pollaioDAO.save(p);
+        }
+        return p;
     }
 
 }
