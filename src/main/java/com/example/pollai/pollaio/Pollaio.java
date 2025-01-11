@@ -14,7 +14,7 @@ public class Pollaio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
-    @OneToMany(mappedBy = "pollaio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pollaio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Gallina> galline;
 
     @OneToOne(mappedBy = "pollaio", cascade = CascadeType.ALL)
