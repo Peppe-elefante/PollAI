@@ -140,4 +140,5 @@ public class Utente implements Serializable {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }

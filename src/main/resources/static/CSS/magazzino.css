@@ -7,25 +7,27 @@ body {
     overflow-x: hidden;
 }
 
+
 header {
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    width: 320px;
-    bottom: 0;
-    background-color: #019ade;
     z-index: 1000;
-    padding: 20px;
-    box-sizing: border-box;
-    color: white;
 }
+
 
 header .userbar {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 0;
+    background-color: #019ade;
+    color: white;
+    padding: 20px;
+    width: 320px;
+    box-sizing: border-box;
 }
+
 
 header .userbar a {
     color: white;
@@ -36,10 +38,12 @@ header .userbar a {
     font-size: 18px;
 }
 
+
 header .userbar a:hover {
     background-color: #017a9d;
     border-radius: 5px;
 }
+
 
 header .userbar .profile {
     display: flex;
@@ -48,12 +52,38 @@ header .userbar .profile {
     margin-bottom: 20px;
 }
 
+
+header .userbar .profile span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #019ade;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+
+
+header .userbar .profile span:hover {
+    filter: none;
+    transform: none;
+}
+
+
 header .userbar .profile img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
+    display: block;
 }
+
 
 .content-container {
     margin-left: 320px;
@@ -65,24 +95,29 @@ header .userbar .profile img {
     min-height: 100vh;
 }
 
+
 h1, h2 {
     color: #203752;
 }
+
 
 h1 {
     font-size: 32px;
     margin-bottom: 20px;
 }
 
+
 h2 {
     font-size: 24px;
     margin-bottom: 15px;
 }
 
+
 .intro-text {
     font-size: 18px;
     margin-bottom: 20px;
 }
+
 
 form {
     display: block;
@@ -90,6 +125,7 @@ form {
     width: 100%;
     max-width: 500px;
 }
+
 
 input[type="text"], input[type="number"], select {
     padding: 8px;
@@ -99,6 +135,7 @@ input[type="text"], input[type="number"], select {
     margin-bottom: 10px;
     font-size: 14px;
 }
+
 
 input[type="submit"], button {
     background-color: #4CAF50;
@@ -110,18 +147,22 @@ input[type="submit"], button {
     border-radius: 5px;
 }
 
+
 input[type="submit"]:hover, button:hover {
     background-color: #45a049;
 }
+
 
 .farmaci-display, .cibo-display {
     margin-top: 20px;
 }
 
+
 .farmaci-display ul, .cibo-display ul {
     list-style-type: none;
     padding: 0;
 }
+
 
 .farmaci-display li, .cibo-display li {
     background-color: #eaf1f8;
@@ -130,6 +171,7 @@ input[type="submit"]:hover, button:hover {
     margin-bottom: 10px;
     border: 1px solid #019ade;
 }
+
 
 .farmaci-display button, .cibo-display button {
     background-color: #019ade;
@@ -141,23 +183,28 @@ input[type="submit"]:hover, button:hover {
     font-size: 14px;
 }
 
+
 .farmaci-display button:hover, .cibo-display button:hover {
     background-color: #017A9D;
 }
 
+
 span, p {
     font-size: 16px;
-    color: #555;
+    color: #000000;
 }
+
 
 span {
     font-weight: bold;
 }
 
+
 #notifica {
     color: red;
     margin-top: 20px;
 }
+
 
 /* Responsive */
 @media screen and (max-width: 768px) {

@@ -4,6 +4,7 @@ import com.example.pollai.utente.Utente;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 //Classe che gestisce l'accesso a tutte le pagine generali
 @Controller
@@ -32,6 +33,12 @@ public class MainController {
     public String registerPage(Model model){
         model.addAttribute("user", new Utente());
         return "registeruser";
+    }
+
+    // Mapping verso talk to us
+    @GetMapping("/talk-to-us")
+    public String talkToUs() {
+        return "talk-to-us";
     }
 
     // Mapping verso la pagina Our Story

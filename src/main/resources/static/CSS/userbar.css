@@ -15,20 +15,22 @@
     z-index: 1;
 }
 
-.profile-initials {
+
+.initials {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     background-color: #019ADE;
     color: white;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
 
 .user-bar a {
     color: #ffffff;
@@ -38,9 +40,11 @@
     padding-left: 0;
 }
 
+
 .user-bar a:hover {
     text-decoration: underline;
 }
+
 
 .user-link-top {
     margin-top: 30px;
@@ -48,6 +52,7 @@
     flex-direction: column;
     gap: 5px;
 }
+
 
 .user-links-bottom {
     margin-top: auto;
@@ -58,10 +63,12 @@
     padding-bottom: 20px;
 }
 
+
 .user-links-bottom a {
     margin: 0;
     padding: 0;
 }
+
 
 .user-profile {
     display: flex;
@@ -76,6 +83,3 @@
     font-weight: bold;
     color: #ffffff;
 }
-
-
-
