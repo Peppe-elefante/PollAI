@@ -1,5 +1,13 @@
 function mostraDettagli(button) {
     console.log("Pulsante cliccato");
+    // Reset messaggi e contatto veterinario
+    const messaggioSalute = document.getElementById('messaggioSalute');
+    const dettagliVeterinario = document.getElementById('dettagliVeterinario');
+
+    messaggioSalute.textContent = '';  // Reset del consiglio precedente
+    messaggioSalute.style.color = '';  // Reset colore messaggio
+    dettagliVeterinario.style.display = 'none';
+
     const id = button.getAttribute('data-id');
     const razza = button.getAttribute('data-razza');
     const eta = button.getAttribute('data-eta');
@@ -21,16 +29,24 @@ function mostraContattoVeterinario() {
 function richiediConsiglio() {
     const idGallina = document.getElementById('dettagli-id').textContent;
 
+    // Invia una richiesta al server per ottenere un consiglio
     fetch(`/consiglio/${idGallina}`, {
         method: 'POST'
     })
-        .then(response => response.json())  // Prendi la risposta come JSON
+        .then(response => response.json())
         .then(data => {
-            const messaggio = data.message; // Il messaggio che abbiamo restituito nel backend
+            const messaggio = data.message;
             const messaggioSalute = document.getElementById('messaggioSalute');
 
             // Mostra il messaggio nella pagina
             messaggioSalute.textContent = messaggio;
+
+            // Imposta il colore del messaggio in base alla salute
+            if (messaggio.includes("non")) {
+                messaggioSalute.style.color = "red";
+            } else {
+                messaggioSalute.style.color = "green";
+            }
         })
         .catch(error => {
             console.error("Errore:", error);

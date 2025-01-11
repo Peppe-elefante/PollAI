@@ -5,74 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production of eggs</title>
     <link rel="stylesheet" href="/CSS/userbar.css">
-    <link rel="stylesheet" href="/CSS/produzione.css">
+    <link rel="stylesheet" href="/CSS/gestione-produzione.css">
 </head>
 <body>
 <header>
     <div th:replace="fragments/userbar :: userbar"></div>
 </header>
 
-<div class="uova-display">
-    <h2>Eggs produced in the past</h2>
-    <ul th:each="uova : ${session.user.pollaio.produzione.uovaPerGiorno}">
-        <li>
-            Date: <span th:text="${uova.key}">Sample Date</span>
-            Eggs: <span th:text="${uova.value}">Sample Count</span>
-        </li>
-    </ul>
-</div>
+<div class="content-container">
+    <div class="uova-display">
+        <h2>Eggs produced in the past</h2>
+        <ul th:each="uova : ${session.user.pollaio.produzione.uovaPerGiorno}">
+            <li>
+                Date: <span th:text="${uova.key}">Sample Date</span>
+                Eggs: <span th:text="${uova.value}">Sample Count</span>
+            </li>
+        </ul>
+    </div>
 
-<div class ="inserimento-uova">
-    <h2>Insert eggs</h2>
-    <form th:action="@{/inserisci-uova}" method="post">
-        <fieldset>
-            <div>
-                <label for="date">Data:</label>
-                <input type="date" id="date" name="date" required />
-            </div>
-            <div>
-                <label for="quantita">Quantità:</label>
-                <input type="number" id="quantita" name="quantita" required />
-            </div>
-            <div>
-                <button type="submit">Aggiungi</button>
-            </div>
-        </fieldset>
-    </form>
-</div>
+    <div class="inserimento-uova">
+        <h2>Insert eggs</h2>
+        <form th:action="@{/inserisci-uova}" method="post">
+            <fieldset>
+                <div>
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required />
+                </div>
+                <div>
+                    <label for="quantita">Quantity:</label>
+                    <input type="number" id="quantita" name="quantita" required min="0" />
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
-<div class = "archivio-uovo">
-    <h2>How many eggs have been produced in the past?</h2>
-    <form th:action="@{/archivio-produzione}">
-        <p>
-            Periodo:
-            <select name="category" size="1" class="category-select">
-                <option value="3 months">3 months</option>
-                <option value="1 month">1 month</option>
-                <option value="1 year">1 year</option>
-            </select>
-            <input type="submit" value="Search">
-        </p>
-    </form>
-    <p><span th:text="${archivio}"></span></p>
-</div>
+    <div class="archivio-uovo">
+        <h2>How many eggs have been produced in the past?</h2>
+        <form th:action="@{/archivio-produzione}">
+            <p>
+                Period:
+                <select name="category" size="1" class="category-select">
+                    <option value="3 months">3 months</option>
+                    <option value="1 month">1 month</option>
+                    <option value="1 year">1 year</option>
+                </select>
+                <input type="submit" value="Search">
+            </p>
+        </form>
+        <p><span th:text="${archivio}"></span></p>
+    </div>
 
-<div class = "predizione-uova">
-    <h2>How many eggs will be produced in the future?</h2>
-    <form th:action="@{/predizione-produzione}">
-        <p>
-            Periodo:
-            <select name="category" size="1" class="category-select">
-                <option value="3 months">3 months</option>
-                <option value="1 month">1 month</option>
-                <option value="1 year">1 year</option>
-            </select>
-            <input type="submit" value="Search">
-        </p>
-    </form>
-    <p><span th:text="${predizione}"></span></p>
+    <div class="predizione-uova">
+        <h2>How many eggs will be produced in the future?</h2>
+        <form th:action="@{/predizione-produzione}">
+            <p>
+                Period:
+                <select name="category" size="1" class="category-select">
+                    <option value="3 months">3 months</option>
+                    <option value="1 month">1 month</option>
+                    <option value="1 year">1 year</option>
+                </select>
+                <input type="submit" value="Search">
+            </p>
+        </form>
+        <p><span th:text="${predizione}"></span></p>
+    </div>
 </div>
-
-</body>
 </body>
 </html>

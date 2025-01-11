@@ -108,5 +108,5 @@ public class Magazzino implements Serializable {
     public Notifica getNotifica(){
         return notifica;
     }
-
+    
 }

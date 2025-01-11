@@ -1,21 +1,23 @@
 <div th:fragment="userbar">
     <div class="user-bar">
-        <!-- Iniziali del profilo -->
+
         <div class="profile-initials">
             <a href="/profilo">
                 <span th:text="${session.user.nome.substring(0,1) + session.user.cognome.substring(0,1)}"></span>
             </a>
         </div>
 
-        <!-- Link principali -->
-        <a href="/area-utente">Dashboard</a>
-        <a href="/accesso-produzione">Accedi alla Produzione</a>
-        <a href="/accesso-salute">Accedi alla Salute</a>
+        <div class="user-info">
+            <p th:text="${session.user.nome + ' ' + session.user.cognome}"></p>
+        </div>
 
-        <!-- Link in basso -->
+        <a href="/area-utente">Dashboard</a>
+        <a href="/accesso-produzione">Produzione</a>
+        <a href="/accesso-salute">Salute</a>
+
         <div class="user-links-bottom">
-            <a href="/accesso-magazzino">Accedi al Magazzino</a>
-            <a href="/accesso-pollaio">Accedi al Pollaio</a>
+            <a href="/accesso-magazzino">Magazzino</a>
+            <a href="/accesso-pollaio">Pollaio</a>
         </div>
     </div>
 </div>

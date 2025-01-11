@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.content-container {
+    margin-left: 320px; /* Stessa larghezza della userbar */
+    padding: 20px;
+    width: calc(100% - 320px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+    padding-top: 60px; /* Assicurati che il contenuto non si sovrapponga alla userbar */
+}
+
+h1, p {
+    font-size: 20px;
+    color: #203752;
+}

@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+}
+
+.content-container {
+    margin-left: 320px;
+    padding: 20px;
+    width: calc(100% - 320px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    font-size: 32px;
+    color: #203752;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #203752;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallina-card {
+    background-color: #eaf1f8;
+    padding: 15px;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    border: 1px solid #019ade;
+    margin-bottom: 10px;
+    flex: 0 1 calc(33% - 20px);
+}
+
+.gallina-card button {
+    width: 100%;
+}
+
+.gallina-card img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #019ade;
+    margin-bottom: 10px;
+}
+
+#dettagliGallina {
+    display: none;
+    background-color: #eaf1f8;
+    border-radius: 5px;
+    padding: 20px;
+    border: 1px solid #019ade;
+}
+
+button {
+    background-color: #019ade;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #017A9D;
+}
+
+#dettagliVeterinario {
+    display: none;
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#messaggioSalute {
+    color: green;
+    margin-top: 10px;
+}

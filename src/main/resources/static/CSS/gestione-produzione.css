@@ -1,0 +1,115 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+}
+
+.content-container {
+    margin-left: 320px;
+    padding: 20px;
+    width: calc(100% - 320px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    font-size: 24px;
+    color: #203752;
+    margin-bottom: 15px;
+}
+
+.uova-display ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.uova-display li {
+    background-color: rgba(1, 154, 222, 0.05);
+    border: 1px solid #019ade;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.uova-display span {
+    font-weight: bold;
+}
+
+.inserimento-uova form {
+    background-color: rgba(1, 154, 222, 0.05);
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #019ade;
+    margin-top: 20px;
+}
+
+.inserimento-uova label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.inserimento-uova input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #019ade;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.inserimento-uova button {
+    background-color: #019ADE;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inserimento-uova button:hover {
+    background-color: #017A9D;
+}
+
+.archivio-uovo form, .predizione-uova form {
+    background-color: rgba(1, 154, 222, 0.05);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #019ade;
+    margin-top: 20px;
+}
+
+.archivio-uovo select, .predizione-uova select {
+    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #019ade;
+    margin-right: 10px;
+}
+
+.archivio-uovo input[type="submit"], .predizione-uova input[type="submit"] {
+    background-color: #019ADE;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.archivio-uovo input[type="submit"]:hover, .predizione-uova input[type="submit"]:hover {
+    background-color: #017A9D;
+}
+
+.predizione-uova p, .archivio-uovo p {
+    margin-top: 10px;
+    color: #000000;
+    font-size: 16px;
+}
+
+fieldset {
+    border: 1px solid #019ade;
+    border-radius: 8px;
+    padding: 20px;
+}

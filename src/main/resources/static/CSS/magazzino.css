@@ -1,0 +1,167 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    bottom: 0;
+    background-color: #019ade;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+header .userbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+}
+
+header .userbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+header .userbar a:hover {
+    background-color: #017a9d;
+    border-radius: 5px;
+}
+
+header .userbar .profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header .userbar .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.content-container {
+    margin-left: 320px;
+    padding: 20px;
+    width: calc(100% - 320px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    color: #203752;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.intro-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+input[type="text"], input[type="number"], select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+input[type="submit"], button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #45a049;
+}
+
+.farmaci-display, .cibo-display {
+    margin-top: 20px;
+}
+
+.farmaci-display ul, .cibo-display ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.farmaci-display li, .cibo-display li {
+    background-color: #eaf1f8;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #019ade;
+}
+
+.farmaci-display button, .cibo-display button {
+    background-color: #019ade;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.farmaci-display button:hover, .cibo-display button:hover {
+    background-color: #017A9D;
+}
+
+span, p {
+    font-size: 16px;
+    color: #555;
+}
+
+span {
+    font-weight: bold;
+}
+
+#notifica {
+    color: red;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    form {
+        width: 100%;
+    }
+}

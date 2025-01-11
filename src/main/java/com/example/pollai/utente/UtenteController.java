@@ -1,5 +1,6 @@
 package com.example.pollai.utente;
 
+import com.example.pollai.magazzino.Magazzino;
 import com.example.pollai.pollaio.Pollaio;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
-   //Dopo che l'utente ha inserito tutti fa l'autenticazione
+    //Dopo che l'utente ha inserito tutti fa l'autenticazione
     @PostMapping("/login")
     public String login(String email, String password, HttpSession session, HttpServletRequest request, Model model){
         Optional<Utente> user = utenteService.autenticazione(email, password);
@@ -64,7 +65,15 @@ public class UtenteController {
         if (user == null) {
             return "redirect:/login";
         }
+
+        // Verifica se il pollaio dell'utente esiste
+        Pollaio pollaio = user.getPollaio();
+        if (pollaio == null || pollaio.getGalline() == null || pollaio.getGalline().isEmpty()) {
+            return "redirect:/configura-pollaio";
+        }
+
         model.addAttribute("user", user);
+        model.addAttribute("pollaio", pollaio);
         return "areautente";
     }
 

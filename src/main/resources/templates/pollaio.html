@@ -5,55 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pollaio</title>
     <link rel="stylesheet" href="/CSS/userbar.css">
+    <link rel="stylesheet" href="/CSS/pollaio.css">
+    <script>
+        // Funzione per la validazione dell'età
+        function validateForm() {
+            var eta = document.getElementsByName("eta")[0].value;
+            if (eta <= 0) {
+                alert("L'età deve essere maggiore di 0");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <header>
     <div th:replace="fragments/userbar :: userbar"></div>
 </header>
 
-<h1> Pollaio </h1>
-<p> Questo è il pollaio di <span th:text="${session.user.nome}"></span></p>
+<div class="content-container">
+    <h1> Pollaio </h1>
+    <p> Questo è il pollaio di <span class="nome-utente" th:text="${session.user.nome}"></span></p>
 
-<h2>Lista delle galline: </h2>
-<div class="pollame-display">
-    <ul>
-        <li th:each="gallina : ${session.user.pollaio.galline}">
-            <span th:text="${gallina.razza}">Razza</span>
-            <span th:text="${gallina.eta}">età</span>
-            <span th:text="${gallina.peso}">peso</span>
-            <form th:action="@{/rimuovi-gallina}"  method="post">
-                <div>
-                    <input type="hidden" th:name="gallinaId" th:value="${gallina.id}" />
-                    <button type="submit">Rimuovi</button>
-                </div>
-            </form>
-        </li>
-    </ul>
-</div>
-<div th:if="${session.user.pollaio.quantity < 15}">
-    <p>Inserisci gallina</p>
-        <form th:action="@{/inserisci-gallina}"  method="post">
+    <h2>Lista delle galline: </h2>
+    <div class="pollame-display">
+        <ul>
+            <li th:each="gallina : ${session.user.pollaio.galline}">
+                <span th:text="${gallina.razza}">razza</span>
+                <span th:text="${gallina.eta}">età</span>
+                <span th:text="${gallina.peso}">peso</span>
+                <form th:action="@{/rimuovi-gallina}" method="post">
+                    <div>
+                        <input type="hidden" th:name="gallinaId" th:value="${gallina.id}" />
+                        <button type="submit">Rimuovi</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${session.user.pollaio.quantity < 15}">
+        <p>Inserisci gallina</p>
+        <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()">
             <div>
-                <label >razza:</label>
-                <input type="text" name="razza" required />
+                <label> razza:</label>
+                <label>
+                    <input type="text" name="razza" required />
+                </label>
             </div>
             <div>
                 <label> età:</label>
-                <input type="number" name ="eta" required />
+                <label>
+                    <input type="number" name="eta" required min="1" />
+                </label>
             </div>
             <div>
                 <label> peso (in grammi):</label>
-                <input type="number" name ="peso" required />
+                <label>
+                    <input type="number" name="peso" required />
+                </label>
             </div>
             <div>
                 <button type="submit">aggiungi</button>
             </div>
         </form>
-</div>
+    </div>
 
-<div th:if="${session.user.pollaio.quantity > 15}">
-    <h2>Reached the maximum number of poultry for your plan.</h2>
-    <h3>To add more poultry you must upgrade your plan!</h3>
+    <div th:if="${session.user.pollaio.quantity > 15}">
+        <h2>Raggiunto il numero massimo di galline per il tuo piano.</h2>
+        <h3>Per aggiungere altre galline, devi aggiornare il tuo piano!</h3>
+    </div>
 </div>
 
 </body>

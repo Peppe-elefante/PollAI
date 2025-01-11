@@ -1,4 +1,8 @@
 .user-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -6,6 +10,9 @@
     color: white;
     font-family: 'Arial', sans-serif;
     height: 100vh;
+    box-sizing: border-box;
+    background-color: #203752;
+    z-index: 1;
 }
 
 .profile-initials {
@@ -28,6 +35,7 @@
     text-decoration: none;
     font-size: 18px;
     margin: 10px 0;
+    padding-left: 0;
 }
 
 .user-bar a:hover {
@@ -39,28 +47,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
-    text-align: left;
+    gap: 15px;
+    padding-bottom: 20px;
 }
 
 .user-links-bottom a {
-    margin: 5px 0;
+    margin: 0;
+    padding: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .userbar-container {
-        width: 100%;
-        display: block;
-    }
-
-    .content-container {
-        width: 100%;
-    }
-
-    .profile-initials {
-        width: 70px;
-        height: 70px;
-        font-size: 24px;
-    }
-}
