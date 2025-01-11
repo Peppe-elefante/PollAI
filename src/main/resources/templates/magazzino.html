@@ -6,6 +6,7 @@
     <title>Magazzino</title>
     <link rel="stylesheet" href="/CSS/userbar.css">
     <link rel="stylesheet" href="/CSS/magazzino.css">
+    <script src="/JS/magazzino.js"></script>
 </head>
 <body>
 
@@ -49,7 +50,7 @@
         </div>
     </form>
 
-    <h2>Cibo registrato:</h2>
+    <h2 class="cibo-title">Cibo registrato:</h2>
     <div class="cibo-display">
         <ul>
             <li th:each="cibi : ${session.user.magazzino.cibo}">
@@ -82,7 +83,7 @@
         </ul>
     </div>
 
-    <h2>Farmaci registrati:</h2>
+    <h2 class="farmaci-title">Farmaci registrati:</h2>
     <div class="farmaci-display">
         <ul>
             <li th:each="farmaco : ${session.user.magazzino.farmaci}">
