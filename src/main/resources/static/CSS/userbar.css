@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .user-bar a {
@@ -40,6 +40,13 @@
 
 .user-bar a:hover {
     text-decoration: underline;
+}
+
+.user-link-top {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .user-links-bottom {
@@ -55,4 +62,20 @@
     margin: 0;
     padding: 0;
 }
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.user-info p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+
 

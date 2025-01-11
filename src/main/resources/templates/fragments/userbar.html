@@ -1,19 +1,21 @@
 <div th:fragment="userbar">
     <div class="user-bar">
-
-        <div class="profile-initials">
-            <a href="/profilo">
+        <div class="user-profile">
+            <div class="profile-initials">
                 <span th:text="${session.user.nome.substring(0,1) + session.user.cognome.substring(0,1)}"></span>
-            </a>
+            </div>
+            <div class="user-info">
+                <a href="/profilo">
+                    <p th:text="${session.user.nome + ' ' + session.user.cognome}"></p>
+                </a>
+            </div>
         </div>
 
-        <div class="user-info">
-            <p th:text="${session.user.nome + ' ' + session.user.cognome}"></p>
+        <div class="user-link-top">
+            <a href="/area-utente">Dashboard</a>
+            <a href="/accesso-produzione">Produzione</a>
+            <a href="/accesso-salute">Salute</a>
         </div>
-
-        <a href="/area-utente">Dashboard</a>
-        <a href="/accesso-produzione">Produzione</a>
-        <a href="/accesso-salute">Salute</a>
 
         <div class="user-links-bottom">
             <a href="/accesso-magazzino">Magazzino</a>
