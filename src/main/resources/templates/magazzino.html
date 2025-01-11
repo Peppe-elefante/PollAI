@@ -10,7 +10,7 @@
 <body>
 
 <header>
-    <div th:replace="fragments/userbar :: userbar"></div> <!-- Userbar Frammento -->
+    <div th:replace="fragments/userbar :: userbar"></div>
 </header>
 
 <div class="content-container">
@@ -27,7 +27,7 @@
         </div>
         <div>
             <label for="quantita_c">Quantità:</label>
-            <input type="number" id="quantita_c" name="quantita_c" min="0" required />
+            <input type="number" id="quantita_c" name="quantita_c" min="1" required />
         </div>
         <div>
             <button type="submit">Aggiungi</button>
@@ -42,12 +42,45 @@
         </div>
         <div>
             <label for="quantita_f">Quantità:</label>
-            <input type="number" id="quantita_f" name="quantita_f" min="0" required />
+            <input type="number" id="quantita_f" name="quantita_f" min="1" required />
         </div>
         <div>
             <button type="submit">Aggiungi</button>
         </div>
     </form>
+
+    <h2>Cibo registrato:</h2>
+    <div class="cibo-display">
+        <ul>
+            <li th:each="cibi : ${session.user.magazzino.cibo}">
+                <span th:text="${cibi.tipo}">Tipo</span>
+                <span th:text="${cibi.quantita}">Quantità</span>
+                <form th:action="@{/rimuovi-cibo}" method="post">
+                    <div>
+                        <input type="hidden" th:name="id" th:value="${cibi.id}" />
+                        <input type="hidden" name="tipo" value="cibo">
+                        <button type="submit">Rimuovi</button>
+                    </div>
+                </form>
+                <form th:action="@{/modifica-cibo}" method="post">
+                    <div>
+                        <label>
+                            <input type="number" name="cambio" min="1" required />
+                        </label>
+                        <label>
+                            <select name="azione" size="1">
+                                <option value="aggiungi">add</option>
+                                <option value="rimuovi">remove</option>
+                            </select>
+                        </label>
+                        <input type="hidden" name="tipo" value="cibo">
+                        <input type="hidden" th:name="id" th:value="${cibi.id}" />
+                        <button type="submit">Modifica</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
 
     <h2>Farmaci registrati:</h2>
     <div class="farmaci-display">
@@ -62,21 +95,20 @@
                         <button type="submit">Rimuovi</button>
                     </div>
                 </form>
-            </li>
-        </ul>
-    </div>
-
-    <h2>Cibo registrato:</h2>
-    <div class="cibo-display">
-        <ul>
-            <li th:each="cibi : ${session.user.magazzino.cibo}">
-                <span th:text="${cibi.tipo}">Tipo</span>
-                <span th:text="${cibi.quantita}">Quantità</span>
-                <form th:action="@{/rimuovi-cibo}" method="post">
+                <form th:action="@{/modifica-farmaco}" method="post">
                     <div>
-                        <input type="hidden" th:name="id" th:value="${cibi.id}" />
-                        <input type="hidden" name="tipo" value="cibo">
-                        <button type="submit">Rimuovi</button>
+                        <label>
+                            <input type="number" name="cambio" min="1" required />
+                        </label>
+                        <label>
+                            <select name="azione" size="1">
+                                <option value="aggiungi">add</option>
+                                <option value="rimuovi">remove</option>
+                            </select>
+                        </label>
+                        <input type="hidden" name="tipo" value="farmaco">
+                        <input type="hidden" th:name="id" th:value="${farmaco.id}" />
+                        <button type="submit">Modifica</button>
                     </div>
                 </form>
             </li>
