@@ -4,6 +4,7 @@ package com.example.pollai.nutrizione;
 import com.example.pollai.magazzino.Cibo;
 import com.example.pollai.magazzino.Magazzino;
 import com.example.pollai.utente.Utente;
+import com.example.pollai.utente.UtenteController;
 import com.example.pollai.utente.UtenteService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -21,13 +22,17 @@ import java.util.List;
 
 @Controller
 public class NutrizioneController {
+
+    private static final Logger log = LoggerFactory.getLogger(NutrizioneController.class);
+
+
     @Autowired
     private NutrizioneService nutrizioneService;
 
     @Autowired
     private UtenteService utenteService;
 
-    private static final Logger log = LoggerFactory.getLogger(NutrizioneController.class);
+    private static final Logger logger = LoggerFactory.getLogger(NutrizioneController.class);
 
     @GetMapping("/nutrizione")
     public String mostraSezioneNutrizione(HttpSession session, Model model) {
@@ -60,6 +65,8 @@ public class NutrizioneController {
                                 @RequestParam(name = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data,
                                 @RequestParam("ciboId") Long ciboId, @RequestParam("quantità") int quantità){
         Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
         Cibo cibo = null;
         for (Cibo item : utente.getMagazzino().getCibo()) {
             if (item.getId().equals(ciboId)) {
@@ -105,7 +112,11 @@ public class NutrizioneController {
     @GetMapping("/visualizza-pasti-periodo")
     public String visualizzaPastiPeriodo(@RequestParam(name = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                          @RequestParam(name = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-                                         Model model) {
+                                         HttpSession session, Model model) {
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
+        Magazzino magazzino = utente.getMagazzino();
         // Imposta le date di default se non sono fornite dall'utente
         if (startDate == null) {
             startDate = LocalDate.now().minusWeeks(1);
@@ -118,7 +129,7 @@ public class NutrizioneController {
         model.addAttribute("endDate", endDate);
 
         // Recupera i pasti filtrati dall'intervallo di date
-        List<Pasto> pastiFiltrati = nutrizioneService.trovaPastiPerPeriodo(startDate, endDate);
+        List<Pasto> pastiFiltrati = nutrizioneService.trovaPastiPerPeriodo(startDate, endDate, magazzino);
         model.addAttribute("pastiFiltrati", pastiFiltrati);
 
         return "nutrizione";
@@ -133,10 +144,12 @@ public class NutrizioneController {
         LocalDate end = LocalDate.parse(endStr);
 
         Utente utente = getUtente(session);
+        if(utente == null) return "login";
+        //Prende l'id del magazzino
         Magazzino magazzino = utente.getMagazzino();
         model.addAttribute("pasti", nutrizioneService.trovaPastiPerMagazzino(magazzino.getId()));
 
-        List<Pasto> pastiFiltrati = nutrizioneService.trovaPastiPerPeriodo(start, end);
+        List<Pasto> pastiFiltrati = nutrizioneService.trovaPastiPerPeriodo(start, end, magazzino);
 
         model.addAttribute("pastiFiltrati", pastiFiltrati);
 

@@ -30,8 +30,9 @@ public class NutrizioneService {
     }
 
     // Trova pasti in un intervallo di tempo
-    public List<Pasto> trovaPastiPerPeriodo(LocalDate start, LocalDate end) {
-        return pastoDAO.findByData(start, end);
+    public List<Pasto> trovaPastiPerPeriodo(LocalDate start, LocalDate end, Magazzino magazzino) {
+
+        return pastoDAO.findByData(start, end, magazzino);
     }
 
     // Trova pasto in una data

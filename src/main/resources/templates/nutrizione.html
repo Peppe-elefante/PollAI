@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Nutrition Section</title>
+    <link rel="stylesheet" href="/CSS/userbar.css">
+    <link rel="stylesheet" href="/CSS/gestione-produzione.css">
 </head>
 
 <body>
 <h1>Nutrition Section</h1>
 
+<header>
+    <div th:replace="fragments/userbar :: userbar"></div>
+</header>
 
-<main>
+<div class="content-container">
     <!-- Lista Pasti -->
     <div class="lista-pasti">
         <h2>Complete List of Meals</h2>
@@ -124,7 +129,7 @@
             </fieldset>
         </form>
     </div>
-</main>
+</div>
 
 </body>
 </html>

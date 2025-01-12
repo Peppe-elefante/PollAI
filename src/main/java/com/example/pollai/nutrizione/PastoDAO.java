@@ -1,5 +1,6 @@
 package com.example.pollai.nutrizione;
 
+import com.example.pollai.magazzino.Magazzino;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,6 @@ public interface PastoDAO extends JpaRepository<Pasto, LocalDate>{
     Pasto findByDataOne(@Param("data") LocalDate data);
 
     //trova pasti tra due date
-    @Query("SELECT p FROM Pasto p WHERE p.data BETWEEN :startDate AND :endDate")
-    List<Pasto> findByData(@Param("startDate") LocalDate start, @Param("endDate") LocalDate end);
+    @Query("SELECT p FROM Pasto p WHERE p.data BETWEEN :startDate AND :endDate AND p.magazzino = :magazzino")
+    List<Pasto> findByData(@Param("startDate") LocalDate start, @Param("endDate") LocalDate end, @Param("magazzino") Magazzino magazzino);
 }
