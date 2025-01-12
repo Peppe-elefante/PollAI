@@ -6,6 +6,7 @@
     <title>Sign Up!</title>
     <link rel="stylesheet" href="/CSS/nav-bar.css">
     <link rel="stylesheet" href="/CSS/registeruser.css">
+    <link rel="stylesheet" href="/CSS/footer.css">
     <script src="/JS/check.js"></script>
 </head>
 <body>
@@ -16,7 +17,7 @@
 
 <main>
     <div class="form">
-        <h1 class="title">Register a New Account</h1>
+        <h1 class="title">Registration form</h1>
         <p class="subtitle">Fill out the form below to create your account</p>
 
         <form th:action="@{/register}" th:object="${user}" method="post" id="registerForm">
@@ -48,6 +49,12 @@
                 <div id="pIVAError" class="error" style="color: red;"></div>
             </div>
 
+            <!-- RASVSL -->
+            <div class="form-group">
+                <label for="document">Upload your RASVSL (PDF)</label>
+                <input type="file" id="document" name="document" accept="application/pdf" required>
+            </div>
+
             <!-- Email -->
             <div class="input-container">
                 <input type="email" id="email" class="input" pattern="^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,10}$" th:field="*{email}" placeholder=" " required />
@@ -68,5 +75,8 @@
     </div>
 </main>
 
+<footer>
+    <div th:replace="fragments/footer :: footer"></div> <!-- Inclusione del footer -->
+</footer>
 </body>
 </html>

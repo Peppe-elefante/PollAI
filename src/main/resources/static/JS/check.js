@@ -16,41 +16,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Validazione nome
         if (nome.length > 20) {
-            displayError("nomeError", "Il nome deve avere meno di 20 caratteri.");
+            displayError("nomeError", "The name must be less than 20 characters.");
             isValid = false;
         }
 
         // Validazione cognome
         if (cognome.length > 20) {
-            displayError("cognomeError", "Il cognome deve avere meno di 20 caratteri.");
+            displayError("cognomeError", "The lastname must be less than 20 characters.");
             isValid = false;
         }
 
         // Validazione numero di telefono
         const phonePattern = new RegExp(/^\+?\d{1,4}[\s\-]?\(?\d{1,3}\)?[\s\-]?\d{1,4}[\s\-]?\d{1,4}$/);
         if (!phonePattern.test(phoneNumber)) {
-            displayError("phoneNumberError", "Numero di telefono non valido. Usa il formato corretto.");
+            displayError("phoneNumberError", "Invalid phone number. Please use the correct format.");
             isValid = false;
         }
 
         // Validazione partita IVA
         const pIVAPattern = new RegExp(/^IT\d{11}$/);
         if (!pIVAPattern.test(pIVA)) {
-            displayError("pIVAError", "La Partita IVA non è valida. Usa il formato corretto.");
+            displayError("pIVAError", "Invalid PIVA. Please use the correct format.");
             isValid = false;
         }
 
         // Validazione email
         const emailPattern = new RegExp(/^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,10}$/);
         if (!emailPattern.test(email)) {
-            displayError("emailError", "Email non valida.");
+            displayError("emailError", "Invalid email. Please use the correct format.");
             isValid = false;
         }
 
         // Validazione password
         const passwordPattern = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\[\]{};':&quot\\|,.<>\/?]).{8,}$/);
         if (!passwordPattern.test(password)) {
-            displayError("passwordError", "La password deve essere di almeno 8 caratteri e contenere lettere maiuscole, minuscole, numeri e caratteri speciali.");
+            displayError("passwordError", "Password must be at least 8 characters long and contain uppercase letters, lowercase letters, numbers and special characters.");
             isValid = false;
         }
 

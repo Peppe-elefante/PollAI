@@ -13,9 +13,9 @@
 </header>
 
 <div class="content-container">
-    <h1>AREA GESTIONE SALUTE</h1>
+    <h1>HEALTH MANAGEMENT AREA</h1>
 
-    <h2>Galline nel Pollaio</h2>
+    <h2>Chickens in the Henhouse</h2>
 
     <!-- Lista delle galline visualizzate come piccole card -->
     <ul>
@@ -29,29 +29,29 @@
                         th:data-razza="${gallina.razza}"
                         th:data-eta="${gallina.eta}"
                         th:data-peso="${gallina.peso}">
-                    Mostra dettagli
+                    show details
                 </button>
             </div>
         </li>
     </ul>
 
     <div id="dettagliGallina" style="display: none; margin-top: 20px; border: 1px solid #ccc; padding: 10px;">
-        <h2>Dettagli della Gallina</h2>
+        <h2>Details of the Hen</h2>
         <p><strong>ID:</strong> <span id="dettagli-id"></span></p>
-        <p><strong>Razza:</strong> <span id="dettagli-razza"></span></p>
-        <p><strong>Età:</strong> <span id="dettagli-eta"></span></p>
-        <p><strong>Peso:</strong> <span id="dettagli-peso"></span></p>
+        <p><strong>Variety:</strong> <span id="dettagli-razza"></span></p>
+        <p><strong>Age:</strong> <span id="dettagli-eta"></span></p>
+        <p><strong>Weight:</strong> <span id="dettagli-peso"></span></p>
 
-        <button type="button" onclick="richiediConsiglio()">Richiedi Consiglio</button>
-        <button type="button" onclick="mostraContattoVeterinario()">Contatto Veterinario</button>
+        <button type="button" onclick="richiediConsiglio()">Request Advice</button>
+        <button type="button" onclick="mostraContattoVeterinario()">Veterinary Contact</button>
 
         <p id="messaggioSalute" style="color: green; margin-top: 10px;"></p>
 
         <div id="dettagliVeterinario" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid #aaa;">
-            <h3>Dettagli del Veterinario</h3>
-            <p><strong>Nome:</strong> Mario</p>
-            <p><strong>Cognome:</strong> Rossi</p>
-            <p><strong>Telefono:</strong> 123-456-7890</p>
+            <h3>Veterinarian Details</h3>
+            <p><strong>Name:</strong> Mario</p>
+            <p><strong>Lastname:</strong> Rossi</p>
+            <p><strong>Phone:</strong> 123-456-7890</p>
         </div>
     </div>
 </div>
