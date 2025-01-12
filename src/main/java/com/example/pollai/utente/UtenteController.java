@@ -63,13 +63,13 @@ public class UtenteController {
     public String areaUtente(HttpSession session, Model model) {
         Utente user = (Utente) session.getAttribute("user");
         if (user == null) {
-            return "redirect:/login";
+            return "login";
         }
 
         // Verifica se il pollaio dell'utente esiste
         Pollaio pollaio = user.getPollaio();
-        if (pollaio == null || pollaio.getGalline() == null || pollaio.getGalline().isEmpty()) {
-            return "redirect:/configura-pollaio";
+        if (pollaio == null || pollaio.getQuantity() == 0) {
+            return "configura-pollaio";
         }
 
         model.addAttribute("user", user);
