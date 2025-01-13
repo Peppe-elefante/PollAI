@@ -22,7 +22,7 @@
         <li th:each="gallina, gallinaStat : ${session.user.pollaio.galline}">
             <div class="gallina-card">
                 <div class="gallina-icon" style="font-size: 30px;">🐔</div>
-                <div>ID: <span th:text="${gallinaStat.index + 1}">ID</span></div>
+                <div>ID: <span th:text="${gallina.id}">ID</span></div>
                 <button type="button"
                         onclick="mostraDettagli(this)"
                         th:data-id="${gallina.id}"

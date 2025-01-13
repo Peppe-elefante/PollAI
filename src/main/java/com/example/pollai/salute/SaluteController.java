@@ -75,9 +75,9 @@ public class SaluteController {
 
         Map<String, String> response = new HashMap<>();
         if (gallina.getPeso() < 1500 || gallina.getPeso() > 2500) {
-            response.put("message", "La gallina non è in buone condizioni di salute.");
+            response.put("message", "The hen is not in good health.");
         } else {
-            response.put("message", "La gallina è in buone condizioni di salute.");
+            response.put("message", "The hen is in good health.");
         }
 
         return ResponseEntity.ok(response);

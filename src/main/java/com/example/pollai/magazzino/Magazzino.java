@@ -96,11 +96,11 @@ public class Magazzino implements Serializable {
             quantity += c.getQuantita();
         }
         if(quantity < 200){
-            notifica.setAvvertimento("Le scorte alimentari sono insufficienti");
+            notifica.setAvvertimento("We are running out of food supplies");
         } else if(quantity > 200 && quantity < 400){
-            notifica.setAvvertimento("Le scorte alimentari saranno presto insufficienti");
+            notifica.setAvvertimento("We will be soon run out of food supplies");
         } else{
-            notifica.setAvvertimento("Le scorte alimentari sono sufficienti");
+            notifica.setAvvertimento("Our food suplies are enought");
         }
         this.notifica = notifica;
     }
