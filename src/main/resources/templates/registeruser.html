@@ -21,62 +21,57 @@
         <p class="subtitle">Fill out the form below to create your account</p>
 
         <form th:action="@{/register}" th:object="${user}" method="post" id="registerForm">
-            <!-- Nome -->
             <div class="input-container">
                 <input type="text" id="nome" class="input" th:field="*{nome}" placeholder=" " required maxlength="20" />
                 <label for="nome" class="iLabel">First Name</label>
                 <div id="nomeError" class="error" style="color: red;"></div>
             </div>
 
-            <!-- Cognome -->
             <div class="input-container">
                 <input type="text" id="cognome" class="input" th:field="*{cognome}" placeholder=" " required maxlength="20" />
                 <label for="cognome" class="iLabel">Last Name</label>
                 <div id="cognomeError" class="error" style="color: red;"></div>
             </div>
 
-            <!-- Numero di Telefono -->
             <div class="input-container">
                 <input type="text" id="phoneNumber" class="input" pattern="^\+?\d{1,4}[\s\-]?\(?\d{1,3}\)?[\s\-]?\d{1,4}[\s\-]?\d{1,4}$" th:field="*{phone_number}" placeholder=" " required />
                 <label for="phoneNumber" class="iLabel">Phone Number</label>
                 <div id="phoneNumberError" class="error" style="color: red;"></div>
             </div>
 
-            <!-- Partita IVA -->
             <div class="input-container">
                 <input type="text" id="pIVA" class="input" pattern="^IT\d{11}$" th:field="*{PIVA}" placeholder=" " required />
                 <label for="pIVA" class="iLabel">P.IVA (Tax ID)</label>
                 <div id="pIVAError" class="error" style="color: red;"></div>
             </div>
 
-            <!-- RASVSL -->
-            <div class="form-group">
-                <label for="document">Upload your RASVSL (PDF)</label>
-                <input type="file" id="document" name="document" accept="application/pdf" required>
-            </div>
-
-            <!-- Email -->
             <div class="input-container">
                 <input type="email" id="email" class="input" pattern="^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,10}$" th:field="*{email}" placeholder=" " required />
                 <label for="email" class="iLabel">Email</label>
                 <div id="emailError" class="error" style="color: red;"></div>
             </div>
 
-            <!-- Password -->
             <div class="input-container">
                 <input type="password" id="password" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\[\]{};':&quot\\|,.<>\/?]).{8,}$" name="password" placeholder=" " required />
                 <label for="password" class="iLabel">Password</label>
                 <div id="passwordError" class="error" style="color: red;"></div>
             </div>
 
+            <div class="input-container">
+                <label for="document" class="iLabel">Upload your RASVSL (PDF)</label>
+                <br>
+                <input type="file" id="document" name="document" accept="application/pdf" required class="input-file">
+                <br>
+            </div>
+
             <button type="submit" class="submit">Register</button>
         </form>
-
     </div>
 </main>
 
 <footer>
-    <div th:replace="fragments/footer :: footer"></div> <!-- Inclusione del footer -->
+    <div th:replace="fragments/footer :: footer"></div>
 </footer>
+
 </body>
 </html>
