@@ -21,7 +21,6 @@ header {
     box-sizing: border-box;
     overflow-y: auto;
     background-color: #f4f4f4;
-    padding-top: 60px;
 }
 
 h1, h2 {

@@ -3,6 +3,8 @@ body {
     font-family: 'Merriweather', serif;
     margin: 0;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h2 {
@@ -12,11 +14,14 @@ h2 {
     margin-top: 20px;
 }
 
+main {
+    flex: 1;
+}
+
 .login-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin-top: 70px;
+    margin-bottom: 80px;
     background-color: #354580;
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -26,6 +31,8 @@ h2 {
     text-align: center;
     color: #ffffff;
     font-family: 'Merriweather', serif;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form-title {
