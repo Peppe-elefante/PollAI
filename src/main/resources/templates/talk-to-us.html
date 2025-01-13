@@ -9,97 +9,10 @@
 </head>
 <body>
 
-<header>
-    <div th:replace="fragments/navbar :: navbar"></div>
-</header>
-
-<main>
     <div class="form">
         <h1 class="title">Talk To Us</h1>
         <p> Contact us: +39 123 456 0090</p>
+        <a href="/">Back to homepage</a>
     </div>
-
-    <!--
-    <div class="form">
-        <h1 class="title">Talk To Us</h1>
-
-        <form th:action="@{/talk-to-us}" th:object="${user}" method="post" id="talkToUsForm">
-
-            <div class="input-container">
-                <input type="text" id="nome" class="input" th:field="*{nome}" placeholder=" " required maxlength="20" />
-                <label for="nome" class="iLabel">First Name</label>
-                <div id="nomeError" class="error" style="color: red;"></div>
-            </div>
-
-            <div class="input-container">
-                <input type="text" id="cognome" class="input" th:field="*{cognome}" placeholder=" " required maxlength="20" />
-                <label for="cognome" class="iLabel">Last Name</label>
-                <div id="cognomeError" class="error" style="color: red;"></div>
-            </div>
-
-            <div class="input-container">
-                <input type="text" id="phone_number" class="input" th:field="*{phone_number}" placeholder=" " required />
-                <label for="phone_number" class="iLabel">Phone Number</label>
-                <div id="phone_numberError" class="error" style="color: red;" th:if="${#fields.hasErrors('phone_number')}">Please enter a valid phone number</div>
-            </div>
-
-            <div class="input-container">
-                <input type="text" id="pIVA" class="input" pattern="^IT\d{11}$" th:field="*{pIVA}" placeholder=" " required />
-                <label for="pIVA" class="iLabel">P.IVA (Tax ID)</label>
-                <div id="pIVAError" class="error" style="color: red;"></div>
-            </div>
-
-            <div class="input-container">
-                <input type="email" id="email" class="input" pattern="^[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,10}$" th:field="*{email}" placeholder=" " required />
-                <label for="email" class="iLabel">Email</label>
-                <div id="emailError" class="error" style="color: red;"></div>
-            </div>
-
-            <div class="input-container">
-                <input type="number" id="numeroGalline" class="input" th:field="*{numeroGalline}" required />
-                <label for="numeroGalline" class="iLabel">Numero Galline</label>
-            </div>
-
-            <button type="submit" class="submit">Invia Richiesta</button>
-        </form>
-
-        <div id="message" class="message" style="display: none;"></div>
-    </div> -->
-</main>
-
-<script>
-    document.getElementById("talkToUsForm").onsubmit = function(event) {
-        event.preventDefault();  // Preveniamo il submit del form per la gestione personalizzata
-
-        // Raccogliamo i dati del form
-        var nome = document.getElementById("nome").value;
-        var cognome = document.getElementById("cognome").value;
-        var phoneNumber = document.getElementById("phoneNumber").value;
-        var pIVA = document.getElementById("pIVA").value;
-        var email = document.getElementById("email").value;
-        var numeroGalline = document.getElementById("numeroGalline").value;
-
-        // Verifica che tutti i campi siano compilati
-        if (nome && cognome && phoneNumber && pIVA && email && numeroGalline) {
-            // Success message
-            var messageDiv = document.getElementById("message");
-            messageDiv.style.display = "block";
-            messageDiv.style.color = "green";
-            messageDiv.innerText = "Richiesta inviata con successo!";
-
-            // Dopo 5 secondi, redirigiamo alla homepage
-            setTimeout(function() {
-                window.location.href = "/";
-            }, 5000);
-        } else {
-            // Error message
-            var messageDiv = document.getElementById("message");
-            messageDiv.style.display = "block";
-            messageDiv.style.color = "red";
-            messageDiv.innerText = "Errore! Compila tutti i campi.";
-        }
-    };
-</script>
-
 </body>
 </html>

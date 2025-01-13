@@ -15,48 +15,55 @@
 
 <div class="content-container">
     <h1> Chicken Coop </h1>
-    <p> This is the chicken coop of <span class="nome-utente" th:text="${session.user.nome}"></span></p>
+    <p><b> This is the chicken coop of <span class="nome-utente" th:text="${session.user.nome}"></span></b></p>
 
     <h2>Chickens: </h2>
     <div class="pollame-display">
         <ul>
-            <li th:each="gallina : ${session.user.pollaio.galline}">
-                <span th:text="${gallina.razza}">variety</span>
-                <span th:text="${gallina.eta}">age</span>
-                <span th:text="${gallina.peso}">weight</span>
-                <form th:action="@{/rimuovi-gallina}" method="post">
-                    <div>
+            <li th:each="gallina : ${session.user.pollaio.galline}" style="display: flex; align-items: center; margin-bottom: 20px; width: 100%;">
+                <div style="flex-grow: 1; margin-right: 20px;">
+                    <strong>Variety:</strong> <span th:text="${gallina.razza}">variety</span>
+                </div>
+                <div style="flex-grow: 1; margin-right: 20px;">
+                    <strong>Age (in months):</strong> <span th:text="${gallina.eta}">age</span>
+                </div>
+                <div style="flex-grow: 1; margin-right: 20px;">
+                    <strong>Weight (in grams):</strong> <span th:text="${gallina.peso}">weight</span>
+                </div>
+                <div style="margin-left: auto;">
+                    <form th:action="@{/rimuovi-gallina}" method="post">
                         <input type="hidden" th:name="gallinaId" th:value="${gallina.id}" />
                         <button type="submit">Remove</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </li>
         </ul>
     </div>
 
     <div th:if="${session.user.pollaio.quantity < 15}">
-        <p>Add chicken:</p>
+        <br>
+        <p><b>Add chicken:</b></p>
         <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()">
             <div>
-                <label> variety:</label>
+                <label> Variety:</label>
                 <label>
                     <input type="text" name="razza" required />
                 </label>
             </div>
             <div>
-                <label> age:</label>
+                <label> Age (in months):</label>
                 <label>
                     <input type="number" name="eta" required min="1" />
                 </label>
             </div>
             <div>
-                <label> weight (in grams):</label>
+                <label> Weight (in grams):</label>
                 <label>
                     <input type="number" name="peso" required />
                 </label>
             </div>
             <div>
-                <button type="submit">add</button>
+                <button type="submit">Add</button>
             </div>
         </form>
     </div>
