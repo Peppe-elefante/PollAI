@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -116,12 +115,13 @@ public class MagazzinoController {
         // Reindirizza alla pagina precedente o alla home
         return "redirect:" + (referer != null ? referer : "/");
     }
+
     @PostMapping({"/modifica-farmaco", "/modifica-cibo"})
-    public String modificaFarmaco(@RequestParam("cambio") int cambio,
-                                  @RequestParam("azione") String azione,
-                                  @RequestParam("id") Long itemId,
-                                  @RequestParam("tipo") String itemType,
-                                  HttpSession session, HttpServletRequest request){
+    public String modificaElemento(@RequestParam("cambio") int cambio,
+                                   @RequestParam("azione") String azione,
+                                   @RequestParam("id") Long itemId,
+                                   @RequestParam("tipo") String itemType,
+                                   HttpSession session, HttpServletRequest request){
         // Recupera l'utente dalla sessione
         Utente utente = getUtente(session);
         if(utente == null) return "login";
