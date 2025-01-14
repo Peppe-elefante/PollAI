@@ -24,8 +24,6 @@ public class SaluteController {
 
     @Autowired
     private UtenteService utenteService;
-    @Autowired
-    private PollaioService pollaioService;
 
     @GetMapping("/accesso-salute")
     public String salute(HttpSession session){
