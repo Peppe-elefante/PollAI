@@ -69,7 +69,7 @@ public class MagazzinoService {
             return magazzinoDAO.save(m);
         } catch (Exception e) {
             // Gestisce eventuali errori di rimozione o salvataggio
-            throw new RuntimeException("Errore durante la rimozione del farmaco", e);
+            throw new RuntimeException("Errore durante la rimozione del cibo", e);
         }
     }
 
