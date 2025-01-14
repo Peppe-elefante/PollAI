@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "pollaio")
@@ -50,6 +51,11 @@ public class Pollaio implements Serializable {
 
     public List<Gallina> getGalline() {
         return galline;
+    }
+
+    public Optional<Gallina> getGallinaByid(int id){
+        Long Gid = (long) id;
+        return galline.stream().filter(gallina -> gallina.getId() == Gid).findFirst();
     }
 
     public void setGalline(List<Gallina> galline) {

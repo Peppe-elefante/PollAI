@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class SaluteController {
@@ -55,22 +56,16 @@ public class SaluteController {
 
         Utente utente = (Utente) session.getAttribute("user");
         Pollaio pollaio = utente.getPollaio();
-        List<Gallina> galline = pollaio.getGalline();
-        Gallina gallina = null;
 
-        for (Gallina g : galline){
-            if(g.getId() == id){
-                gallina = g;
-                break;
-            }
-        }
+        Optional<Gallina> checkGallina = pollaio.getGallinaByid(id);
 
-        if (gallina == null) {
+        if (checkGallina.isEmpty()) {
             Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Gallina con ID " + idGallina + " non trovata.");
+            errorResponse.put("message", "Hen with ID " + idGallina + " not found.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
 
+        Gallina gallina = checkGallina.get();
         Map<String, String> response = new HashMap<>();
         if (gallina.getPeso() < 1500 || gallina.getPeso() > 2500) {
             response.put("message", "The hen is not in good health.");
