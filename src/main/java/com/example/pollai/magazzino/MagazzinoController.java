@@ -149,15 +149,21 @@ public class MagazzinoController {
     }
 
     private Utente getUtente(HttpSession session){
-        //prende l'Utente dalla sessione e verifica se esiste nel database
-        Utente sessionUser = (Utente) session.getAttribute("user");
-        if (sessionUser == null) {
+        Utente utente = (Utente) session.getAttribute("user");
+
+        if (utente == null) {
             log.warn("Nessun utente trovato in sessione.");
             return null;
         }
-        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();
 
-        return utente;
+        Optional<Utente> optionalUtente = utenteService.getUtenteById(utente.getId());
+
+        if (optionalUtente.isPresent()) {
+            return optionalUtente.get();
+        } else {
+            log.warn("Utente con ID {} non trovato nel database.", utente.getId());
+            return null;
+        }
     }
 
 }
