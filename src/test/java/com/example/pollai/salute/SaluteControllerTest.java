@@ -1,8 +1,20 @@
 package com.example.pollai.salute;
 
+import com.example.pollai.magazzino.Magazzino;
+import com.example.pollai.magazzino.MagazzinoController;
+import com.example.pollai.magazzino.MagazzinoService;
+import com.example.pollai.pollaio.Gallina;
+import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.utente.Utente;
 import com.example.pollai.utente.UtenteService;
+import jakarta.servlet.http.HttpSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,32 +22,128 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.ui.Model;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@ExtendWith(MockitoExtension.class)
 class SaluteControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private SaluteController saluteController;
 
-    @Autowired
+    @Mock
     private UtenteService utenteService;
 
-    @Test
-    void salute() throws Exception {
-        Utente utente = utenteService.getUtenteById(Long.valueOf(1)).get();
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/accesso-salute")
-                .sessionAttr("user", utente));
+    @Mock
+    private Model model;
 
-        Utente utenteF = new Utente();
-        utenteF.setId(Long.valueOf(4000));
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/accesso-salute")
-                .sessionAttr("user", utenteF));
+    @Mock
+    private HttpSession session;
+
+
+    private Utente utente;
+
+    private Pollaio pollaio;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        pollaio = new Pollaio();
+        utente = new Utente();
+        utente.setPollaio(pollaio);
+        pollaio.setUtente(utente);
     }
 
     @Test
-    void richiediConsiglio() {
+    void testSalute() {
+        Utente utente = new Utente();
+        Pollaio pollaio = new Pollaio();
+        utente.setId(1L);
+        utente.setNome("User");
+        pollaio.setQuantity(1);
+        utente.setPollaio(pollaio);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+
+        doNothing().when(session).setAttribute("user", utente);
+
+        String viewName = saluteController.salute(session);
+
+        assertEquals("gestione-salute", viewName);
+
+        verify(session, times(1)).setAttribute("user", utente);
+    }
+
+
+    @Test
+    void testSaluteWithUserNotLogged() {
+        when(session.getAttribute("user")).thenReturn(null);
+
+        String viewName = saluteController.salute(session);
+
+        assertEquals("login", viewName);
+        verify(session, never()).setAttribute(eq("user"), any());
+    }
+
+
+    @Test
+    void testSaluteWithUserWithoutHens() {
+        Utente utente = new Utente();
+        Pollaio pollaio = new Pollaio();
+        utente.setId(1L);
+        utente.setNome("User");
+        pollaio.setQuantity(0);
+        utente.setPollaio(pollaio);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+
+        String viewName = saluteController.salute(session);
+
+        assertEquals("configura-pollaio", viewName);
+
+    }
+
+    @Test
+    void testSaluteWithUserWithoutPollaio() {
+        Utente utente = new Utente();
+
+        utente.setId(1L);
+        utente.setNome("User");
+
+        utente.setPollaio(null);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+
+        String viewName = saluteController.salute(session);
+
+        assertEquals("configura-pollaio", viewName);
+
+    }
+
+    @Test
+    void testRichiediConsiglio(){
+        Utente utente = new Utente();
+        Pollaio pollaio = new Pollaio();
+        utente.setId(1L);
+        utente.setNome("User");
+        pollaio.setQuantity(1);
+        utente.setPollaio(pollaio);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+
+        //public List<Gallina>
+
     }
 }

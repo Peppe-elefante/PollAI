@@ -35,7 +35,7 @@ public class SaluteController {
         Pollaio pollaio = utente.getPollaio();
 
         //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
-        if(pollaio.getQuantity() == 0 || pollaio == null){
+        if(pollaio == null || pollaio.getQuantity() == 0 ){
             return "configura-pollaio";
         }
 
