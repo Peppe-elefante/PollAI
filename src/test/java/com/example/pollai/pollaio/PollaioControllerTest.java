@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -78,51 +79,56 @@ class PollaioControllerTest {
     // Test del metodo inserisciGallina (POST)
     @Test
     void testInserisciGallina_Success() {
-        // Crea un utente e un pollaio di test
+        // Mock dell'utente con un pollaio
         Utente utente = new Utente();
+        utente.setId(1L);
         Pollaio pollaio = new Pollaio();
         utente.setPollaio(pollaio);
 
+        // Mock dei metodi di sessione e request
         when(session.getAttribute("user")).thenReturn(utente);
-        when(request.getHeader("Referer")).thenReturn("/");
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+        when(request.getHeader("Referer")).thenReturn("http://example.com");
 
-        String razza = "Leghorn";
-        int eta = 5;
-        int peso = 2100;
-
-        // Crea una Gallina
-        Gallina gallina = new Gallina(razza, eta, peso, pollaio);
+        // Mock del servizio per aggiungere una gallina
+        Gallina gallina = new Gallina("Livornese", 2, 3, pollaio);
         when(pollaioService.addGallina(any(Pollaio.class), any(Gallina.class))).thenReturn(pollaio);
 
-        String result = pollaioController.inserisciGallina(session, razza, eta, peso, request);
+        // Chiamata al metodo
+        String viewName = pollaioController.inserisciGallina(session, "Livornese", 2, 3, request);
 
-        assertEquals("redirect:/", result);
-        verify(pollaioService, times(1)).addGallina(any(Pollaio.class), any(Gallina.class));
+        // Verifiche
+        assertEquals("redirect:http://example.com", viewName); // Controlla il redirect
+        verify(pollaioService, times(1)).addGallina(eq(pollaio), any(Gallina.class)); // Verifica l'aggiunta della gallina
+        verify(session, times(1)).setAttribute("user", utente); // Verifica l'aggiornamento della sessione
     }
 
     // Test del metodo rimuoviGallina (POST)
     @Test
-    void testRimuoviGallina_Success() {
-        // Crea utente, pollaio e gallina
-        Utente utente = new Utente();
-        Pollaio pollaio = new Pollaio();
-        Gallina gallina = new Gallina();
-        gallina.setId(1L);
+        void testRimuoviGallina_Success() {
+            // Configura i mock e i dati necessari
+            Utente utente = new Utente();
+            utente.setId(1L);
 
-        //  lista delle galline non sia null
-        if (pollaio.getGalline() == null) {
-            pollaio.setGalline(new ArrayList<>());
+            Pollaio pollaio = new Pollaio();
+            Gallina gallina = new Gallina("Razza1", 2, 3, pollaio);
+            gallina.setId(1L);
+            pollaio.addGallina(gallina);
+            utente.setPollaio(pollaio);
+
+            when(session.getAttribute("user")).thenReturn(utente);
+            when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+            when(request.getHeader("Referer")).thenReturn("http://example.com");
+            when(pollaioService.removeGallina(eq(pollaio), eq(gallina))).thenReturn(pollaio);
+
+            // Chiama il metodo da testare
+            String viewName = pollaioController.rimuoviGallina(1L, session, request);
+
+            // Verifica il risultato
+            assertEquals("redirect:http://example.com", viewName);
+
+            // Verifica che il servizio sia stato chiamato correttamente
+            verify(pollaioService, times(1)).removeGallina(eq(pollaio), eq(gallina));
+            verify(session, times(1)).setAttribute("user", utente);
         }
-        pollaio.getGalline().add(gallina);
-        utente.setPollaio(pollaio);
-
-        when(session.getAttribute("user")).thenReturn(utente);
-        when(request.getHeader("Referer")).thenReturn("/");
-        when(pollaioService.removeGallina(any(Pollaio.class), any(Gallina.class))).thenReturn(pollaio);
-
-        String result = pollaioController.rimuoviGallina(1L, session, request);
-
-        assertEquals("redirect:/", result);
-        verify(pollaioService, times(1)).removeGallina(any(Pollaio.class), any(Gallina.class));
-    }
 }
