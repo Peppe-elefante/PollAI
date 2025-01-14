@@ -98,9 +98,9 @@ public class Magazzino implements Serializable {
         if(quantity < 200){
             notifica.setAvvertimento("We are running out of food supplies");
         } else if(quantity > 200 && quantity < 400){
-            notifica.setAvvertimento("We will be soon run out of food supplies");
+            notifica.setAvvertimento("We will soon run out of food supplies");
         } else{
-            notifica.setAvvertimento("Our food suplies are enought");
+            notifica.setAvvertimento("Our food supplies are enough");
         }
         this.notifica = notifica;
     }
