@@ -7,16 +7,12 @@ import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
-
-
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
