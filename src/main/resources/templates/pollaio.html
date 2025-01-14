@@ -22,7 +22,7 @@
         <ul>
             <li th:each="gallina : ${session.user.pollaio.galline}" style="display: flex; align-items: center; margin-bottom: 20px; width: 100%;">
                 <div style="flex-grow: 1; margin-right: 20px;">
-                    <strong>Variety:</strong> <span th:text="${gallina.razza}">variety</span>
+                    <strong>Breed:</strong> <span th:text="${gallina.razza}">variety</span>
                 </div>
                 <div style="flex-grow: 1; margin-right: 20px;">
                     <strong>Age (in months):</strong> <span th:text="${gallina.eta}">age</span>
@@ -45,7 +45,7 @@
         <p><b>Add chicken:</b></p>
         <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()">
             <div>
-                <label> Variety:</label>
+                <label> Breed:</label>
                 <label>
                     <input type="text" name="razza" required />
                 </label>
