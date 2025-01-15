@@ -5,6 +5,7 @@ import com.example.pollai.utente.Utente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,14 +64,31 @@ public class Pollaio implements Serializable {
     }
 
     public void addGallina(Gallina gallina) {
-        galline.add(gallina);
-        gallina.setPollaio(this);
+        if (galline == null) {
+            galline = new ArrayList<>();
+        }
+
+        if (gallina != null) {
+            galline.add(gallina);  // Aggiungiamo la gallina alla lista
+            gallina.setPollaio(this);  // Impostiamo il pollaio nella gallina
+            this.quantity++;  // Incrementiamo la quantità di galline
+        } else {
+            throw new IllegalArgumentException("La gallina non può essere null");  // Lancia un'eccezione se gallina è null
+        }
     }
 
+
+
+
     public void removeGallina(Gallina gallina) {
-        galline.remove(gallina);
-        gallina.setPollaio(null);
+        if (galline != null && galline.contains(gallina)) {
+            galline.remove(gallina); // Rimuoviamo la gallina dalla lista
+            gallina.setPollaio(null); // Rimuoviamo il riferimento al pollaio nella gallina
+        } else {
+            System.out.println("Gallina non trovata nel pollaio");
+        }
     }
+
 
     public Utente getUtente() {
         return utente;

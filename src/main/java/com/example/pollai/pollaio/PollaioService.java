@@ -13,6 +13,11 @@ public class PollaioService {
     @Autowired
     private GallinaDAO gallinaDAO;
 
+    public PollaioService(PollaioDAO pollaioDAOMock, GallinaDAO gallinaDAOMock) {
+        this.pollaioDAO = pollaioDAOMock;
+        this.gallinaDAO = gallinaDAOMock;
+    }
+
 
     public Pollaio createPollaio(Utente utente){
         Pollaio pollaio = new Pollaio();
@@ -31,6 +36,9 @@ public class PollaioService {
             p.addGallina(g);
             gallinaDAO.save(g);
             p.setQuantity(p.getQuantity()+1);
+        }
+        else {
+            throw new IllegalStateException("Il pollaio è pieno!");
         }
         return pollaioDAO.save(p);
     }
