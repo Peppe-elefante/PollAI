@@ -63,19 +63,26 @@ public class Pollaio implements Serializable {
         }
 
         if (gallina != null) {
-            galline.add(gallina); // Aggiungiamo la gallina alla lista
-            gallina.setPollaio(this); // Impostiamo il pollaio nella gallina
+            galline.add(gallina);  // Aggiungiamo la gallina alla lista
+            gallina.setPollaio(this);  // Impostiamo il pollaio nella gallina
+            this.quantity++;  // Incrementiamo la quantità di galline
         } else {
-            System.out.println("Gallina non può essere null");
+            throw new IllegalArgumentException("La gallina non può essere null");  // Lancia un'eccezione se gallina è null
         }
     }
 
 
 
+
     public void removeGallina(Gallina gallina) {
-        galline.remove(gallina);
-        gallina.setPollaio(null);
+        if (galline != null && galline.contains(gallina)) {
+            galline.remove(gallina); // Rimuoviamo la gallina dalla lista
+            gallina.setPollaio(null); // Rimuoviamo il riferimento al pollaio nella gallina
+        } else {
+            System.out.println("Gallina non trovata nel pollaio");
+        }
     }
+
 
     public Utente getUtente() {
         return utente;

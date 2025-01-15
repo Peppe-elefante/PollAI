@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,10 +37,9 @@ class PollaioControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    // Test del metodo Pollaio (GET) - Utente con pollaio esistente
+
     @Test
-    void testPollaio_UtenteConPollaio() {
-        // Crea un utente con ID e un pollaio associato
+    void testPollaio() {
         Utente utente = new Utente();
         utente.setId(1L);
         Pollaio pollaio = new Pollaio();
@@ -57,10 +55,9 @@ class PollaioControllerTest {
         verify(session, times(1)).setAttribute("user", utente);
     }
 
-    // Test del metodo Pollaio (GET) - Utente senza pollaio
+
     @Test
-    void testPollaio_UtenteSenzaPollaio() {
-        // Crea un utente senza pollaio
+    void testPollaioWithUserWithoutPollaio() {
         Utente utente = new Utente();
         utente.setId(1L);
 
@@ -76,37 +73,70 @@ class PollaioControllerTest {
         verify(pollaioService, times(1)).createPollaio(utente);
     }
 
-    // Test del metodo inserisciGallina (POST)
+
     @Test
-    void testInserisciGallina_Success() {
-        // Mock dell'utente con un pollaio
+    void testPollaioWithUserNotLogged() {
+        when(session.getAttribute("user")).thenReturn(null);
+
+        String result = pollaioController.Pollaio(session);
+
+        assertEquals("login", result);
+        verify(pollaioService, never()).createPollaio(any());
+    }
+
+
+    @Test
+    void testAddGallina_Success_pc() {
         Utente utente = new Utente();
         utente.setId(1L);
         Pollaio pollaio = new Pollaio();
         utente.setPollaio(pollaio);
 
-        // Mock dei metodi di sessione e request
         when(session.getAttribute("user")).thenReturn(utente);
         when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
         when(request.getHeader("Referer")).thenReturn("http://example.com");
 
-        // Mock del servizio per aggiungere una gallina
         Gallina gallina = new Gallina("Livornese", 2, 3, pollaio);
         when(pollaioService.addGallina(any(Pollaio.class), any(Gallina.class))).thenReturn(pollaio);
 
-        // Chiamata al metodo
         String viewName = pollaioController.inserisciGallina(session, "Livornese", 2, 3, request);
 
-        // Verifiche
-        assertEquals("redirect:http://example.com", viewName); // Controlla il redirect
-        verify(pollaioService, times(1)).addGallina(eq(pollaio), any(Gallina.class)); // Verifica l'aggiunta della gallina
-        verify(session, times(1)).setAttribute("user", utente); // Verifica l'aggiornamento della sessione
+        assertEquals("redirect:http://example.com", viewName);
+        verify(pollaioService, times(1)).addGallina(eq(pollaio), any(Gallina.class));
+        verify(session, times(1)).setAttribute("user", utente);
     }
 
-    // Test del metodo rimuoviGallina (POST)
     @Test
-        void testRimuoviGallina_Success() {
-            // Configura i mock e i dati necessari
+    void testAddGallinaWithUserWithoutPollaio() {
+        Utente utente = new Utente();
+        utente.setId(1L);
+        utente.setPollaio(null);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(1L)).thenReturn(java.util.Optional.of(utente));
+        when(pollaioService.createPollaio(utente)).thenReturn(new Pollaio());
+
+        String view = pollaioController.Pollaio(session);
+
+        assertEquals("pollaio", view);
+        verify(pollaioService).createPollaio(utente);
+    }
+
+
+    @Test
+    void testAddGallinaWithUserNotLogged() {
+        when(session.getAttribute("user")).thenReturn(null);
+        when(request.getHeader("Referer")).thenReturn("http://example.com");
+
+        String viewName = pollaioController.inserisciGallina(session, "Livornese", 6, 2000, request);
+
+        assertEquals("login", viewName);
+        verify(pollaioService, never()).addGallina(any(Pollaio.class), any(Gallina.class));
+    }
+
+
+    @Test
+        void testRemoveGallina_Success_pc() {
             Utente utente = new Utente();
             utente.setId(1L);
 
@@ -121,14 +151,36 @@ class PollaioControllerTest {
             when(request.getHeader("Referer")).thenReturn("http://example.com");
             when(pollaioService.removeGallina(eq(pollaio), eq(gallina))).thenReturn(pollaio);
 
-            // Chiama il metodo da testare
             String viewName = pollaioController.rimuoviGallina(1L, session, request);
 
-            // Verifica il risultato
             assertEquals("redirect:http://example.com", viewName);
 
-            // Verifica che il servizio sia stato chiamato correttamente
             verify(pollaioService, times(1)).removeGallina(eq(pollaio), eq(gallina));
             verify(session, times(1)).setAttribute("user", utente);
         }
+
+
+    @Test
+    void testRemoveGallinaWithUserWithoutPollaio() {
+        Utente utente = new Utente();
+        utente.setId(1L);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+
+        String viewName = pollaioController.rimuoviGallina(1L, session, request);
+
+        assertEquals("pollaio", viewName);
+    }
+
+
+    @Test
+    void testRemoveGallinaWithUserNotLogged() {
+        when(session.getAttribute("user")).thenReturn(null);
+
+        String viewName = pollaioController.rimuoviGallina(1L, session, request);
+
+        assertEquals("login", viewName);
+    }
+
 }

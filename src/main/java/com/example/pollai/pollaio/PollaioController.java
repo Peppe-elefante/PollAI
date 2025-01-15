@@ -92,7 +92,7 @@ public class PollaioController {
     }
 
 
-    private Utente getUtente(HttpSession session){
+    Utente getUtente(HttpSession session){
         //prende l'Utente dalla sessione e verifica se esiste nel database
         Utente sessionUser = (Utente) session.getAttribute("user");
         if (sessionUser == null) {
