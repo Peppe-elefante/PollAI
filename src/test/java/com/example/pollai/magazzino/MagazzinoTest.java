@@ -64,7 +64,7 @@ class MagazzinoTest {
 
         magazzino.setNotifica();
 
-        assertEquals("We will be soon run out of food supplies", magazzino.getNotifica().getAvvertimento());
+        assertEquals("We will soon run out of food supplies", magazzino.getNotifica().getAvvertimento());
     }
 
     @Test
@@ -77,7 +77,7 @@ class MagazzinoTest {
 
         magazzino.setNotifica();
 
-        assertEquals("Our food suplies are enought", magazzino.getNotifica().getAvvertimento());
+        assertEquals("Our food supplies are enough", magazzino.getNotifica().getAvvertimento());
     }
 
     @Test
