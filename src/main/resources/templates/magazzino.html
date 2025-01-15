@@ -24,7 +24,7 @@
     <form th:action="@{/inserisci-cibo}" method="post">
         <div>
             <label for="tipo_c">Type:</label>
-            <input type="text" id="tipo_c" name="tipo_c" required />
+            <input type="text" id="tipo_c" name="tipo_c" maxlength="15" required />
         </div>
         <div>
             <label for="quantita_c">Quantity:</label>
@@ -39,7 +39,7 @@
     <form th:action="@{/inserisci-farmaco}" method="post">
         <div>
             <label for="tipo_f">Type:</label>
-            <input type="text" id="tipo_f" name="tipo_f" required />
+            <input type="text" id="tipo_f" name="tipo_f" maxlength="15" required />
         </div>
         <div>
             <label for="quantita_f">Quantity:</label>
