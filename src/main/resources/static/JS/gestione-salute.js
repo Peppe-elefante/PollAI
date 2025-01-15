@@ -42,7 +42,7 @@ function richiediConsiglio() {
             messaggioSalute.textContent = messaggio;
 
             // Imposta il colore del messaggio in base alla salute
-            if (messaggio.includes("no")) {
+            if (messaggio.includes("not")) {
                 messaggioSalute.style.color = "red";
             } else {
                 messaggioSalute.style.color = "green";

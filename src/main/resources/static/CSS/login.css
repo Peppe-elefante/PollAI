@@ -20,8 +20,6 @@ main {
 
 .login-form {
     position: relative;
-    margin-top: 70px;
-    margin-bottom: 80px;
     background-color: #354580;
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -31,8 +29,8 @@ main {
     text-align: center;
     color: #ffffff;
     font-family: 'Merriweather', serif;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20vh auto;
+
 }
 
 .form-title {
@@ -100,10 +98,11 @@ main {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .login-form {
-        width: 70%;
+        width: 60%;
         padding: 20px;
+        margin: 35vh auto;
     }
 
     .form-title {
@@ -115,9 +114,11 @@ main {
     }
 }
 
+
 @media (max-width: 480px) {
     .login-form {
-        width: 80%;
+        width: 70%;
+        margin: 25vh auto;
     }
 
     .input-container input {
