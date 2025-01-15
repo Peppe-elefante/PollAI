@@ -73,6 +73,15 @@ class PollaioTest {
 
 
     @Test
+    void testAddNullGallina() {
+        Pollaio pollaio = new Pollaio();
+
+        assertThrows(IllegalArgumentException.class, () -> pollaio.addGallina(null),
+                "Dovrebbe lanciare un'eccezione quando si tenta di aggiungere una gallina null");
+    }
+
+
+    @Test
     public void testRemoveGallina() {
         Pollaio pollaio = new Pollaio();
         Gallina gallina = new Gallina();
@@ -81,14 +90,6 @@ class PollaioTest {
         assertEquals(1, pollaio.getGalline().size());
         pollaio.removeGallina(gallina);
         assertEquals(0, pollaio.getGalline().size());
-    }
-
-    @Test
-    void testAddNullGallina() {
-        Pollaio pollaio = new Pollaio();
-
-        assertThrows(IllegalArgumentException.class, () -> pollaio.addGallina(null),
-                "Dovrebbe lanciare un'eccezione quando si tenta di aggiungere una gallina null");
     }
 
 
@@ -101,6 +102,31 @@ class PollaioTest {
         assertEquals(pollaio1, gallina.getPollaio(), "La gallina dovrebbe essere associata al primo pollaio");
         gallina.setPollaio(pollaio2);
         assertEquals(pollaio2, gallina.getPollaio(), "La gallina dovrebbe essere ora associata al secondo pollaio");
+    }
+
+
+    @Test
+    public void testSetGalline_Success() {
+        Pollaio pollaio = new Pollaio();
+        List<Gallina> galline = new ArrayList<>();
+        galline.add(new Gallina("Razza1", 2, 3, pollaio));
+        galline.add(new Gallina("Razza2", 3, 4, pollaio));
+
+        pollaio.setGalline(galline);
+
+        assertEquals(galline, pollaio.getGalline(), "Il getter dovrebbe restituire la lista di galline impostata.");
+        assertEquals(2, pollaio.getGalline().size(), "La lista di galline dovrebbe contenere 2 elementi.");
+    }
+
+
+    @Test
+    public void testSetGalline_EmptyList() {
+        Pollaio pollaio = new Pollaio();
+        List<Gallina> gallineVuote = new ArrayList<>();
+
+        pollaio.setGalline(gallineVuote);
+
+        assertEquals(0, pollaio.getGalline().size(), "La lista di galline dovrebbe essere vuota.");
     }
 
 }
