@@ -1,13 +1,22 @@
 package com.example.pollai.pollaio;
 
 import com.example.pollai.utente.Utente;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PollaioTest {
+
+    private Pollaio pollaio;
+
+    @BeforeEach
+    public void setUp() {
+        pollaio = new Pollaio();
+    }
 
     @Test
     void testPollaioConstructor_Success() {
@@ -26,39 +35,15 @@ class PollaioTest {
     @Test
     void testPollaioConstructor_EmptyGalline() {
         Utente utente = new Utente();
-        List<Gallina> galline = new ArrayList<>(); // Lista vuota
-
-        Pollaio pollaio = new Pollaio(galline.size(), galline, utente);
-
-        assertEquals(0, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 0");
-        assertTrue(pollaio.getGalline().isEmpty(), "La lista di galline dovrebbe essere vuota");
-        assertEquals(utente, pollaio.getUtente(), "L'utente dovrebbe essere correttamente associato al pollaio");
-    }
-
-    @Test
-    void testPollaioConstructor_NullGalline() {
-        Utente utente = new Utente();
-        List<Gallina> galline = null;
-
-        Pollaio pollaio = new Pollaio(0, galline != null ? galline : new ArrayList<>(), utente);
-
-        assertEquals(0, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 0");
-        assertTrue(pollaio.getGalline().isEmpty(), "La lista di galline dovrebbe essere vuota");
-        assertEquals(utente, pollaio.getUtente(), "L'utente dovrebbe essere correttamente associato al pollaio");
-    }
-
-
-    @Test
-    void testPollaioConstructor_QuantityCalculatedFromGalline() {
-        Utente utente = new Utente();
         List<Gallina> galline = new ArrayList<>();
-        galline.add(new Gallina("Razza1", 2, 3, null));
-        galline.add(new Gallina("Razza2", 3, 4, null));
 
-        Pollaio pollaio = new Pollaio(galline.size(), galline, utente);
+        Pollaio pollaio = new Pollaio(0, galline, utente);
 
-        assertEquals(2, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 2, calcolata dalla lista di galline");
+        assertEquals(0, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 0");
+        assertTrue(pollaio.getGalline().isEmpty(), "La lista di galline dovrebbe essere vuota");
+        assertEquals(utente, pollaio.getUtente(), "L'utente dovrebbe essere correttamente associato al pollaio");
     }
+
 
     @Test
     void testAddGallina() {
@@ -128,5 +113,51 @@ class PollaioTest {
 
         assertEquals(0, pollaio.getGalline().size(), "La lista di galline dovrebbe essere vuota.");
     }
+
+
+    @Test
+    public void testSetGetId() {
+        Pollaio pollaio = new Pollaio();
+
+        Long expectedId = 123L;
+        pollaio.setId(expectedId);
+
+        assertEquals(expectedId, pollaio.getId(), "L'ID restituito dal getter non corrisponde a quello impostato.");
+    }
+
+
+    @Test
+    public void testGetGallinaById_Found() {
+        Pollaio pollaio = new Pollaio();
+
+        Gallina gallina1 = new Gallina("Razza1", 2, 2000, pollaio);
+        Gallina gallina2 = new Gallina("Razza2", 3, 2000, pollaio);
+
+        gallina1.setId(1L);
+        gallina2.setId(2L);
+
+        pollaio.setGalline(List.of(gallina1, gallina2));
+
+        Long gallina1Id = gallina1.getId();
+
+        Optional<Gallina> result = pollaio.getGallinaByid(gallina1Id.intValue());
+
+        assertTrue(result.isPresent(), "La gallina con ID " + gallina1Id + " dovrebbe essere trovata.");
+        assertEquals(gallina1, result.get(), "La gallina trovata non è quella attesa.");
+    }
+
+
+    @Test
+    public void testGetGallinaById_NotFound() {
+        Gallina gallina1 = new Gallina("Razza1", 2, 2000, pollaio);
+        Gallina gallina2 = new Gallina("Razza2", 3, 2000, pollaio);
+
+        pollaio.setGalline(List.of(gallina1, gallina2));
+
+        Optional<Gallina> result = pollaio.getGallinaByid(999);
+
+        assertFalse(result.isPresent(), "Non dovrebbe esserci una gallina con ID 999.");
+    }
+
 
 }
