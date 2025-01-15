@@ -1,5 +1,6 @@
 package com.example.pollai.magazzino;
 
+import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.utente.Utente;
 import com.example.pollai.utente.UtenteController;
 import com.example.pollai.utente.UtenteService;
@@ -31,6 +32,12 @@ public class MagazzinoController {
     public String Magazzino(HttpSession session, Model model){
         Utente utente = getUtente(session);
         if(utente == null) return "login";
+
+        Pollaio pollaio = utente.getPollaio();
+        //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
+        if(pollaio == null || pollaio.getQuantity() == 0 ){
+            return "configura-pollaio";
+        }
 
         Magazzino magazzino;
         if(utente.getMagazzino() == null){

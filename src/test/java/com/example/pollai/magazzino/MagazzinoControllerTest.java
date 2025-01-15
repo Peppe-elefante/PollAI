@@ -1,5 +1,6 @@
 package com.example.pollai.magazzino;
 
+import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.utente.Utente;
 import com.example.pollai.utente.UtenteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,6 +60,11 @@ class MagazzinoControllerTest {
         utente.setId(1L);
         utente.setMagazzino(magazzino);
 
+        Pollaio pollaio = new Pollaio();
+        pollaio.setId(1L);
+        pollaio.setQuantity(10);
+        utente.setPollaio(pollaio);
+
         when(session.getAttribute("user")).thenReturn(utente);
         when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
 
@@ -81,10 +87,31 @@ class MagazzinoControllerTest {
     }
 
     @Test
+    void testMagazzinoWithUserWithoutPollaio() {
+        Utente utente = new Utente();
+        utente.setId(1L);
+        utente.setMagazzino(new Magazzino());
+        utente.setPollaio(null);
+
+        when(session.getAttribute("user")).thenReturn(utente);
+        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
+
+        String viewName = magazzinoController.Magazzino(session, model);
+
+        assertEquals("configura-pollaio", viewName);
+        verify(session, never()).setAttribute(eq("user"), any());
+    }
+
+    @Test
     void testMagazzinoWithUserWithoutMagazzino() {
         Utente utente = new Utente();
         utente.setId(1L);
         utente.setMagazzino(null);
+
+        Pollaio pollaio = new Pollaio();
+        pollaio.setId(1L);
+        pollaio.setQuantity(10);
+        utente.setPollaio(pollaio);
 
         when(session.getAttribute("user")).thenReturn(utente);
         when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
