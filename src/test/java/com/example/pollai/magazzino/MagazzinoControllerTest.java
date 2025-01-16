@@ -87,22 +87,6 @@ class MagazzinoControllerTest {
     }
 
     @Test
-    void testMagazzinoWithUserWithoutPollaio() {
-        Utente utente = new Utente();
-        utente.setId(1L);
-        utente.setMagazzino(new Magazzino());
-        utente.setPollaio(null);
-
-        when(session.getAttribute("user")).thenReturn(utente);
-        when(utenteService.getUtenteById(anyLong())).thenReturn(Optional.of(utente));
-
-        String viewName = magazzinoController.Magazzino(session, model);
-
-        assertEquals("configura-pollaio", viewName);
-        verify(session, never()).setAttribute(eq("user"), any());
-    }
-
-    @Test
     void testMagazzinoWithUserWithoutMagazzino() {
         Utente utente = new Utente();
         utente.setId(1L);

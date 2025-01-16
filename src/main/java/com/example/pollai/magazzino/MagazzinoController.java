@@ -33,12 +33,6 @@ public class MagazzinoController {
         Utente utente = getUtente(session);
         if(utente == null) return "login";
 
-        Pollaio pollaio = utente.getPollaio();
-        //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
-        if(pollaio == null || pollaio.getQuantity() == 0 ){
-            return "configura-pollaio";
-        }
-
         Magazzino magazzino;
         if(utente.getMagazzino() == null){
             magazzino = magazzinoService.createMagazzino(utente);
