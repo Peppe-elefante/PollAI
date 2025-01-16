@@ -46,11 +46,11 @@ public class MagazzinoController {
         } else{
             //Se non è il primo accesso l'utente avrà una notifica sulle sue scorte
             magazzino = utente.getMagazzino();
-            magazzino.setNotifica();
         }
         //aggiorna il magazzino
         utente.setMagazzino(magazzino);
         session.setAttribute("user", utente);
+        magazzino.setNotifica();
 
         return "magazzino";
     }
