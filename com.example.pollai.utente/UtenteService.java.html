@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UtenteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PollAI</a> &gt; <a href="index.source.html" class="el_package">com.example.pollai.utente</a> &gt; <span class="el_source">UtenteService.java</span></div><h1>UtenteService.java</h1><pre class="source lang-java linenums">package com.example.pollai.utente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import java.util.List;
+import java.util.Optional;
+import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Service
+<span class="fc" id="L13">public class UtenteService {</span>
+
+    // Inietta il repository per l'interazione con il database
+    @Autowired
+    private UtenteDAO utenteDAO;
+
+    // Crea un logger per il controllo dei log
+<span class="fc" id="L20">    private static final Logger log = LoggerFactory.getLogger(UtenteController.class);</span>
+
+    // Crea o aggiorna un Utente (salva)
+    public Utente saveUtente(Utente utente, String password) {
+        // Hash della password prima di salvarla
+<span class="fc" id="L25">        String hashedPassword = hashPassword(password);</span>
+        // Imposta la password criptata sull'utente
+<span class="fc" id="L27">        utente.setPassword(hashedPassword);</span>
+        // Salva l'utente nel repository e restituisce l'utente salvato
+<span class="fc" id="L29">        return utenteDAO.save(utente);</span>
+    }
+
+    // Ottiene tutti gli utenti
+    public List&lt;Utente&gt; getAllUtenti() {
+        // Restituisce una lista di tutti gli utenti
+<span class="fc" id="L35">        return utenteDAO.findAll();</span>
+    }
+
+    // Ottiene un Utente per ID
+    public Optional&lt;Utente&gt; getUtenteById(Long id) {
+        // Restituisce un utente opzionale trovato tramite ID
+<span class="fc" id="L41">        return utenteDAO.findById(id);</span>
+    }
+
+    // Elimina un Utente per ID
+    public void deleteUtente(Long id) {
+        // Elimina l'utente con il dato ID
+<span class="fc" id="L47">        utenteDAO.deleteById(id);</span>
+<span class="fc" id="L48">    }</span>
+
+    // Esempio di query personalizzata: Ottieni un Utente tramite email
+    public Optional&lt;Utente&gt; autenticazione(String email, String password) {
+        // Cerca un utente tramite email
+<span class="fc" id="L53">        Optional&lt;Utente&gt; userCheck = utenteDAO.findByEmail(email);</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if(userCheck.isPresent()){</span>
+<span class="fc" id="L55">            log.info(&quot;L'email è stata trovata&quot;);</span>
+<span class="fc" id="L56">            Utente user = userCheck.get();</span>
+            // Verifica se la password corrisponde
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if(!verifyPassword(password, user.getPassword())){</span>
+                // Se la password non è corretta, restituisce un risultato vuoto
+<span class="fc" id="L60">                return Optional.empty();</span>
+            }
+        }
+        // Restituisce l'utente trovato tramite email
+<span class="fc" id="L64">        return userCheck;</span>
+    }
+
+    // Metodo per fare l'hash della password
+    public static String hashPassword(String plainPassword) {
+        // Restituisce la password criptata usando BCrypt
+<span class="fc" id="L70">        return BCrypt.hashpw(plainPassword, BCrypt.gensalt(12));</span>
+    }
+
+    // Metodo per verificare se la password inserita corrisponde alla password criptata
+    public static boolean verifyPassword(String plainPassword, String hashedPassword) {
+        // Confronta la password in chiaro con quella criptata
+<span class="fc" id="L76">        return BCrypt.checkpw(plainPassword, hashedPassword);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProduzioneController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PollAI</a> &gt; <a href="index.source.html" class="el_package">com.example.pollai.produzione</a> &gt; <span class="el_source">ProduzioneController.java</span></div><h1>ProduzioneController.java</h1><pre class="source lang-java linenums">package com.example.pollai.produzione;
+
+import com.example.pollai.pollaio.Pollaio;
+import com.example.pollai.pollaio.PollaioService;
+import com.example.pollai.utente.Utente;
+import com.example.pollai.utente.UtenteService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
+
+@Controller
+<span class="fc" id="L20">public class ProduzioneController {</span>
+
+    @Autowired
+    private ProduzioneService produzioneService;
+    @Autowired
+    private PollaioService pollaioService;
+    @Autowired
+    private UtenteService utenteService;
+
+    @GetMapping(&quot;/accesso-produzione&quot;)
+    public String produzione(HttpSession session){
+        // Recupera l'utente dalla sessione
+<span class="nc" id="L32">        Utente utente = getUtente(session);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(utente == null) return &quot;login&quot;;</span>
+
+<span class="nc" id="L35">        Pollaio pollaio = utente.getPollaio();</span>
+        DatiProduzione produzione;
+
+        //Se non ha galline o è nullo reinderizzalo verso configura-pollaio
+<span class="nc bnc" id="L39" title="All 4 branches missed.">        if (pollaio == null || pollaio.getQuantity() == 0) {</span>
+<span class="nc" id="L40">            return &quot;configura-pollaio&quot;;</span>
+        }
+
+        //Crea i dati sulla produzione se non esistono
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if((produzione = pollaio.getProduzione()) == null){</span>
+<span class="nc" id="L45">            produzione = produzioneService.createProduzione(pollaio);</span>
+        }
+        //aggiorna il pollaio
+<span class="nc" id="L48">        pollaio.setProduzione(produzione);</span>
+<span class="nc" id="L49">        utente.setPollaio(pollaio);</span>
+<span class="nc" id="L50">        session.setAttribute(&quot;user&quot;, utente);</span>
+
+<span class="nc" id="L52">        return &quot;gestione-produzione&quot;;</span>
+    }
+
+    @PostMapping(&quot;/inserisci-uova&quot;)
+    public String inserisciUova(String date, int quantita, HttpServletRequest request, HttpSession session){
+<span class="nc" id="L57">        LocalDate data = LocalDate.parse(date);</span>
+<span class="nc" id="L58">        String referer = request.getHeader(&quot;Referer&quot;);</span>
+
+        // Recupera l'utente dalla sessione
+<span class="nc" id="L61">        Utente utente = getUtente(session);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if(utente == null) return &quot;login&quot;;</span>
+
+<span class="nc" id="L64">        Pollaio pollaio = utente.getPollaio();</span>
+
+<span class="nc" id="L66">        DatiProduzione produzione = produzioneService.aggiornaUovaGiorno(quantita, pollaio.getProduzione(), data);</span>
+<span class="nc" id="L67">        pollaio.setProduzione(produzione);</span>
+<span class="nc" id="L68">        utente.setPollaio(pollaio);</span>
+<span class="nc" id="L69">        session.setAttribute(&quot;user&quot;, utente);</span>
+        // Reindirizza alla pagina precedente o alla home
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        return &quot;redirect:&quot; + (referer != null ? referer : &quot;/&quot;);</span>
+    }
+
+    @GetMapping(&quot;/archivio-produzione&quot;)
+    public String archivioProduzione(@RequestParam String category, HttpSession session, HttpServletRequest request, RedirectAttributes redirectAttributes){
+<span class="nc" id="L76">        LocalDate data = LocalDate.now();</span>
+<span class="nc" id="L77">        String referer = request.getHeader(&quot;Referer&quot;);</span>
+
+        // Recupera l'utente dalla sessione
+<span class="nc" id="L80">        Utente utente = getUtente(session);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if(utente == null) return &quot;login&quot;;</span>
+
+<span class="nc" id="L83">        Pollaio pollaio = utente.getPollaio();</span>
+<span class="nc" id="L84">        DatiProduzione produzione = pollaio.getProduzione();</span>
+        
+<span class="nc bnc" id="L86" title="All 3 branches missed.">        switch (category) {</span>
+
+            case &quot;3 months&quot;:
+<span class="nc" id="L89">                data = data.minusMonths(3);</span>
+<span class="nc" id="L90">                break;</span>
+            case &quot;1 month&quot;:
+<span class="nc" id="L92">                data = data.minusMonths(1);</span>
+<span class="nc" id="L93">                break;</span>
+
+            default:
+<span class="nc" id="L96">                data = data.minusYears(1);</span>
+        }
+
+<span class="nc" id="L99">        String archivio = &quot;The eggs produced in the last &quot; + category + &quot; are &quot;;</span>
+<span class="nc" id="L100">        int eggs = produzioneService.getProduzionePeriodo(data, produzione);</span>
+<span class="nc" id="L101">        archivio += eggs;</span>
+
+<span class="nc" id="L103">        redirectAttributes.addFlashAttribute(&quot;archivio&quot;, archivio);</span>
+
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        return &quot;redirect:&quot; + (referer != null ? referer : &quot;/&quot;);</span>
+    }
+
+    @GetMapping(&quot;/predizione-produzione&quot;)
+    public String predizioneProduzione(@RequestParam String category,
+                                       HttpSession session, HttpServletRequest request,
+                                       RedirectAttributes redirectAttributes){
+        int eggs;
+<span class="nc" id="L113">        String referer = request.getHeader(&quot;Referer&quot;);</span>
+
+
+<span class="nc bnc" id="L116" title="All 3 branches missed.">        switch (category) {</span>
+
+            case &quot;3 months&quot;:
+<span class="nc" id="L119">                eggs = 30;</span>
+<span class="nc" id="L120">                break;</span>
+            case &quot;1 month&quot;:
+<span class="nc" id="L122">                eggs = 10;</span>
+<span class="nc" id="L123">                break;</span>
+
+            default:
+<span class="nc" id="L126">                eggs = 100;</span>
+        }
+
+<span class="nc" id="L129">        String predizione = &quot;The eggs that will be produces in the next &quot; + category + &quot; are &quot; + eggs;</span>
+
+<span class="nc" id="L131">        redirectAttributes.addFlashAttribute(&quot;predizione&quot;, predizione);</span>
+
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        return &quot;redirect:&quot; + (referer != null ? referer : &quot;/&quot;);</span>
+    }
+
+    private Utente getUtente(HttpSession session){
+        //prende l'Utente dalla sessione e verifica se esiste nel database
+<span class="nc" id="L138">        Utente sessionUser = (Utente) session.getAttribute(&quot;user&quot;);</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (sessionUser == null) {</span>
+<span class="nc" id="L140">            return null;</span>
+        }
+<span class="nc" id="L142">        Utente utente = utenteService.getUtenteById(sessionUser.getId()).get();</span>
+
+<span class="nc" id="L144">        return utente;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
