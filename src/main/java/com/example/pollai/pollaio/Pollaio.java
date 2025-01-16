@@ -71,7 +71,6 @@ public class Pollaio implements Serializable {
         if (gallina != null) {
             galline.add(gallina);  // Aggiungiamo la gallina alla lista
             gallina.setPollaio(this);  // Impostiamo il pollaio nella gallina
-            this.quantity++;  // Incrementiamo la quantità di galline
         } else {
             throw new IllegalArgumentException("La gallina non può essere null");  // Lancia un'eccezione se gallina è null
         }
