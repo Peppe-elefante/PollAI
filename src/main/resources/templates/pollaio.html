@@ -47,19 +47,22 @@
             <div>
                 <label> Breed:</label>
                 <label>
-                    <input type="text" name="razza" required />
+                    <input type="text" name="razza" maxlength="15" required />
+                    <div id="razzaError" class="error" style="color: red;"></div>
                 </label>
             </div>
             <div>
                 <label> Age (in months):</label>
                 <label>
                     <input type="number" name="eta" required min="1" />
+                    <div id="etaError" class="error" style="color: red;"></div>
                 </label>
             </div>
             <div>
                 <label> Weight (in grams):</label>
                 <label>
                     <input type="number" name="peso" required />
+                    <div id="pesoError" class="error" style="color: red;"></div>
                 </label>
             </div>
             <div>
