@@ -43,25 +43,27 @@
     <div th:if="${session.user.pollaio.quantity < 15}">
         <br>
         <p><b>Add chicken:</b></p>
-        <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()">
-            <div>
+        <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()" id="addChickenForm">
+
+        <div>
                 <label> Breed:</label>
                 <label>
-                    <input type="text" name="razza" maxlength="15" required />
+                    <input type="text" id="razza" name="razza" maxlength="15" required />
                     <div id="razzaError" class="error" style="color: red;"></div>
                 </label>
+
             </div>
             <div>
                 <label> Age (in months):</label>
                 <label>
-                    <input type="number" name="eta" required min="1" />
+                    <input type="number" id="eta" name="eta" required min="1" />
                     <div id="etaError" class="error" style="color: red;"></div>
                 </label>
             </div>
             <div>
                 <label> Weight (in grams):</label>
                 <label>
-                    <input type="number" name="peso" required />
+                    <input type="number" id="peso" name="peso" required />
                     <div id="pesoError" class="error" style="color: red;"></div>
                 </label>
             </div>

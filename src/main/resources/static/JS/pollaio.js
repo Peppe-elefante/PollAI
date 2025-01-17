@@ -1,4 +1,4 @@
-// Funzione per la validazione dell'età
+// Funzione per la validazione dell'età (usata inline nel form)
 function validateForm() {
     var eta = document.getElementsByName("eta")[0].value;
     if (eta <= 0) {
@@ -8,8 +8,13 @@ function validateForm() {
     return true;
 }
 
+// Aggiunta di un listener all'evento DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("addChickenForm").addEventListener("submit", function (event) {
+    // Recupera il form usando il nuovo ID
+    const form = document.getElementById("addChickenForm");
+
+    // Aggiunge un evento di submit al form
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevenire l'invio finché i controlli non passano
 
         let isValid = true;
@@ -17,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Rimuovere errori precedenti
         clearErrors();
 
+        // Recupera i valori dai campi del modulo
         const razza = document.getElementById("razza").value.trim();
         const eta = parseInt(document.getElementById("eta").value);
         const peso = parseInt(document.getElementById("peso").value);
@@ -34,14 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validazione del peso
-        if (isNaN(peso) || peso < 5000) {
-            displayError("pesoError", "Weight must be at least 5000 grams.");
+        if (isNaN(peso) || peso < 0 || peso > 5000) {
+            displayError("pesoError", "Weight must be between 0 and 5000 grams.");
             isValid = false;
         }
 
+
         // Se tutto è valido, invia il modulo
         if (isValid) {
-            event.target.submit();
+            form.submit();
         }
     });
 
