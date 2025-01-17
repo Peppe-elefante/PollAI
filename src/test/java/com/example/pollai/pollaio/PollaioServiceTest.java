@@ -160,8 +160,10 @@ class PollaioServiceTest {
     @Test
     void testRemoveGallina_Success_ps() {
         Pollaio pollaio = new Pollaio();
+        pollaio.setGalline(new ArrayList<>(Collections.nCopies(10, new Gallina())));
         pollaio.setQuantity(10);
-        Gallina gallina = new Gallina();
+
+        Gallina gallina = pollaio.getGalline().get(0);
 
         when(pollaioDAO.save(any(Pollaio.class))).thenReturn(pollaio);
         doNothing().when(gallinaDAO).delete(gallina);
@@ -169,9 +171,10 @@ class PollaioServiceTest {
         Pollaio result = pollaioService.removeGallina(pollaio, gallina);
 
         assertEquals(9, result.getQuantity(), "La quantità di galline dovrebbe diminuire di 1");
-        verify(gallinaDAO, times(1)).delete(gallina);
-        verify(pollaioDAO, times(1)).save(pollaio);
+        verify(gallinaDAO, times(1)).delete(gallina); // Verifica che gallinaDAO abbia cancellato la gallina
+        verify(pollaioDAO, times(1)).save(pollaio);   // Verifica che pollaioDAO abbia salvato il pollaio
     }
+
 
 
     @Test

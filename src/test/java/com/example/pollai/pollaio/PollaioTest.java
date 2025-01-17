@@ -52,12 +52,10 @@ class PollaioTest {
 
         pollaio.addGallina(gallina);
 
-        // Debug temporanei per verificare lo stato
         System.out.println("Galline nel pollaio: " + pollaio.getGalline());
         System.out.println("Quantità di galline: " + pollaio.getQuantity());
         System.out.println("Pollaio associato alla gallina: " + gallina.getPollaio());
 
-        // Verifiche
         assertEquals(1, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 1 dopo l'aggiunta");
         assertTrue(pollaio.getGalline().contains(gallina), "La gallina dovrebbe essere aggiunta alla lista di galline");
         assertEquals(pollaio, gallina.getPollaio(), "Il pollaio della gallina dovrebbe essere correttamente associato");
@@ -158,6 +156,9 @@ class PollaioTest {
     public void testGetGallinaById_NotFound() {
         Gallina gallina1 = new Gallina("Razza1", 2, 2000, pollaio);
         Gallina gallina2 = new Gallina("Razza2", 3, 2000, pollaio);
+
+        gallina1.setId(1L);
+        gallina2.setId(2L);
 
         pollaio.setGalline(List.of(gallina1, gallina2));
 
