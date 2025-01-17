@@ -54,9 +54,14 @@ public class Pollaio implements Serializable {
         return galline;
     }
 
-    public Optional<Gallina> getGallinaByid(int id){
-        Long Gid = (long) id;
-        return galline.stream().filter(gallina -> gallina.getId() == Gid).findFirst();
+    public Optional<Gallina> getGallinaByid(long id){
+        for (Gallina g : galline){
+            if (g.getId() == id){
+                Optional<Gallina> gallina = Optional.of(g);
+                return gallina;
+            }
+        }
+        return Optional.empty();
     }
 
     public void setGalline(List<Gallina> galline) {

@@ -47,7 +47,6 @@ public class PollaioService {
         if (p.getQuantity() > 0) {
             p.removeGallina(g);
             gallinaDAO.delete(g);
-            p.setQuantity(p.getQuantity()-1);
             return pollaioDAO.save(p);
         }
         return p;

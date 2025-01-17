@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PollaioController {
@@ -77,13 +78,11 @@ public class PollaioController {
         Pollaio pollaio = utente.getPollaio();
         if (pollaio == null) return "pollaio";
 
-        Gallina gallinaDaRimuovere = pollaio.getGalline().stream()
-                .filter(gallina -> gallina.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        Optional<Gallina> gallinaDaRimuovere = pollaio.getGallinaByid(id);
 
-        if (gallinaDaRimuovere != null) {
-            Pollaio pollaioAggiornato = pollaioService.removeGallina(pollaio, gallinaDaRimuovere);
+        if (gallinaDaRimuovere.isPresent()){
+            Gallina gallina = gallinaDaRimuovere.get();
+            Pollaio pollaioAggiornato = pollaioService.removeGallina(pollaio, gallina);
             utente.setPollaio(pollaioAggiornato);
             session.setAttribute("user", utente);
         }
