@@ -29,8 +29,8 @@ public class Pollaio implements Serializable {
     }
 
     public Pollaio(int quantity, List<Gallina> galline, Utente utente) {
-        this.quantity = galline.size();
-        this.galline = galline;
+        this.galline = galline != null ? galline : new ArrayList<>();
+        this.quantity = this.galline.size();
         this.utente = utente;
     }
 
@@ -67,22 +67,22 @@ public class Pollaio implements Serializable {
         if (galline == null) {
             galline = new ArrayList<>();
         }
-
         if (gallina != null) {
-            galline.add(gallina);  // Aggiungiamo la gallina alla lista
-            gallina.setPollaio(this);  // Impostiamo il pollaio nella gallina
+            galline.add(gallina);
+            gallina.setPollaio(this);
+            quantity = galline.size();
         } else {
-            throw new IllegalArgumentException("La gallina non può essere null");  // Lancia un'eccezione se gallina è null
+            throw new IllegalArgumentException("La gallina non può essere null");
         }
     }
 
 
 
-
     public void removeGallina(Gallina gallina) {
         if (galline != null && galline.contains(gallina)) {
-            galline.remove(gallina); // Rimuoviamo la gallina dalla lista
-            gallina.setPollaio(null); // Rimuoviamo il riferimento al pollaio nella gallina
+            galline.remove(gallina);
+            gallina.setPollaio(null);
+            quantity = galline.size();
         } else {
             System.out.println("Gallina non trovata nel pollaio");
         }

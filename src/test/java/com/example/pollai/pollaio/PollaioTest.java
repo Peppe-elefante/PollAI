@@ -48,9 +48,16 @@ class PollaioTest {
     @Test
     void testAddGallina() {
         Pollaio pollaio = new Pollaio(0, new ArrayList<>(), new Utente());
-        Gallina gallina = new Gallina("Razza1", 2, 3, pollaio);
+        Gallina gallina = new Gallina("Razza1", 2, 3, null);
 
         pollaio.addGallina(gallina);
+
+        // Debug temporanei per verificare lo stato
+        System.out.println("Galline nel pollaio: " + pollaio.getGalline());
+        System.out.println("Quantità di galline: " + pollaio.getQuantity());
+        System.out.println("Pollaio associato alla gallina: " + gallina.getPollaio());
+
+        // Verifiche
         assertEquals(1, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 1 dopo l'aggiunta");
         assertTrue(pollaio.getGalline().contains(gallina), "La gallina dovrebbe essere aggiunta alla lista di galline");
         assertEquals(pollaio, gallina.getPollaio(), "Il pollaio della gallina dovrebbe essere correttamente associato");

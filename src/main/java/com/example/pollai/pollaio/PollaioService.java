@@ -35,13 +35,13 @@ public class PollaioService {
         if (p.getQuantity() < 15) {
             p.addGallina(g);
             gallinaDAO.save(g);
-            p.setQuantity(p.getQuantity()+1);
-        }
-        else {
+        } else {
             throw new IllegalStateException("Il pollaio è pieno!");
         }
+
         return pollaioDAO.save(p);
     }
+
 
     public Pollaio removeGallina(Pollaio p, Gallina g) {
         if (p.getQuantity() > 0) {

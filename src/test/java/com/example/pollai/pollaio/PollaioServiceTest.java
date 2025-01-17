@@ -8,6 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -121,14 +124,30 @@ class PollaioServiceTest {
 
 
     @Test
+    void testAddGallina() {
+        Pollaio pollaio = new Pollaio(0, new ArrayList<>(), new Utente());
+        Gallina gallina = new Gallina("Razza1", 2, 3, null);
+
+        pollaio.addGallina(gallina);
+
+        System.out.println("Galline nel pollaio: " + pollaio.getGalline());
+        System.out.println("Quantità di galline: " + pollaio.getQuantity());
+        System.out.println("Pollaio associato alla gallina: " + gallina.getPollaio());
+
+        assertEquals(1, pollaio.getQuantity(), "La quantità di galline dovrebbe essere 1 dopo l'aggiunta");
+        assertTrue(pollaio.getGalline().contains(gallina), "La gallina dovrebbe essere aggiunta alla lista di galline");
+        assertEquals(pollaio, gallina.getPollaio(), "Il pollaio della gallina dovrebbe essere correttamente associato");
+    }
+
+
+    @Test
     void testAddGallina_FullPollaio() {
         Pollaio pollaio = new Pollaio();
+        List<Gallina> galline = new ArrayList<>(Collections.nCopies(15, new Gallina()));
+        pollaio.setGalline(galline);
         pollaio.setQuantity(15);
 
         assertEquals(15, pollaio.getQuantity(), "Il pollaio deve essere pieno con 15 galline");
-
-        Gallina nuovaGallina = new Gallina();
-        pollaio.addGallina(nuovaGallina);
 
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
             pollaioService.addGallina(pollaio, new Gallina());
@@ -136,7 +155,6 @@ class PollaioServiceTest {
 
         assertEquals("Il pollaio è pieno!", exception.getMessage());
     }
-
 
 
     @Test
