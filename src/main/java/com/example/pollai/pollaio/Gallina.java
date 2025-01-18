@@ -1,5 +1,6 @@
 package com.example.pollai.pollaio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 public class Gallina implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(nullable = false, length = 20)
@@ -22,6 +24,7 @@ public class Gallina implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "pollaio_id", nullable = false)
+    @JsonIgnore
     private Pollaio pollaio;
 
     public Gallina() {

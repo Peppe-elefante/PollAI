@@ -1,5 +1,6 @@
 package com.example.pollai.produzione;
 
+import com.example.pollai.pollaio.Gallina;
 import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.pollaio.PollaioService;
 import com.example.pollai.utente.Utente;
@@ -17,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class ProduzioneController {
@@ -29,6 +35,7 @@ public class ProduzioneController {
     private UtenteService utenteService;
     @Autowired
     private RestTemplate restTemplate;
+
 
 
 
@@ -143,10 +150,21 @@ public class ProduzioneController {
     public String predizioneProduzione(@RequestParam String category,
                                        HttpSession session, HttpServletRequest request,
                                        RedirectAttributes redirectAttributes) throws JsonProcessingException {
+        // Recupera l'utente dalla sessione
+        Utente utente = getUtente(session);
+        if(utente == null) return "login";
+
+        Pollaio pollaio = utente.getPollaio();
         String referer = request.getHeader("Referer");
         //WebClient client = WebClient.create("http://192.168.1.13:8050/predizione");
+        //converte le galline in json per mandarle al servizio di predizione
         ObjectMapper objectMapper = new ObjectMapper();
-        String response = restTemplate.postForObject("http://uova-service:8050/predizione", "hello", String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        List<Gallina> galline = pollaio.getGalline();
+        HttpEntity<List<Gallina>> requestJson = new HttpEntity<>(galline, headers);
+        String response = restTemplate.postForObject("http://uova-service:8050/predizione", requestJson, String.class);
+
 
         /**String response = client.post()
                 .retrieve()
