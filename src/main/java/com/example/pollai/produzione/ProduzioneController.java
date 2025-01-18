@@ -27,6 +27,8 @@ public class ProduzioneController {
     private ProduzioneService produzioneService;
     @Autowired
     private UtenteService utenteService;
+    @Autowired
+    private RestTemplate restTemplate;
 
 
 
@@ -142,14 +144,14 @@ public class ProduzioneController {
                                        HttpSession session, HttpServletRequest request,
                                        RedirectAttributes redirectAttributes) throws JsonProcessingException {
         String referer = request.getHeader("Referer");
-        WebClient client = WebClient.create("http://192.168.1.13:8050/predizione");
+        //WebClient client = WebClient.create("http://192.168.1.13:8050/predizione");
         ObjectMapper objectMapper = new ObjectMapper();
+        String response = restTemplate.postForObject("http://uova-service:8050/predizione", "hello", String.class);
 
-        // Fetch prediction from uova-service
-        String response = client.post()
+        /**String response = client.post()
                 .retrieve()
-                .bodyToMono(String.class)  // Assume the response is an integer (number of eggs)
-                .block();  // Block for response (convert reactive to synchronous)
+                .bodyToMono(String.class)
+                .block();  */
 
         Prediction eggs = objectMapper.readValue(response, Prediction.class);
 
