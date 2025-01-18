@@ -4,6 +4,8 @@ import com.example.pollai.pollaio.Pollaio;
 import com.example.pollai.pollaio.PollaioService;
 import com.example.pollai.utente.Utente;
 import com.example.pollai.utente.UtenteService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -22,9 +26,9 @@ public class ProduzioneController {
     @Autowired
     private ProduzioneService produzioneService;
     @Autowired
-    private PollaioService pollaioService;
-    @Autowired
     private UtenteService utenteService;
+
+
 
     @GetMapping("/accesso-produzione")
     public String produzione(HttpSession session){
@@ -105,7 +109,7 @@ public class ProduzioneController {
         return "redirect:" + (referer != null ? referer : "/");
     }
 
-    @GetMapping("/predizione-produzione")
+    /**@GetMapping("/predizione-produzione")
     public String predizioneProduzione(@RequestParam String category,
                                        HttpSession session, HttpServletRequest request,
                                        RedirectAttributes redirectAttributes){
@@ -131,7 +135,31 @@ public class ProduzioneController {
         redirectAttributes.addFlashAttribute("predizione", predizione);
 
         return "redirect:" + (referer != null ? referer : "/");
+    }*/
+
+    @GetMapping("/predizione-produzione")
+    public String predizioneProduzione(@RequestParam String category,
+                                       HttpSession session, HttpServletRequest request,
+                                       RedirectAttributes redirectAttributes) throws JsonProcessingException {
+        String referer = request.getHeader("Referer");
+        WebClient client = WebClient.create("http://192.168.1.13:8050/predizione");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Fetch prediction from uova-service
+        String response = client.post()
+                .retrieve()
+                .bodyToMono(String.class)  // Assume the response is an integer (number of eggs)
+                .block();  // Block for response (convert reactive to synchronous)
+
+        Prediction eggs = objectMapper.readValue(response, Prediction.class);
+
+        String predizione = "The eggs that will be produces in the next " + category + " are " + eggs.getPrediction();
+
+        redirectAttributes.addFlashAttribute("predizione", predizione);
+
+        return "redirect:" + (referer != null ? referer : "/");
     }
+
 
     private Utente getUtente(HttpSession session){
         //prende l'Utente dalla sessione e verifica se esiste nel database
