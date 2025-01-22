@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
+
+import java.nio.file.Paths;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -44,7 +46,10 @@ public class UtenteTestSelenium {
     driver.findElement(By.linkText("Choose Your Plan")).click();
     driver.findElement(By.cssSelector(".plan-box:nth-child(1) .subscribe-button")).click();
 
-    driver.findElement(By.id("document")).sendKeys("C:\\Users\\annav\\Rasvsl.pdf");
+    String projectPath = System.getProperty("user.dir"); // Ottieni la directory di lavoro corrente
+    String pdfPath = Paths.get(projectPath, "RASVSL.pdf").toAbsolutePath().toString(); // Percorso assoluto del file PDF
+
+    driver.findElement(By.id("document")).sendKeys(pdfPath);
 
     driver.findElement(By.id("nome")).click();
     driver.findElement(By.id("nome")).sendKeys("Giovanna");
@@ -112,7 +117,10 @@ public class UtenteTestSelenium {
     driver.findElement(By.linkText("Choose Your Plan")).click();
     driver.findElement(By.cssSelector(".plan-box:nth-child(1) .subscribe-button")).click();
 
-    driver.findElement(By.id("document")).sendKeys("C:\\Users\\annav\\Rasvsl.pdf");
+    String projectPath = System.getProperty("user.dir"); // Ottieni la directory di lavoro corrente
+    String pdfPath = Paths.get(projectPath, "RASVSL.pdf").toAbsolutePath().toString(); // Percorso assoluto del file PDF
+
+    driver.findElement(By.id("document")).sendKeys(pdfPath);
 
     driver.findElement(By.id("nome")).click();
     driver.findElement(By.id("nome")).sendKeys("Marco");

@@ -20,6 +20,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.*;
 import java.net.MalformedURLException;
@@ -49,9 +50,9 @@ public class PollAISaluteTest {
     //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Click here!")));
     //element.click();
     driver.findElement(By.linkText("Click here!")).click();
-    driver.findElement(By.id("email")).sendKeys("g.elefante19@studenti.unisa.it");
+    driver.findElement(By.id("email")).sendKeys("test.salute@gmail.com");
     driver.findElement(By.id("password")).click();
-    driver.findElement(By.id("password")).sendKeys("123");
+    driver.findElement(By.id("password")).sendKeys("!Salute1");
     driver.findElement(By.cssSelector(".button-login")).click();
     driver.findElement(By.linkText("Health")).click();
     driver.findElement(By.cssSelector("li:nth-child(1) button")).click();
@@ -90,7 +91,9 @@ public class PollAISaluteTest {
     driver.findElement(By.id("password")).click();
     driver.findElement(By.id("password")).sendKeys("saluteTest123!");
     //driver.findElement(By.id("document")).click();
-    driver.findElement(By.id("document")).sendKeys("C:\\Users\\ACER\\Downloads\\PD_sanremo_traccia (1).pdf");
+    String projectPath = System.getProperty("user.dir"); // Ottieni la directory di lavoro corrente
+    String pdfPath = Paths.get(projectPath, "RASVSL.pdf").toAbsolutePath().toString(); // Percorso assoluto del file PDF
+    driver.findElement(By.id("document")).sendKeys(pdfPath);
     driver.findElement(By.cssSelector(".submit")).click();
     driver.findElement(By.linkText("Health")).click();
   }

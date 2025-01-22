@@ -39,7 +39,7 @@ public class AccessoAlMagazzinoTest {
         driver.findElement(By.id("password")).sendKeys(Keys.ENTER);
         driver.findElement(By.linkText("Warehouse")).click();
         driver.findElement(By.cssSelector(".content-container")).click();
-        assertThat(driver.findElement(By.cssSelector(".intro-text")).getText(), is("This is the warehouse of Selenium"));
+        assertThat(driver.findElement(By.cssSelector(".intro-text")).getText(), is("This is the warehouse of Test"));
         driver.findElement(By.cssSelector(".content-container")).click();
     }
 }
