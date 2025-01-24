@@ -68,8 +68,20 @@
                     <option value="1 month">1 month</option>
                     <option value="1 year">1 year</option>
                 </select>
-                <input type="submit" value="Search">
             </p>
+            <p>
+                Feed:
+                <select name="category" size="1" class="category-select">
+                    <option value="Type A">Type A</option>
+                    <option value="Type B">Type B</option>
+                    <option value="Type C">Type C</option>
+                </select>
+            </p>
+            <p>
+                Temperature (Celsius):
+                <input type="number" id="temperatura" name="temperatura" required min="5" max="30" />
+            </p>
+            <input type="submit" value="Search">
         </form>
         <p><span th:text="${predizione}"></span></p>
     </div>

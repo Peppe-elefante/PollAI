@@ -148,6 +148,8 @@ public class ProduzioneController {
 
     @GetMapping("/predizione-produzione")
     public String predizioneProduzione(@RequestParam String category,
+                                       @RequestParam String feed,
+                                       @RequestParam int temperature,
                                        HttpSession session, HttpServletRequest request,
                                        RedirectAttributes redirectAttributes) throws JsonProcessingException {
         // Recupera l'utente dalla sessione
@@ -162,6 +164,12 @@ public class ProduzioneController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         List<Gallina> galline = pollaio.getGalline();
+
+        for(int i = 0; i <= galline.size(); i++){
+            galline.get(i).setMangime(feed);
+            galline.get(i).setTemperatura(temperature);
+        }
+
         HttpEntity<List<Gallina>> requestJson = new HttpEntity<>(galline, headers);
         String response = restTemplate.postForObject("http://uova-service:8050/predizione", requestJson, String.class);
 
