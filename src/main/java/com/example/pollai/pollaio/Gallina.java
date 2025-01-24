@@ -27,6 +27,40 @@ public class Gallina implements Serializable {
     @JsonIgnore
     private Pollaio pollaio;
 
+    @Transient
+    private float temperatura;
+
+    @Transient
+    private String mangime;
+
+    @Transient
+    private int q_uova_mensili;
+
+    public int getQ_uova_mensili() {
+        return q_uova_mensili;
+    }
+
+    public void setQ_uova_mensili(int q_uova_mensili) {
+        this.q_uova_mensili = q_uova_mensili;
+    }
+
+    public float getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(float temperatura) {
+        this.temperatura = temperatura;
+    }
+
+
+    public String getMangime() {
+        return mangime;
+    }
+
+    public void setMangime(String mangime) {
+        this.mangime = mangime;
+    }
+
     public Gallina() {
     }
 
