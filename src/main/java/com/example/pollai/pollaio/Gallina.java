@@ -33,17 +33,6 @@ public class Gallina implements Serializable {
     @Transient
     private String mangime;
 
-    @Transient
-    private int q_uova_mensili;
-
-    public int getQ_uova_mensili() {
-        return q_uova_mensili;
-    }
-
-    public void setQ_uova_mensili(int q_uova_mensili) {
-        this.q_uova_mensili = q_uova_mensili;
-    }
-
     public float getTemperatura() {
         return temperatura;
     }

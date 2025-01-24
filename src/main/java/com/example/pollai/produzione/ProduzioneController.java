@@ -165,9 +165,9 @@ public class ProduzioneController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         List<Gallina> galline = pollaio.getGalline();
 
-        for(int i = 0; i <= galline.size(); i++){
-            galline.get(i).setMangime(feed);
-            galline.get(i).setTemperatura(temperature);
+        for(Gallina g : galline){
+            g.setMangime(feed);
+            g.setTemperatura(temperature);
         }
 
         HttpEntity<List<Gallina>> requestJson = new HttpEntity<>(galline, headers);
