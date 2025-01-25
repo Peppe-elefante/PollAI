@@ -181,6 +181,12 @@ public class ProduzioneController {
 
         Prediction eggs = objectMapper.readValue(response, Prediction.class);
 
+        switch (category){
+            case "3 months": eggs.setPrediction(eggs.getPrediction() * 3); break;
+            case "1 months": break;
+            case "1 year": eggs.setPrediction(eggs.getPrediction() * 12); break;
+        }
+
         String predizione = "The eggs that will be produces in the next " + category + " are " + eggs.getPrediction();
 
         redirectAttributes.addFlashAttribute("predizione", predizione);

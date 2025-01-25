@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
         clearErrors();
 
         // Recupera i valori dai campi del modulo
-        const razza = document.getElementById("razza").value.trim();
         const eta = parseInt(document.getElementById("eta").value);
         const peso = parseInt(document.getElementById("peso").value);
 
