@@ -75,6 +75,16 @@ form input {
     border-radius: 5px;
 }
 
+form input:hover {
+    border-color: #034aff;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #034aff;
+    box-shadow: 0 0 5px rgb(3, 57, 195);
+}
+
 form button {
     background-color: #4CAF50;
     color: white;
@@ -92,4 +102,37 @@ form button:hover {
 h3 {
     color: #ff0000;
     font-size: 18px;
+}
+
+select {
+    width: 100%;
+    max-width: 150px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #203752;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+select:hover {
+    border-color: #034aff;
+}
+
+select:focus {
+    outline: none;
+    border-color: #034aff;
+    box-shadow: 0 0 5px rgb(3, 57, 195);
+}
+
+option {
+    color: #203752;
+    background-color: #ffffff;
+}
+
+select::-ms-expand, select::-webkit-inner-spin-button {
+    color: #203752;
 }

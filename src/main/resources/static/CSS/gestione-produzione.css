@@ -58,6 +58,11 @@ h2 {
     border: 1px solid #019ade;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inserimento-uova input:hover {
+    border-color: #034aff;
 }
 
 .inserimento-uova button {
@@ -79,6 +84,7 @@ h2 {
     border-radius: 5px;
     border: 1px solid #019ade;
     margin-top: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .archivio-uovo select, .predizione-uova select {
@@ -87,6 +93,7 @@ h2 {
     border-radius: 5px;
     border: 1px solid #019ade;
     margin-right: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .archivio-uovo input[type="submit"], .predizione-uova input[type="submit"] {
@@ -96,6 +103,7 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .archivio-uovo input[type="submit"]:hover, .predizione-uova input[type="submit"]:hover {
@@ -112,4 +120,47 @@ fieldset {
     border: 1px solid #019ade;
     border-radius: 8px;
     padding: 20px;
+}
+
+form input[type="number"]:hover, form select:hover {
+    border-color: #034aff;
+}
+
+form input[type="number"]:focus, form select:focus {
+    outline: none;
+    border-color: #034aff;
+    box-shadow: 0 0 5px rgb(3, 57, 195);
+}
+
+.predizione-uova input[type="number"] {
+    width: 100%;
+    max-width: 70px;
+    height: 20px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #203752;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.predizione-uova input[type="number"]:hover {
+    border-color: #034aff;
+}
+
+.predizione-uova input[type="number"]:focus {
+    outline: none;
+    border-color: #034aff;
+    box-shadow: 0 0 5px rgb(3, 57, 195);
+}
+
+.inserimento-uova input[type="date"]:hover {
+    border-color: #034aff;
+}
+
+.inserimento-uova input[type="date"]:focus {
+    outline: none;
+    border-color: #034aff;
+    box-shadow: 0 0 5px rgb(3, 57, 195);
 }
