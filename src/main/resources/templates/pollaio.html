@@ -45,14 +45,20 @@
         <p><b>Add chicken:</b></p>
         <form th:action="@{/inserisci-gallina}" method="post" onsubmit="return validateForm()" id="addChickenForm">
 
-        <div>
+            <div>
                 <label> Breed:</label>
                 <label>
-                    <input type="text" id="razza" name="razza" maxlength="15" required />
+                    <select id="razza" name="razza" required>
+                        <option value="" disabled selected>Select a breed</option>
+                        <option value="Leghorn">Leghorn</option>
+                        <option value="Rhode Island Red">Rhode Island Red</option>
+                        <option value="Sussex">Sussex</option>
+                        <option value="Plymouth Rock">Plymouth Rock</option>
+                    </select>
                     <div id="razzaError" class="error" style="color: red;"></div>
                 </label>
-
             </div>
+
             <div>
                 <label> Age (in months):</label>
                 <label>

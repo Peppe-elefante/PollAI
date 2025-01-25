@@ -27,12 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const eta = parseInt(document.getElementById("eta").value);
         const peso = parseInt(document.getElementById("peso").value);
 
-        // Validazione della razza
-        if (razza.length > 15) {
-            displayError("razzaError", "The breed name must be 15 characters or fewer.");
-            isValid = false;
-        }
-
         // Validazione dell'età
         if (isNaN(eta) || eta > 72 || eta < 1) {
             displayError("etaError", "Age must be between 1 and 72 months.");
